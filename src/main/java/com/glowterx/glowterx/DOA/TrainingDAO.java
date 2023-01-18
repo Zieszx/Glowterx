@@ -19,7 +19,11 @@ public class TrainingDAO {
     @Autowired
     HttpSession session;
 
-    
+    public Training getInfoTraining () {
+        Training training = null;
+        
+        return training;
+    }
     
 
     
