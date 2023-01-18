@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.glowterx.glowterx.DOA.AdminDOA;
-import com.glowterx.glowterx.DOA.InstructorDOA;
-import com.glowterx.glowterx.DOA.TraineeDOA;
+import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.InstructorDAO;
+import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
@@ -19,13 +19,13 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class loginController {
     @Autowired
-    private AdminDOA adminDAO;
+    private AdminDAO adminDAO;
 
     @Autowired
-    private InstructorDOA instructorDAO;
+    private InstructorDAO instructorDAO;
 
     @Autowired
-    private TraineeDOA traineeDAO;
+    private TraineeDAO traineeDAO;
 
     @GetMapping("/login")
     public String login(HttpSession session) {
