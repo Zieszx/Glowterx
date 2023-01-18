@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Inria Serif');
+@import url('https://fonts.googleapis.com/css?family=Cambay');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+
+.title
+{ color:black;text-align: center;}
+
+.title div
+{ 
+font-family: 'Cambay';
+font-style: italic;
+font-weight: 700;
+font-size: 30px;
+line-height: 65px;
+letter-spacing: 0.1em;
+position: absolute;
+width: 589px;
+height: 65px;
+left: 462px;
+top: 160px;
+}
+.title p 
+{
+font-family: 'Cambay';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 41px;
+letter-spacing: 0.1em;
+position: absolute;
+width: 808px;
+height: 27px;
+left: 354px;
+top: 225px;
+}
+
+.pricing {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    max-width: 960px;
+    margin: auto;
+    margin-bottom: 0px;
+  }
+  .pricing-plan {
+    flex: 1;
+    background-color: #1f262c;
+    margin: 170px 8px;
+    padding: 20px;
+    border-radius: 6px;
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .pricing {
+      display: block;
+    }
+    body{display: block;} 
+  }
+  .pricing-plan h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    font-size: 30px;
+    border-bottom: 2px solid #783A4D;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .pricing-plan p {
+    margin-top: 0;
+  }
+  .pricing-plan p span {
+    font-size: 33px;
+  }
+  .pricing-plan ul {
+    margin: 0 0 35px;
+    padding-left: 16px;
+    list-style: none;
+    line-height: 1.8;
+    color: #b5b5b5;
+  }
+  .pricing-plan ul li::before {
+    content: "•";
+    color: goldenrod;
+    display: inline-block;
+    width: 20px;
+    margin-left: -15px;
+    position: relative;
+    top: 4px;
+    font-size: 26px;
+    line-height: 0;
+  }
+  .pricing-plan a {
+    margin-left: 70px;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    background: #783A4D;
+    border: 2px solid #783A4D;
+    border-radius: 5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .pricing-plan a:hover{
+    color: black; background: white;
+    border: 2px solid whitesmoke;}
+  .pricing-plan:hover {
+    box-shadow: 0 15px 12px 0 rgba(0,0,0,0.2);
+    color:#fff;
+  }
+.table-cont{
+  
+padding: 0px;
+margin: auto;
+position:absolute;
+top: 710px;
+left: 10%;
+}
+.table-cont h2{ 
+font-family: 'Cambay';
+font-size: 28px;
+font-weight: normal;
+}
+table td{
+font-family: 'Cambay';
+font-style: normal;
+}
+table th
+{font-family: 'Cambay';
+  font-weight: bold;
+  text-shadow: 0 15px 12px 0 rgba(0,0,0,0.2);}

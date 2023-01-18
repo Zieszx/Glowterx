@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Inria Serif');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #783A4D;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #000
+}
+
+hr.style2 {
+    border-top: 3px double #8c8b8b;
+}
+
+div.row {
+    font-family: 'Inria Serif';
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    font-size: 15px;
+    color: #000;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #EFEBEB;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+div.Checked {
+    background-color: #783A4D;
+    color: white;
+}
+
+div.Unchecked {
+    background-color: #EFEBEB;
+    color: black;
+}
+
+div.Unchecked:hover {
+    background-color: #783A4D;
+    color: #FFFFFF;
+}
+
+.row div.d-flex img {
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #000;
+    margin: 5px;
+    padding: 5px;
+    width: 250px;
+}
+
+input.btn-secondary {
+    background-color: #783A4D;
+    border-color: #000;
+}
+
+input.btn-secondary:hover {
+    background-color: #000;
+    border-color: #FFFFFF;
+}
+
+input.btn-primary {
+    background-color: #783A4D;
+    border-color: #000;
+}
+
+input.btn-primary:hover {
+    background-color: #000;
+    border-color: #FFFFFF;
+}

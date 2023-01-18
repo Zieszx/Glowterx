@@ -1,0 +1,14 @@
+input.btn-secondary {
+    background-color: #783A4D;
+    border-color: #000;
+}
+
+input.btn-secondary:hover {
+    background-color: #000;
+    border-color: #FFFFFF;
+}
+
+.bdr {
+    border-radius: 6px;
+    overflow: hidden;
+}

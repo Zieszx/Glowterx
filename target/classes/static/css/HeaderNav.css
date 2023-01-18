@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Inria Serif');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+.nav-bar {
+    background-color: #1E1E1E;
+    width: 100%;
+}
+
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.Header-Nav {
+    background-color: #783A4D;
+    height: 45px;
+    width: 100%;
+    font-family: 'Inria Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #FFFFFF;
+}
+
+.Header-nav div {
+    color: #FFFFFF;
+    float: right;
+    margin-right: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.Header-Nav .MalaysiaLogo {
+    border-radius: 10%;
+    height: 27px;
+    width: 50px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ul li {
+    margin-left: 25px;
+}
+
+ul li a {
+    font-family: 'Inria Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-right: 0px;
+}
+
+ul.nav a:hover {
+    background-color: #783A4D;
+    color: black;
+    border: 1px;
+    border-radius: 5px;
+}
+
+.Checked {
+    background-color: #783A4D;
+    color: black;
+    border-radius: 5px;
+    width: auto;
+    padding: auto;
+}
+
+.Nav-Logo {
+    font-family: 'Inspiration';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    margin-left: 70px;
+    margin-top: 0px;
+    letter-spacing: 0.05em;
+    color: rgb(255, 255, 255);
+}
+
+.Nav-Item img {
+    height: 23px;
+    width: 23px;
+    margin-left: 10px;
+    margin-right: 11px;
+    margin-bottom: 1px;
+}
+
+header div {
+    margin-right: 30px;
+}
+
+header {
+    height: 73px;
+}
