@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Inria Serif');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cambay');
+body{
+    font-family: 'Inria Serif'; 
+}
+.title{
+    margin-left: 65px;
+    font-family: 'Inria Serif';
+    font-weight: 550;
+    font-size: 30px;
+    color: black;
+}
+
+.box {
+    background-color: #EFEBEB;
+    margin-top: auto;
+    margin-left: 70px;
+    margin-right: 70px;
+    border-radius: 30px 30px 30px 30px;
+    border-top: 10px solid #EFEBEB;
+    border-bottom: 100px solid #EFEBEB;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 70%;
+    margin-left:  240px;
+    margin-top: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  td, th {
+    border: 10px solid #D8BBC0;
+    text-align: left;
+    padding: 10px;
+    
+  }
+.table-col-1{
+  padding: 10%;
+  margin-left: auto;
+  margin: 10%;
+}
+  
+  tr:nth-child(even) {
+    background-color: #D8BBC0;
+  }
+
+  #submit {
+    position: absolute;
+    width: auto;
+    height: auto;
+  
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+  
+    /* Rectangle */
+    position: absolute;
+    width: 490px;
+    height: 63px;
+    left: 550px;
+    top: 570px;
+  
+    background: #783A4D;
+    border-radius: 10px;
+    border: none;
+  }
+  #submit:hover {
+    color: white; background: black;
+    border: 2px solid whitesmoke;
+    box-shadow: 0 15px 12px 0 whitesmoke(0,0,0,0.2);
+    
+  }
+  .info{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 50px;
+  }
+  img{
+    text-align: center;
+    width:20%;
+  }
+  #submitEdit {
+    position: absolute;
+    width: auto;
+    height: auto;
+  
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+  
+    /* Rectangle */
+    position: absolute;
+    width: 490px;
+    height: 63px;
+    left: 550px;
+    top: 740px;
+  
+    background: #783A4D;
+    border-radius: 10px;
+    border: none;
+  }
+  #submitEdit:hover {
+    color: white; background: black;
+    border: 2px solid whitesmoke;
+    box-shadow: 0 15px 12px 0 whitesmoke(0,0,0,0.2);
+    
+  }

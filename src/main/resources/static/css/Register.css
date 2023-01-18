@@ -1,0 +1,173 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.Nav-Logo {
+  font-family: 'Inspiration';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  margin-left: 960px;
+  margin-top: 30px;
+  letter-spacing: 0.05em;
+  color: black;
+}
+.title{
+  position: absolute;
+  width: 262px;
+  height: 48px;
+  left: 970px;
+  top: 110px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+}
+.description {
+  position: absolute;
+  width: auto;
+  height: 17px;
+  left: 970px;
+  top: 150px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 50px;
+}
+.fullname {
+  position: absolute;
+  width: 41px;
+  height: 19px;
+  left: 970px;
+  top: 210px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+#fullname {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 490px;
+  height: 40px;
+  left: 970px;
+  top: 250px;
+  
+  border: 1px solid #000000;
+}
+.phoneNo {
+  position: absolute;
+  width: 1000px;
+  height: 19px;
+  left: 970px;
+  top: 310px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+#phoneNo {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 490px;
+  height: 40px;
+  left: 970px;
+  top: 350px;
+  
+  border: 1px solid #000000;
+}
+.email {
+  position: absolute;
+  width: 41px;
+  height: 19px;
+  left: 970px;
+  top: 410px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+#email {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 490px;
+  height: 40px;
+  left: 970px;
+  top: 450px;
+  
+  border: 1px solid #000000;
+}
+.password {
+  position: absolute;
+  width: 75px;
+  height: 19px;
+  left: 970px;
+  top: 510px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+#password {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 490px;
+  height: 40px;
+  left: 970px;
+  top: 550px;
+
+  border: 1px solid #000000;
+}
+
+#submit {
+  position: absolute;
+  width: auto;
+  height: auto;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 3px;
+  color: #FFFFFF;
+
+  /* Rectangle */
+  position: absolute;
+  width: 490px;
+  height: 63px;
+  left: 970px;
+  top: 620px;
+
+  background: #783A4D;
+  border-radius: 10px;
+  border: none;
+}
+
+img {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  left: 0px;
+  right: 700px;
+  top: 0px;  margin: 0px; 
+  border-radius: 0px 55px 55px 0px;
+}

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Inria Serif');
+@import url('https://fonts.googleapis.com/css2?family=Inspiration&display=swap');
+p.lead {
+    font-family: 'Inria Serif';
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.4;
+    font-size: 40px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+span.text-Cart {
+    color: #783A4D;
+}
+
+span.bg-Cart {
+    background-color: #783A4D;
+}
+
+h6.ShippedItem,
+small.ShippedItem {
+    color: #000
+}
+
+input.btn-secondary {
+    background-color: #783A4D;
+    border-color: #000;
+}
+
+input.btn-secondary:hover {
+    background-color: #000;
+    border-color: #FFFFFF;
+}
+
+input.btn-primary {
+    background-color: #783A4D;
+    border-color: #000;
+}
+
+input.btn-primary:hover {
+    background-color: #000;
+    border-color: #FFFFFF;
+}
+
+.Checked {
+    background-color: #783A4D;
+    color: black;
+    border-radius: 5px;
+    width: auto;
+    padding: auto;
+}
