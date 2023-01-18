@@ -43,7 +43,7 @@ public class IndexController {
 
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
+        Admin admin = adminDAO.getInfoAdmin();
         model.addAttribute("admin", admin);
         return "Admin/ProfileDetails";
     }
