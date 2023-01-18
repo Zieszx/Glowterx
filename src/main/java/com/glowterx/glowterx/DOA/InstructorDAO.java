@@ -78,6 +78,7 @@ public class InstructorDAO {
                 instructor.setZip(rs.getString("zip"));
                 instructor.setPhone(rs.getString("phone"));
                 instructor.setEmail(rs.getString("email"));
+                instructor.setGender(rs.getString("gender"));
             }
 
         } catch (SQLException e) {
