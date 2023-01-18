@@ -7,19 +7,25 @@ public class Training {
     private String name;
     private String start_date;
     private String end_date;
+    private int training_session;
+    private int training_duration;
 
     public Training() {
         this.id = 0;
         this.name = "";
         this.start_date = "";
         this.end_date = "";
+        this.training_session = 0;
+        this.training_duration = 0;
     }
     
-    public Training(int id, String name, String start_date, String end_date) {
+    public Training(int id, String name, String start_date, String end_date, int training_session, int training_duration) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.training_session = training_session;
+        this.training_duration = training_duration;
     }
     
     public void setId (int id) {
@@ -38,6 +44,14 @@ public class Training {
         this.end_date = end_date;
     }
 
+    public void setTraining_session (int training_session){
+        this.training_session = training_session;
+    }
+
+    public void setTraining_duration (int training_duration) {
+        this.training_duration = training_duration;
+    }
+
     public int getId() {
         return id;
     }
@@ -52,6 +66,14 @@ public class Training {
 
     public String getEnd_date() {
         return end_date;
+    }
+
+    public int getTraining_session() {
+        return training_session;
+    }
+
+    public int getTraining_duration() {
+        return training_duration;
     }
 
 }

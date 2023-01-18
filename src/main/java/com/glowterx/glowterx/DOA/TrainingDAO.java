@@ -20,4 +20,7 @@ public class TrainingDAO {
     HttpSession session;
 
     
+    
+
+    
 }
