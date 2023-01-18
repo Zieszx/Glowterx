@@ -10,6 +10,7 @@ public class Trainee {
     private String zip;
     private String phone;
     private String email;
+    private String gender;
 
     private String TraineeUsername;
     private String TraineePass;
@@ -120,5 +121,13 @@ public class Trainee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

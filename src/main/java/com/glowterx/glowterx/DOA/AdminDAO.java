@@ -52,6 +52,7 @@ public class AdminDAO {
                 admin.setZip(rs.getString("zip"));
                 admin.setPhone(rs.getString("phone"));
                 admin.setEmail(rs.getString("email"));
+                admin.setGender(rs.getString("gender"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,6 +85,7 @@ public class AdminDAO {
                 admin.setZip(rs.getString("zip"));
                 admin.setPhone(rs.getString("phone"));
                 admin.setEmail(rs.getString("email"));
+                admin.setGender(rs.getString("gender"));
             }
 
         } catch (SQLException e) {

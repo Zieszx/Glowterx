@@ -44,6 +44,7 @@ public class TraineeDAO {
                 trainee.setZip(rs.getString("zip"));
                 trainee.setPhone(rs.getString("phone"));
                 trainee.setEmail(rs.getString("email"));
+                trainee.setGender(rs.getString("gender"));
             }
 
         } catch (SQLException e) {
