@@ -10,10 +10,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Instructor;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -102,6 +105,11 @@ public class AdminDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Instructor> getAllInstructors() {
+        String sql = "SELECT * FROM instructor";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
+import com.glowterx.glowterx.DOA.TrainingDAO;
 
 @Configuration
 public class AppConfig {
@@ -23,5 +24,10 @@ public class AppConfig {
     @Bean
     public TraineeDAO traineeDOA() {
         return new TraineeDAO();
+    }
+
+    @Bean
+    public TrainingDAO trainingDOA() {
+        return new TrainingDAO();
     }
 }

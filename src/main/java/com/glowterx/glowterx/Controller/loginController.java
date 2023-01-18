@@ -32,7 +32,7 @@ public class loginController {
         boolean check = false;
         // Check if user is already logged in
         if (session.getAttribute("admin") != null) {
-            return "redirect:/admin/home";
+            return "ProfileDetails";
         } else {
             check = true;
         }

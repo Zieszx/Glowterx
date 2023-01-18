@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.glowterx.glowterx.Model.Training;
 
@@ -19,5 +20,12 @@ public class TrainingDAO {
     @Autowired
     HttpSession session;
 
-    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void addTraining(Training training) {
+        String sql = "INSERT INTO training (training_name, start_date, end_date, training_duration, training_session, instructor_id) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, training.getName(), training.getStart_date(), training.getEnd_date(),
+                training.getDuration(), training.getSessionNum(), training.getInstructorId());
+    }
 }
