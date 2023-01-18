@@ -10,6 +10,7 @@ public class Admin {
     private String zip;
     private String phone;
     private String email;
+    private String gender;
 
     private String adminUsername;
     private String adminPass;
@@ -17,7 +18,8 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int id, String firstName, String lastName, String address, String city, String state, String zip,
+    public Admin(int id, String firstName, String lastName, String gender, String address, String city, String state,
+            String zip,
             String phone, String email, String adminUsername, String adminPass) {
         this.adminUsername = adminUsername;
         this.adminPass = adminPass;
@@ -31,6 +33,7 @@ public class Admin {
         this.zip = zip;
         this.phone = phone;
         this.email = email;
+        this.gender = gender;
 
     }
 
@@ -120,5 +123,13 @@ public class Admin {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

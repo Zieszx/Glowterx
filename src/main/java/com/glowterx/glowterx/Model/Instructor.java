@@ -10,6 +10,7 @@ public class Instructor {
     private String zip;
     private String phone;
     private String email;
+    private String gender;
 
     private String InstructorUsername;
     private String InstructorPass;
@@ -17,7 +18,8 @@ public class Instructor {
     public Instructor() {
     }
 
-    public Instructor(int id, String firstName, String lastName, String address, String city, String state, String zip,
+    public Instructor(int id, String firstName, String lastName, String gender, String address, String city,
+            String state, String zip,
             String phone, String email, String InstructorUsername, String InstructorPass) {
         this.InstructorUsername = InstructorUsername;
         this.InstructorPass = InstructorPass;
@@ -31,6 +33,7 @@ public class Instructor {
         this.zip = zip;
         this.phone = phone;
         this.email = email;
+        this.gender = gender;
 
     }
 
@@ -120,5 +123,13 @@ public class Instructor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

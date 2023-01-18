@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Customer Profile Pages</title>
+    <title>Admin Profile Pages</title>
     <link rel="stylesheet" href="/css/HeaderNav.css" />
     <link rel="stylesheet" href="/css/ProfileDetails.css" />
     <meta charset="utf-8">
@@ -34,9 +34,7 @@
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
                 <a class="Nav-Item" href="ProfileDetails.html"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
     </div>
@@ -101,14 +99,14 @@
                                             </li>
                                             <li>
                                                 <span class="title">Address:</span>
-                                                <span class="text" th:text="*{address}"></span>
-                                                <span class="text" th:text="*{city}"></span>
-                                                <span class="text" th:text="*{zip}"></span>
+                                                <span class="text" th:text="*{address}">, </span>
+                                                <span class="text" th:text="*{city}">, </span>
+                                                <span class="text" th:text="*{zip}">, </span>
                                                 <span class="text" th:text="*{state}"></span>
                                             </li>
                                             <li>
                                                 <span class="title">Gender:</span>
-                                                <span class="text">Female</span>
+                                                <span class="text" th:text="*{gender}"></span>
                                             </li>
                                         </ul>
                                     </div>
