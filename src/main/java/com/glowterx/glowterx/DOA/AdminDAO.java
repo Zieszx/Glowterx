@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -97,19 +98,53 @@ public class AdminDAO {
         return admin;
     }
 
-    public void saveImage(String username, MultipartFile file) {
-        try {
-            byte[] bytes = file.getBytes();
-            String sql = "UPDATE admin SET image = ? WHERE username = ?";
-            jdbcTemplate.update(sql, bytes, username);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void uploadProfilePicture(String username, byte[] image) {
+        String sql = "UPDATE admin SET profle_images = ? WHERE username = ?";
+        jdbcTemplate.update(sql, new Object[] { image, username });
+    }
+
+    public byte[] getProfilePicture(String username) {
+        String sql = "SELECT profle_images FROM admin WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
     }
 
     public List<Instructor> getAllInstructors() {
         String sql = "SELECT * FROM instructor";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
+    }
+
+    // public void updateProfile(Admin admin) {
+    // String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?,
+    // username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?,
+    // city = ? WHERE username = ?";
+    // jdbcTemplate.update(sql, admin.getFirstName(), admin.getLastName(),
+    // admin.getGender(), admin.getAdminUsername(),
+    // admin.getAdminPass(), admin.getPhone(), admin.getAddress(), admin.getEmail(),
+    // admin.getState(),
+    // admin.getCity(), admin.getId());
+    // }
+
+    public void updateProfile(Admin admin) {
+        String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, admin.getFirstName());
+            statement.setString(2, admin.getLastName());
+            statement.setString(3, admin.getGender());
+            statement.setString(4, admin.getAdminUsername());
+            statement.setString(5, admin.getAdminPass());
+            statement.setString(6, admin.getPhone());
+            statement.setString(7, admin.getAddress());
+            statement.setString(8, admin.getEmail());
+            statement.setString(9, admin.getState());
+            statement.setString(10, admin.getCity());
+            statement.setString(11, admin.getAdminUsername());
+
+            System.out.println(admin.getAdminUsername());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

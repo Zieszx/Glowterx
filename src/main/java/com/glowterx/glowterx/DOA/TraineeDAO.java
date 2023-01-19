@@ -87,4 +87,8 @@ public class TraineeDAO {
         }
         return trainee;
     }
+
+    public void insertTrainee(String traineeName, String traineePass) {
+
+    }
 }

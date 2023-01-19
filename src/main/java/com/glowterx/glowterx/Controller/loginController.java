@@ -80,7 +80,7 @@ public class loginController {
             return "trainee_welcome";
         } else {
             model.addAttribute("errorMessage", "Invalid credentials");
-            return "login";
+            return "fitnesslogin";
         }
     }
 }

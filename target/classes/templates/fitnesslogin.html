@@ -37,9 +37,12 @@
                 <tr>
                     <td class="forgotPassword">Forgot Password?</td>
                 </tr>
+                <tr>
+                    <td th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger mx-auto"></td>
+                </tr>
             </table>
             <button type="submit" id="submit">Sign In</button>
         </form>
-        <a href="register"><p class="signUp">Dont have an account? <u><b>Sign Up</b></u></p></a>
+        <a href="/register"><p class="signUp">Dont have an account? <u><b>Sign Up</b></u></p></a>
     </body>
 </html>

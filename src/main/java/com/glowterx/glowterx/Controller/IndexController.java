@@ -47,4 +47,11 @@ public class IndexController {
         model.addAttribute("admin", admin);
         return "Admin/ProfileDetails";
     }
+
+    @GetMapping("/Admin/editProfile")
+    public String EditProfileAdmin(Model model, HttpSession session) {
+        Admin admin = adminDAO.getInfoAdmin();
+        model.addAttribute("admin", admin);
+        return "Admin/EditProfileDetails";
+    }
 }
