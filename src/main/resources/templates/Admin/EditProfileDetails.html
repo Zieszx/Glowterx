@@ -66,6 +66,7 @@
                 <form method="post" enctype="multipart/form-data" action="/uploadProfilePicture">
                     <input type="file" name="file" value="Change Profile Pictures" class="form-control">
                     <input type="submit" value="Upload" class="btn btn-primary profile-button form-control">
+                    <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
                 </form>
             </div>
             <div class="col-md-5">
