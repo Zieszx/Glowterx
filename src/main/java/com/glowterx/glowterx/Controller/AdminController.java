@@ -62,7 +62,6 @@ public class AdminController {
 
     @PostMapping("/updateProfile")
     public String updateProfile(@ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
-        System.out.println(admin.getFirstName());
         if (bindingResult.hasErrors()) {
             return "error";
         }

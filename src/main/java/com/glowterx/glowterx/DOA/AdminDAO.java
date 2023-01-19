@@ -140,7 +140,6 @@ public class AdminDAO {
             statement.setString(10, admin.getCity());
             statement.setString(11, admin.getAdminUsername());
 
-            System.out.println(admin.getAdminUsername());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
