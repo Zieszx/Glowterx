@@ -34,14 +34,14 @@ public class InitialDataLoader {
             System.out.println("Table 'instructor' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE instructor (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), UNIQUE KEY (username))");
+                    "CREATE TABLE instructor (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (username))");
             System.out.println("Table 'instructor' created.");
         }
         if (tables.contains("trainee")) {
             System.out.println("Table 'trainee' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE trainee (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), MembershipStatus VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), UNIQUE KEY (username))");
+                    "CREATE TABLE trainee (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), MembershipStatus VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (username))");
             System.out.println("Table 'trainee' created.");
         }
         if (tables.contains("payment")) {

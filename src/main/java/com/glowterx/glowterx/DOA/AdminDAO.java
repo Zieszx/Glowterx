@@ -113,17 +113,6 @@ public class AdminDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
     }
 
-    // public void updateProfile(Admin admin) {
-    // String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?,
-    // username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?,
-    // city = ? WHERE username = ?";
-    // jdbcTemplate.update(sql, admin.getFirstName(), admin.getLastName(),
-    // admin.getGender(), admin.getAdminUsername(),
-    // admin.getAdminPass(), admin.getPhone(), admin.getAddress(), admin.getEmail(),
-    // admin.getState(),
-    // admin.getCity(), admin.getId());
-    // }
-
     public void updateProfile(Admin admin) {
         String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
         try (Connection connection = dataSource.getConnection();

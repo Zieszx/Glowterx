@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.glowterx.glowterx.Model.Trainee;
 
@@ -18,6 +19,8 @@ public class TraineeDAO {
     private DataSource dataSource;
     @Autowired
     HttpSession session;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public Trainee validate(String username, String password) {
         Trainee trainee = null;
@@ -88,7 +91,22 @@ public class TraineeDAO {
         return trainee;
     }
 
-    public void insertTrainee(String traineeName, String traineePass) {
+    public void uploadProfilePicture(String username, byte[] image) {
+        String sql = "UPDATE trainee SET profle_images = ? WHERE username = ?";
+        jdbcTemplate.update(sql, new Object[] { image, username });
+    }
 
+    public byte[] getProfilePicture(String username) {
+        String sql = "SELECT profle_images FROM trainee WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
+    }
+
+    public void insertTrainee(Trainee trainee) {
+        trainee.setMembershipStatus("Free");
+        String sql = "INSERT INTO trainee (firstname, lastname, username, password, MembershipStatus, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, trainee.getFirstName(), trainee.getLastName(), trainee.getTraineeUsername(),
+                trainee.getTraineePass(), trainee.getMembershipStatus(), trainee.getPhone(), trainee.getEmail(),
+                trainee.getGender(),
+                trainee.getAddress(), trainee.getCity(), trainee.getZip(), trainee.getState());
     }
 }

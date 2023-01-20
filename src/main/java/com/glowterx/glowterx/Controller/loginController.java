@@ -83,4 +83,10 @@ public class loginController {
             return "fitnesslogin";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "fitnesslogin";
+    }
 }

@@ -14,14 +14,17 @@ public class Trainee {
 
     private String TraineeUsername;
     private String TraineePass;
+    private String MembershipStatus;
 
     public Trainee() {
     }
 
-    public Trainee(int id, String firstName, String lastName, String address, String city, String state, String zip,
-            String phone, String email, String TraineeUsername, String TraineePass) {
+    public Trainee(int id, String firstName, String lastName, String gender, String address, String city, String state,
+            String zip,
+            String phone, String email, String TraineeUsername, String TraineePass, String MembershipStatus) {
         this.TraineeUsername = TraineeUsername;
         this.TraineePass = TraineePass;
+        this.MembershipStatus = MembershipStatus;
 
         this.id = id;
         this.firstName = firstName;
@@ -32,6 +35,7 @@ public class Trainee {
         this.zip = zip;
         this.phone = phone;
         this.email = email;
+        this.gender = gender;
 
     }
 
@@ -129,5 +133,13 @@ public class Trainee {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getMembershipStatus() {
+        return MembershipStatus;
+    }
+
+    public void setMembershipStatus(String membershipStatus) {
+        MembershipStatus = membershipStatus;
     }
 }

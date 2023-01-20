@@ -68,6 +68,6 @@ public class AdminController {
         adminDAO.updateProfile(admin);
         Admin RefAdmin = adminDAO.getInfoAdmin();
         model.addAttribute("admin", RefAdmin);
-        return "Admin/EditProfileDetails";
+        return "Admin/ProfileDetails";
     }
 }
