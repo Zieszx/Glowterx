@@ -1,9 +1,11 @@
 package com.glowterx.glowterx.Controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,46 +69,31 @@ public class TraineeController {
     }
     @PostMapping("/membershipPayment")
     public String registerMembership(@RequestParam("Plan") String Category,
-            @RequestParam("date") Date date, @RequestParam("paymentMethod") String paymentMethod,
-             Model model) {
+            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date d, @RequestParam("paymentMethod") String paymentMethod,
+             Model model, HttpSession session) throws SQLException {
 
-            Trainee trainee = (Trainee) session.getAttribute("trainee");
-            Payment payment = new Payment();
-            Membership membership = new Membership ();
-            if (Category == "Free")
-           { payment.setAmount(0.00);}
-           else if ( Category == "Customize")
-           { payment.setAmount(155.00);}
-           else if ( Category == "Unlimited")
-           { payment.setAmount(250.00);}
-          else
-          { payment.setAmount(0.00);}
-            payment.setPayment_category(Category);
-            payment.setPerson_id(trainee.getId());
-            payment.setPayment_status(paymentMethod);
-            payment.setPayment_date(date);
-            membership.setPerson_id(trainee.getId());
-            membership.setstartdate(date);
-            membership.setCategory(Category);
-             /*Trainee trainee = new Trainee();
-        trainee.setFirstName(firstname);
-        trainee.setLastName(lastname);
-        trainee.setTraineeUsername(username);
+                if(session.getAttribute("trainee")!=null){
+                    Trainee trainee = (Trainee) session.getAttribute("trainee");
+                    Payment payment = new Payment();
+                    Membership membership = new Membership ();
+                    if (Category == "Free")
+                   { payment.setAmount(0.00);}
+                   else if ( Category == "Customize")
+                   { payment.setAmount(155.00);}
+                   else if ( Category == "Unlimited")
+                   { payment.setAmount(250.00);}
+                  else
+                  { payment.setAmount(0.00);}
+                    payment.setPayment_category(Category);
+                    payment.setPerson_id(trainee.getId());
+                    payment.setPayment_status(paymentMethod);
+                    payment.setPayment_date(d);
+                    membership.setPerson_id(trainee.getId());
+                    membership.setstartdate(d);
+                    membership.setCategory(Category);
         
-
-        // save the trainee to the database
-        traineeDAO.insertTrainee(trainee);*/
-
-
-        /*try {
-            // get the bytes of the image file
-            byte[] imageBytes = file.getBytes();
-
-            // set the imageBytes to the trainee object
-            traineeDAO.uploadProfilePicture(username, imageBytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+                    traineeDAO.createMembership(payment,membership);
+                    }
 
         return "Trainee/Subscribe";
     }

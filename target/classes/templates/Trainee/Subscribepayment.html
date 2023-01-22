@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3">Billing address</h4>
-                    <form th:action="@{/membershipPayment}" class="needs-validation" novalidate>
+                    <form th:action="@{/membershipPayment}" method="post" class="needs-validation" novalidate>
                         <div class="row g-3">
                            
                             <div class="col-md-5">
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="month" class="form-label">Renew Membership</label><br>&nbsp 
-                                <input  type="date" id="date" name="date" min="2023-01-01">
+                                <input  type="date" id="date" name="date" min="2023-01-01" required>
                             </div>
                      
 

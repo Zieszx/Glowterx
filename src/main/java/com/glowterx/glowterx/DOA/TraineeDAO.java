@@ -10,8 +10,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.glowterx.glowterx.Model.Membership;
 import com.glowterx.glowterx.Model.Trainee;
-
+import com.glowterx.glowterx.Model.Payment;
 import jakarta.servlet.http.HttpSession;
 
 public class TraineeDAO {
@@ -109,4 +110,16 @@ public class TraineeDAO {
                 trainee.getGender(),
                 trainee.getAddress(), trainee.getCity(), trainee.getZip(), trainee.getState());
     }
+
+    public void createMembership ( Payment payment, Membership membership) throws SQLException
+    { 
+       try (Connection connection = dataSource.getConnection();) {
+
+            String sql1 = "INSERT INTO payment (amount, payment_date, payment_status, payment_category) VALUES (?,?,?,?)";
+            jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(), payment.getPayment_status(), payment.getPayment_category());
+            String sql2 = "INSERT INTO membership (person_id, startdate, category) VALUES (?,?,?)";
+            jdbcTemplate.update(sql2, membership.getPerson_id(), new java.sql.Date(membership.startdate().getTime()), membership.getCategory());
+        }
+    }
 }
+
