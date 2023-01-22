@@ -2,8 +2,8 @@
 
 <head>
     <title>Glowterx</title>
-    <link rel="stylesheet" href="/css/HeaderNav.css" />
-    <link rel="stylesheet" href="/css/CustomerCheckout.css" />
+    <link rel="stylesheet" href="css/HeaderNav.css" />
+    <link rel="stylesheet" href="css/CustomerCheckout.css" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS only -->
@@ -29,7 +29,7 @@
                 <li class="Checked"><a href="#" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
                 <li><a href="#" class="nav-link px-2 link-light">HIT THE GYM</a></li>
                 <li><a href="#" class="nav-link px-2 link-light">ATTENDANCE</a></li>
-                <li ><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
+                <li ><a href="AddToCart.html" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -42,24 +42,24 @@
     <!-- Navigation Bar -->
 
     <div class="container">
-        <main>
-            <div class="py-5 text-center">
+        <main ng-app="pMembership">
+            <div class="py-5 text-center" >
                 <p class="nav-link fw-bold py-1 px-0 lead">SUBSCRIBE PLAN FORM</p>
             </div>
 
-            <div class="row g-5">
+            <div class="row g-5" ng-controller="priceCtrl" ng-init="initModel()">
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-Cart">Your Plan Payment</span>
-                        <span class="badge bg-Cart rounded-pill">3</span>
+                        <span class="badge bg-Cart rounded-pill">1</span>
                     </h4>
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">Unlimited Access </h6>
-                                <small class="text-muted">Unlimited Access plan</small>
+                                <h6 class="my-0">{{getCategory()}} </h6>
+                                <small class="text-muted">Subscribe Plan</small>
                             </div>
-                            <span class="text-muted">$99.00</span>
+                            <span class="text-muted" >RM{{calculatePrice() | number:2 }}</span>
                         </li>
                        
                         <li class="list-group-item d-flex justify-content-between bg-light">
@@ -67,12 +67,12 @@
                                 <h6 class="my-0">Promo code</h6>
                                 <small>EXAMPLECODE</small>
                             </div>
-                            <span class="text-success">−$0.00</span>
+                            <span class="text-success">−RM0.00</span>
                         </li>
                        
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (RM)</span>
-                            <strong>RM250.00</strong>
+                            <strong>RM{{calculatePrice() | number:2 }}</span></strong>
                         </li>
                     </ul>
 
@@ -85,61 +85,24 @@
                 </div>
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3">Billing address</h4>
-                    <form th:action="@{/membershipPayment}" method="post" class="needs-validation" novalidate>
+                    <form th:action="@{/membershipPayment}" class="needs-validation" novalidate>
                         <div class="row g-3">
-
-
-                            <div class="col-12">
-                                <label for="username" class="form-label">Username</label>
-                                <div class="input-group has-validation">
-                                    <span class="input-group-text">@</span>
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
-                                    <div class="invalid-feedback">
-                                        Your username is required.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
-                            </div>
-
-                            
+                           
                             <div class="col-md-5">
-                                <label for="Plan" class="form-label">Plan</label>
-                                <select name="Plan" class="form-select" id="Plan" required>
-                                    <option value="">Choose...</option>
-                                    <option value="free">Free Trial A Week</option>
-                                    <option value="customize">Customize your own plan</option>
-                                    <option value="Kelantan">Unlimited Access</option>
+                                <label for="Category" class="form-label">Plan Category</label>
+                                <select ng-model="Pcategory" name="Plan" class="form-select" id="Plan" required>
+                                    <option  value="">Choose...</option>
+                                    <option  value="Free">Free Trial A Week</option>
+                                    <option value="Customize">Customize your own plan</option>
+                                    <option  value="Unlimited">Unlimited Access</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Please select a plan.
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <label for="month" class="form-label">Month</label>
-                                <select name="month" class="form-select" id="month" required>
-                                    <option value="">Choose...</option>
-                                    <option value="January">January</option>
-                                    <option value="February">February</option>
-                                    <option value="March">March</option>
-                                    <option value="April">April</option>
-                                    <option value="May">May</option>
-                                    <option value="June">June</option>
-                                    <option value="July">July</option>
-                                    <option value="August">August</option>
-                                    <option value="September">September</option>
-                                    <option value="November">November</option>
-                                    <option value="December">December</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a month plan.
-                                </div>
+                                <label for="month" class="form-label">Renew Membership</label><br>&nbsp 
+                                <input  type="date" id="date" name="date" min="2023-01-01">
                             </div>
                      
 
@@ -199,7 +162,7 @@
 
                             <hr class="my-4">
 
-                            <input class="w-100 btn btn-primary btn-lg" type="submit" value="Continue to checkout"></input>
+                            <input class="w-100 btn btn-primary btn-lg" type="submit" value="Continue to payment"></input>
                     </form>
                     </div>
                 </div>
@@ -217,3 +180,51 @@
 </body>
 
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+   
+    var app = angular.module('pMembership', []);
+
+    // need the $rootScope as 2nd parameter to share  
+    // model/function to other controller 
+    app.controller("priceCtrl", function ($scope, $rootScope) {
+
+        $scope.initModel = function () {
+            $scope.category = "Free Trial";
+            $scope.price = 0.00;
+        };
+
+        $scope.calculatePrice = function () {
+            // store the bmival model under the root scope so the 
+            // 2nd controller "bmiCtrl2" can watch and evaluate it
+           // $rootScope.price = $scope.weight / ($scope.height * $scope.height);
+           if ( $scope.Pcategory == "Free")
+           {$rootScope.price=0.00;}
+           else if ( $scope.Pcategory=="Customize")
+           {$rootScope.price=155.00;}
+           else if ($scope.Pcategory=="Unlimited" )
+           {$rootScope.price=250.00;}
+           else 
+           {$rootScope.price=0.00;}
+            return $rootScope.price;
+        };
+        $scope.getCategory = function () {
+            // store the bmival model under the root scope so the 
+            // 2nd controller "bmiCtrl2" can watch and evaluate it
+           // $rootScope.price = $scope.weight / ($scope.height * $scope.height);
+           if ( $scope.Pcategory == "Free")
+           {$rootScope.category="Free Trial";}
+           else if ( $scope.Pcategory=="Customize")
+           {$rootScope.category="Customize Your Own Plan";}
+           else if ($scope.Pcategory=="Unlimited" )
+           {$rootScope.category="Unlimited Access";}
+           else
+           {$rootScope.category="Choose Your Plan";}
+          
+            return $rootScope.category;
+        };
+    });
+
+   
+</script>
