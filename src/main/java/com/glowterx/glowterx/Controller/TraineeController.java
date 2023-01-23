@@ -5,14 +5,11 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-=======
 import org.springframework.format.annotation.DateTimeFormat;
->>>>>>> 219fbe2a839e32abaa5d26ab59f6c70ba1f8b2c8
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -77,7 +74,6 @@ public class TraineeController {
 
         return "fitnesslogin";
     }
-<<<<<<< HEAD
 
     @GetMapping("/TraineeProfilePicture")
     public ResponseEntity<byte[]> getProfilePicture() {
@@ -125,34 +121,36 @@ public class TraineeController {
         model.addAttribute("trainee", trainee);
         return "Trainee/EditProfileDetails";
     }
-=======
+
     @PostMapping("/membershipPayment")
     public String registerMembership(@RequestParam("Plan") String Category,
-            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date d, @RequestParam("paymentMethod") String paymentMethod,
-             Model model, HttpSession session) throws SQLException {
+            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date d,
+            @RequestParam("paymentMethod") String paymentMethod,
+            Model model, HttpSession session) throws SQLException {
 
-                if(session.getAttribute("trainee")!=null){
-                    Trainee trainee = (Trainee) session.getAttribute("trainee");
-                    Payment payment = new Payment();
-                    Membership membership = new Membership ();
-                    if (Category == "Free")
-                   { payment.setAmount(0.00);}
-                   else if ( Category == "Customize")
-                   { payment.setAmount(155.00);}
-                   else if ( Category == "Unlimited")
-                   { payment.setAmount(250.00);}
-                  else
-                  { payment.setAmount(0.00);}
-                    payment.setPayment_category(Category);
-                    payment.setPerson_id(trainee.getId());
-                    payment.setPayment_status(paymentMethod);
-                    payment.setPayment_date(d);
-                    membership.setPerson_id(trainee.getId());
-                    membership.setstartdate(d);
-                    membership.setCategory(Category);
-        
-                    traineeDAO.createMembership(payment,membership);
-                    }
+        if (session.getAttribute("trainee") != null) {
+            Trainee trainee = (Trainee) session.getAttribute("trainee");
+            Payment payment = new Payment();
+            Membership membership = new Membership();
+            if (Category == "Free") {
+                payment.setAmount(0.00);
+            } else if (Category == "Customize") {
+                payment.setAmount(155.00);
+            } else if (Category == "Unlimited") {
+                payment.setAmount(250.00);
+            } else {
+                payment.setAmount(0.00);
+            }
+            payment.setPayment_category(Category);
+            payment.setPerson_id(trainee.getId());
+            payment.setPayment_status(paymentMethod);
+            payment.setPayment_date(d);
+            membership.setPerson_id(trainee.getId());
+            membership.setstartdate(d);
+            membership.setCategory(Category);
+
+            traineeDAO.createMembership(payment, membership);
+        }
 
         return "Trainee/Subscribe";
     }
@@ -162,7 +160,4 @@ public class TraineeController {
         return "Trainee/Subscribepayment";
     }
 
-  
-
->>>>>>> 219fbe2a839e32abaa5d26ab59f6c70ba1f8b2c8
 }
