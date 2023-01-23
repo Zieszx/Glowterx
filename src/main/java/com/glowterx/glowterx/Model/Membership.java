@@ -8,12 +8,8 @@ public class Membership {
     private Date startdate;
     private Date enddate;
     private double amount;
-<<<<<<< HEAD
-=======
     private int person_id;
     private int payment_id;
->>>>>>> a838429f3498c27a5af30f8b2381cb4d1a245a64
-
     public Membership()
     {
     
@@ -27,9 +23,7 @@ public class Membership {
     this.enddate=enddate;
     this.amount=amount;
     }
-<<<<<<< HEAD
 
-=======
     public int getPerson_id() {
         return person_id;
     }
@@ -44,7 +38,7 @@ public class Membership {
     public void setPayment_id(int person_id) {
         this.payment_id = payment_id;
     }
->>>>>>> a838429f3498c27a5af30f8b2381cb4d1a245a64
+
     public int getID()
     {
         return id;
