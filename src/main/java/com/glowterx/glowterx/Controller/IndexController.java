@@ -50,6 +50,7 @@ public class IndexController {
         return "Admin/CreateTrainingClass";
     }
 
+    // Huda - Admin Generate Report Trainee & Instructor begins here
     @GetMapping("/reportTrainee")
     public String adminGenerateReportTrainee (Model model) {
         //List<Instructor> instructors = adminDAO.getAllInstructors();
@@ -63,6 +64,22 @@ public class IndexController {
         //model.addAttribute("instructors", instructors);
         return "Admin/ReportInstructor";
     }
+
+    @GetMapping("/gReportTrainee")
+    public String adminGeneratedReportTrainee (Model model) {
+        //List<Instructor> instructors = adminDAO.getAllInstructors();
+        //model.addAttribute("instructors", instructors);
+        return "Admin/ReportTrID";
+    }
+
+    @GetMapping("/gReportInstructor")
+    public String adminGeneratedReportInstructor (Model model) {
+        //List<Instructor> instructors = adminDAO.getAllInstructors();
+        //model.addAttribute("instructors", instructors);
+        return "Admin/ReportInID";
+    }
+
+    // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
 
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
