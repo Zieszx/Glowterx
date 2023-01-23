@@ -50,6 +50,20 @@ public class IndexController {
         return "Admin/CreateTrainingClass";
     }
 
+    @GetMapping("/reportTrainee")
+    public String adminGenerateReportTrainee (Model model) {
+        //List<Instructor> instructors = adminDAO.getAllInstructors();
+        //model.addAttribute("instructors", instructors);
+        return "Admin/ReportTrainee";
+    }
+
+    @GetMapping("/reportInstructor")
+    public String adminGenerateReportInstructor (Model model) {
+        //List<Instructor> instructors = adminDAO.getAllInstructors();
+        //model.addAttribute("instructors", instructors);
+        return "Admin/ReportInstructor";
+    }
+
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
         Admin admin = adminDAO.getInfoAdmin();
