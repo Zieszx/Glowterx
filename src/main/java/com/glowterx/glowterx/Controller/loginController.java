@@ -77,7 +77,11 @@ public class loginController {
             session.setAttribute("trainee", trainee);
             session.setAttribute("role", "trainee");
             session.setAttribute("username", trainee.getTraineeUsername());
+<<<<<<< HEAD
             return "Trainee/ProfileDetails";
+=======
+            return "Trainee/Subscribe";
+>>>>>>> 219fbe2a839e32abaa5d26ab59f6c70ba1f8b2c8
         } else {
             model.addAttribute("errorMessage", "Invalid credentials");
             return "fitnesslogin";

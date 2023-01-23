@@ -29,4 +29,6 @@ public class TrainingController {
         model.addAttribute("message", "Training class added successfully!");
         return "/Admin/CreateTrainingClass";
     }
+
+    
 }
