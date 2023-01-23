@@ -3,8 +3,15 @@ package com.glowterx.glowterx.Controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,5 +65,52 @@ public class TraineeController {
         }
 
         return "fitnesslogin";
+    }
+
+    @GetMapping("/TraineeProfilePicture")
+    public ResponseEntity<byte[]> getProfilePicture() {
+        String username = (String) session.getAttribute("username");
+        byte[] image = traineeDAO.getProfilePicture(username);
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+
+    @PostMapping("/uploadTraineeProfilePicture")
+    public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        model.addAttribute("trainee", trainee);
+        String username = (String) session.getAttribute("username");
+        if (!file.isEmpty()) {
+            try {
+                traineeDAO.uploadProfilePicture(username, file.getBytes());
+                model.addAttribute("message", "Successfully uploaded image");
+                return "Trainee/EditProfileDetails";
+            } catch (IOException e) {
+                model.addAttribute("message", "Failed to upload image");
+                return "Trainee/EditProfileDetails";
+            }
+        } else {
+            model.addAttribute("message", "File is empty");
+            return "Trainee/EditProfileDetails";
+        }
+    }
+
+    @PostMapping("/updateTraineeProfile")
+    public String updateProfile(@ModelAttribute("trainee") Trainee Trainee, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "error";
+        }
+        traineeDAO.updateProfile(Trainee);
+        Trainee RefTrainee = traineeDAO.getInfoTrainee();
+        model.addAttribute("trainee", RefTrainee);
+        return "Trainee/ProfileDetails";
+    }
+
+    @GetMapping("/TraineeEditProfile")
+    public String EditProfileTrainee(Model model, HttpSession session) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        model.addAttribute("trainee", trainee);
+        return "Trainee/EditProfileDetails";
     }
 }

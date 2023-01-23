@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.glowterx.glowterx.Model.Instructor;
 
@@ -18,6 +19,8 @@ public class InstructorDAO {
     private DataSource dataSource;
     @Autowired
     HttpSession session;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public Instructor validate(String username, String password) {
         Instructor instructor = null;
@@ -85,5 +88,46 @@ public class InstructorDAO {
             e.printStackTrace();
         }
         return instructor;
+    }
+
+    public void uploadProfilePicture(String username, byte[] image) {
+        String sql = "UPDATE instructor SET profle_images = ? WHERE username = ?";
+        jdbcTemplate.update(sql, new Object[] { image, username });
+    }
+
+    public byte[] getProfilePicture(String username) {
+        String sql = "SELECT profle_images FROM instructor WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
+    }
+
+    public void insertInstructor(Instructor instructor) {
+        String sql = "INSERT INTO instructor (firstname, lastname, username, password, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, instructor.getFirstName(), instructor.getLastName(),
+                instructor.getInstructorUsername(),
+                instructor.getInstructorPass(), instructor.getPhone(), instructor.getEmail(),
+                instructor.getGender(),
+                instructor.getAddress(), instructor.getCity(), instructor.getZip(), instructor.getState());
+    }
+
+    public void updateProfile(Instructor instructor) {
+        String sql = "UPDATE instructor SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, instructor.getFirstName());
+            statement.setString(2, instructor.getLastName());
+            statement.setString(3, instructor.getGender());
+            statement.setString(4, instructor.getInstructorUsername());
+            statement.setString(5, instructor.getInstructorPass());
+            statement.setString(6, instructor.getPhone());
+            statement.setString(7, instructor.getAddress());
+            statement.setString(8, instructor.getEmail());
+            statement.setString(9, instructor.getState());
+            statement.setString(10, instructor.getCity());
+            statement.setString(11, instructor.getInstructorUsername());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

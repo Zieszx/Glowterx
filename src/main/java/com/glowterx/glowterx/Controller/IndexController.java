@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.InstructorDAO;
+import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
+import com.glowterx.glowterx.Model.Trainee;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +21,12 @@ import jakarta.servlet.http.HttpSession;
 public class IndexController {
     @Autowired
     AdminDAO adminDAO;
+
+    @Autowired
+    TraineeDAO traineeDAO;
+
+    @Autowired
+    InstructorDAO instructorDAO;
 
     @RequestMapping(value = "/")
     public String firstpage() {
@@ -48,10 +57,17 @@ public class IndexController {
         return "Admin/ProfileDetails";
     }
 
-    @GetMapping("/Admin/editProfile")
-    public String EditProfileAdmin(Model model, HttpSession session) {
-        Admin admin = adminDAO.getInfoAdmin();
-        model.addAttribute("admin", admin);
-        return "Admin/EditProfileDetails";
+    @GetMapping("/traineeProfile")
+    public String traineeProfile(Model model, HttpSession session) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        model.addAttribute("trainee", trainee);
+        return "Trainee/ProfileDetails";
+    }
+
+    @GetMapping("/instructorProfile")
+    public String instructorProfile(Model model, HttpSession session) {
+        Instructor instructor = instructorDAO.getInfoinstructor();
+        model.addAttribute("instructor", instructor);
+        return "Instructor/ProfileDetails";
     }
 }
