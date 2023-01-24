@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
+import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
+import com.glowterx.glowterx.Model.Product;
 import com.glowterx.glowterx.Model.Trainee;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +29,9 @@ public class IndexController {
 
     @Autowired
     InstructorDAO instructorDAO;
+
+    @Autowired
+    ProductDAO productDAO;
 
     @RequestMapping(value = "/")
     public String firstpage() {
@@ -100,5 +105,10 @@ public class IndexController {
         Instructor instructor = instructorDAO.getInfoinstructor();
         model.addAttribute("instructor", instructor);
         return "Instructor/ProfileDetails";
+    }
+
+    @GetMapping("/manageShop")
+    public String manageShop(Model model, HttpSession session) {
+        return "Admin/ManageShop";
     }
 }
