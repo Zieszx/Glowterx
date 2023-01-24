@@ -40,7 +40,7 @@ public class AdminController {
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
-    @PostMapping("/uploadProfilePicture")
+    @PostMapping("/uploadAdminProfilePicture")
     public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) {
         Admin admin = adminDAO.getInfoAdmin();
         model.addAttribute("admin", admin);
@@ -60,7 +60,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/updateProfile")
+    @PostMapping("/updateAdminProfile")
     public String updateProfile(@ModelAttribute("admin") Admin admin, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "error";
@@ -69,5 +69,12 @@ public class AdminController {
         Admin RefAdmin = adminDAO.getInfoAdmin();
         model.addAttribute("admin", RefAdmin);
         return "Admin/ProfileDetails";
+    }
+
+    @GetMapping("/AdmineditProfile")
+    public String EditProfileAdmin(Model model, HttpSession session) {
+        Admin admin = adminDAO.getInfoAdmin();
+        model.addAttribute("admin", admin);
+        return "Admin/EditProfileDetails";
     }
 }

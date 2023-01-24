@@ -10,7 +10,6 @@ public class Membership {
     private double amount;
     private int person_id;
     private int payment_id;
-
     public Membership()
     {
     
@@ -24,6 +23,7 @@ public class Membership {
     this.enddate=enddate;
     this.amount=amount;
     }
+
     public int getPerson_id() {
         return person_id;
     }
@@ -38,6 +38,7 @@ public class Membership {
     public void setPayment_id(int person_id) {
         this.payment_id = payment_id;
     }
+
     public int getID()
     {
         return id;

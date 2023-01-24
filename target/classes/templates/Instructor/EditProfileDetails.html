@@ -32,7 +32,7 @@
 
             <div class="col-md-3 text-end">
                 <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
-                <a class="Nav-Item" href="ProfileDetails.html"><img src="Images/account.png" /></a>
+                <a class="Nav-Item" href="/instructorProfile"><img src="Images/account.png" /></a>
                 <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
@@ -48,7 +48,7 @@
                             <h4 class="text-right">My Account</h4>
                         </div>
                         <div class="row mt-3 Checked">
-                            <a href="ProfileDetails.html" class="nav-link px-2">My Details</a>
+                            <a href="/instructorProfile" class="nav-link px-2">My Details</a>
                         </div>
                         <div class="row mt-3 Unchecked">
                             <a href="ProfileAddress.html" class="nav-link px-2">My Address</a>
@@ -56,35 +56,54 @@
                         <div class="row mt-3 Unchecked">
                             <a href="#" class="nav-link px-2">My Orders</a>
                         </div>
+                        <div class="row mt-3 Unchecked">
+                            <a href="/logout" class="nav-link px-2">Log Out</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 border-right">
-                <div class="d-flex list-group-item flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="Images/profile_picture.png">amelly12@bbb.com</span><span> </span></div>
+            <div class="col-md-3 border-right" th:object="${instructor}">
+                <div class="d-flex list-group-item flex-column align-items-center text-center p-3"><img class="rounded-circle mt-5" width="300" height="300" src="/InstructorProfilePicture" alt="Profile Picture"><span th:text="*{email}"> </span></div>
+                <form method="post" enctype="multipart/form-data" action="/uploadInstructorProfilePicture">
+                    <input type="file" name="file" value="Change Profile Pictures" class="form-control">
+                    <input type="submit" value="Upload" class="btn btn-primary profile-button form-control">
+                    <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
+                </form>
             </div>
             <div class="col-md-5">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-0">
-                        <h4 class="text-right">My Details</h4>
-                    </div>
-                    <p class="text-left"><small class="text-muted">Manage your account details</small></p>
-                    <hr class="style2">
-                    <div class="row mt-4">
-                        <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="First name" value="" name="firstname"></div>
-                        <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value="" placeholder="Last Name"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" value="" name="username"></div>
-                        <div class="col-md-12"><label class="labels">Password</label><input type="text" class="form-control" placeholder="Enter Password" value="" name="password"></div>
-                        <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="Enter Phone Number" value="" name="phonenum"></div>
-                        <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="Enter Address" value="" name="address"></div>
-                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter Email" value="" name="email"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label for="State" class="label">State</label>
-                            <select name="state" class="form-select" id="country" required>
-                                <option value="">Choose...</option>
+                <form th:action="@{/updateInstructorProfile}" th:object="${instructor}" method="post">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-0">
+                            <h4 class="text-right">My Details</h4>
+                        </div>
+                        <p class="text-left"><small class="text-muted">Manage your account details</small></p>
+                        <hr class="style2">
+                        <div class="row mt-4">
+                            <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="First name" th:field="*{firstName}" name="firstname"></div>
+                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" placeholder="Last name" th:field="*{lastName}" name="lastname"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" th:field="*{InstructorUsername}" name="username"></div>
+                            <div class="col-md-12"><label class="labels">Password</label><input type="text" class="form-control" placeholder="Enter Password" th:field="*{InstructorPass}" name="password"></div>
+                            <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" placeholder="Enter Phone Number" th:field="*{phone}" name="phonenum"></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter Email" th:field="*{email}" name="email"></div>
+                            <div class="col-md-12">
+                                <label for="gender" class="labels">Gender</label>
+                                <select name="gender" class="form-select" id="gender" required>
+                                    <option th:value="*{gender}"><span th:text="*{gender}"></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="Address" th:field="*{address}" name="address"></div>
+                            <div class="col-md-12"><label class="labels">City</label><input type="text" class="form-control" placeholder="City" th:field="*{city}" name="city"></div>
+                            <div class="col-md-6"><label class="labels">Zip Code</label><input type="text" class="form-control" placeholder="Zip Code" th:field="*{zip}" name="zip"></div>
+                            <div class="col-md-6">
+                                <label for="State" class="labels">State</label>
+                                <select name="state" class="form-select" id="country" required>
+                                <option th:value="*{state}"><span th:text="*{state}"></option>
                                 <option value="Johor">Johor</option>
                                 <option value="Kedah">Kedah</option>
                                 <option value="Kelantan">Kelantan</option>
@@ -99,14 +118,14 @@
                                 <option value="Selangor">Selangor</option>
                                 <option value="Terengganu">Terengganu</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select a valid State.
+                                <div class="invalid-feedback">
+                                    Please select a valid State.
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6"><label class="labels">City</label><input type="text" class="form-control" placeholder="City" value="" name="city"></div>
-                    </div>
-                    <div class="mt-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Save Profile"></input>
-                    </div>
+                        <div class="mt-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Save Profile"></input>
+                        </div>
+                </form>
                 </div>
             </div>
         </div>
