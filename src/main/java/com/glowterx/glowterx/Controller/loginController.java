@@ -31,18 +31,18 @@ public class loginController {
     public String login(HttpSession session) {
         boolean check = false;
         // Check if user is already logged in
-        if (session.getAttribute("admin") != null) {
-            return "ProfileDetails";
+        if (session.getAttribute("role") == "admin") {
+            return "Admin/ProfileDetails";
         } else {
             check = true;
         }
-        if (session.getAttribute("instructor") != null) {
-            return "redirect:/instructor/home";
+        if (session.getAttribute("role") == "instructor") {
+            return "Instructor/ProfileDetails";
         } else {
             check = true;
         }
-        if (session.getAttribute("trainee") != null) {
-            return "redirect:/trainee/home";
+        if (session.getAttribute("role") == "trainee") {
+            return "Trainee/ProfileDetails";
         } else {
             check = true;
         }
@@ -69,7 +69,7 @@ public class loginController {
             session.setAttribute("instructor", instructor);
             session.setAttribute("role", "instructor");
             session.setAttribute("username", instructor.getInstructorUsername());
-            return "instructor_welcome";
+            return "Instructor/ProfileDetails";
         }
         Trainee trainee = traineeDAO.validate(username, password);
         if (trainee != null) {
@@ -77,7 +77,7 @@ public class loginController {
             session.setAttribute("trainee", trainee);
             session.setAttribute("role", "trainee");
             session.setAttribute("username", trainee.getTraineeUsername());
-            return "Trainee/Subscribe";
+            return "Trainee/ProfileDetails";
         } else {
             model.addAttribute("errorMessage", "Invalid credentials");
             return "fitnesslogin";

@@ -49,6 +49,7 @@ public class TraineeDAO {
                 trainee.setPhone(rs.getString("phone"));
                 trainee.setEmail(rs.getString("email"));
                 trainee.setGender(rs.getString("gender"));
+                trainee.setMembershipStatus(rs.getString("MembershipStatus"));
 
             }
 
@@ -84,6 +85,7 @@ public class TraineeDAO {
                 trainee.setPhone(rs.getString("phone"));
                 trainee.setEmail(rs.getString("email"));
                 trainee.setGender(rs.getString("gender"));
+                trainee.setMembershipStatus(rs.getNString("MembershipStatus"));
             }
 
         } catch (SQLException e) {
@@ -111,15 +113,36 @@ public class TraineeDAO {
                 trainee.getAddress(), trainee.getCity(), trainee.getZip(), trainee.getState());
     }
 
-    public void createMembership ( Payment payment, Membership membership) throws SQLException
-    { 
-       try (Connection connection = dataSource.getConnection();) {
+    public void updateProfile(Trainee trainee) {
+        String sql = "UPDATE trainee SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, trainee.getFirstName());
+            statement.setString(2, trainee.getLastName());
+            statement.setString(3, trainee.getGender());
+            statement.setString(4, trainee.getTraineeUsername());
+            statement.setString(5, trainee.getTraineePass());
+            statement.setString(6, trainee.getPhone());
+            statement.setString(7, trainee.getAddress());
+            statement.setString(8, trainee.getEmail());
+            statement.setString(9, trainee.getState());
+            statement.setString(10, trainee.getCity());
+            statement.setString(11, trainee.getTraineeUsername());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createMembership(Payment payment, Membership membership) throws SQLException {
+        try (Connection connection = dataSource.getConnection();) {
 
             String sql1 = "INSERT INTO payment (person_id,amount, payment_date, payment_status, payment_category) VALUES (?,?,?,?,?)";
-            jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(), payment.getPayment_status(), payment.getPayment_category());
+            jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(),
+                    payment.getPayment_status(), payment.getPayment_category());
             String sql2 = "INSERT INTO membership (person_id, startdate, category) VALUES (?,?,?)";
             jdbcTemplate.update(sql2, membership.getPerson_id(),membership.startdate(), membership.getCategory());
         }
     }
 }
-

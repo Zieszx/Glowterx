@@ -46,30 +46,45 @@
         <form action="EditProduct.html" method="post">
             <table class="info">
                 <tr>
+                    <td class="table-col-1">Product Id</td>
+                    <td><input  type="text" class="form-control" name="id" id="id" placeholder="1"></td>
+                </tr>
+                <tr>
                     <td class="table-col-1">Image File</td>
                     <td><img src="Images/IMG4.png" style="position: center;" /><br><input type="file" class="form-control" id="imageFile" name="imageFile" placeholder="MENS SHOES DN 23XX.jpg"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Product Name</td>
-                    <td><input  type="text" class="form-control" name="productName" id="productName" placeholder="MENS SHOES DN 23XX"></td>
+                    <td><input  type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Purple Dumbbell 1.5kg"></td>
                 </tr>
-     
+                
+                <tr>
+                    <td class="table-col-1">Price (RM)</td>
+                    <td><input type="text" class="form-control" name="prod_price" id="prod_price" placeholder="30.00"></td>
+                </tr>
+                <tr>
+                    <td class="table-col-1">Product Quantity</td>
+                    <td><input  type="number" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="30"></td>
+                </tr>
+                <tr>
                     <td class="table-col-1">Category</td>
                     <td>
                         <select id="category" name="category" class="form-control" >
                         <option value="supplement">Supplement</option>
-                        <option value="sportEquipment">Sport Equipment</option>
+                        <option value="sportEquipment">Equipment</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td class="table-col-1">Stock</td>
-                    <td><input  type="number" class="form-control" name="stock" id="stock" placeholder="50"></td>
+                    <td class="table-col-1">Status</td>
+                    <td>
+                        <select id="prod_status" name="prod_status" class="form-control" >
+                        <option value="available">Available</option>
+                        <option value="outOfStock">Out Of Stock</option>
+                        </select>
+                    </td>
                 </tr>
-                <tr>
-                    <td class="table-col-1">Price (RM)</td>
-                    <td><input type="text" class="form-control" name="price" id="price" placeholder="133.00"></td>
-                </tr>
+                
             </table>
             <button class="submitEdit"type="submit" id="submitEdit">Edit Product</button>
         </form>

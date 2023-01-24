@@ -32,7 +32,7 @@
 
             <div class="col-md-3 text-end">
                 <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
-                <a class="Nav-Item" href="ProfileDetails.html"><img src="Images/account.png" /></a>
+                <a class="Nav-Item" href="/instructorProfile"><img src="Images/account.png" /></a>
                 <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
@@ -47,7 +47,7 @@
                             <h4 class="text-right">My Account</h4>
                         </div>
                         <div class="row mt-3 Checked">
-                            <a href="ProfileDetails.html" class="nav-link px-2">My Details</a>
+                            <a href="/instructorProfile" class="nav-link px-2">My Details</a>
                         </div>
                         <div class="row mt-3 Unchecked">
                             <a href="ProfileAddress.html" class="nav-link px-2">My Address</a>
@@ -55,17 +55,20 @@
                         <div class="row mt-3 Unchecked">
                             <a href="#" class="nav-link px-2">My Orders</a>
                         </div>
+                        <div class="row mt-3 Unchecked">
+                            <a href="/logout" class="nav-link px-2">Log Out</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="content col-md-10 my-5">
+            <div class="content col-md-10 my-5" th:object="${instructor}">
                 <div class="row">
                     <div class="col-sm-5 col-md-10" style="border:none;">
                         <h4 class="page-title">My Profile</h4>
                     </div>
 
                     <div class="col-sm-5 col-md text-right mb-1">
-                        <a href="EditProfileDetails.html"><input type="submit" value="Edit Profile" class="btn btn-primary profile-button"></input>
+                        <a href="/InstructorEditProfile"><input type="button" value="Edit Profile" class="btn btn-primary profile-button"></input>
                         </a>
                     </div>
                 </div>
@@ -73,50 +76,49 @@
                     <div class="col-md-12">
                         <div class="profile-view">
                             <div class="profile-img">
-                                <div class="d-flex list-group-item flex-column align-items-center text-center mb-4"><img class="rounded-circle mt-5" src="Images/profile_picture.png"></span>
+                                <div class="d-flex list-group-item flex-column align-items-center text-center mb-4"><img class="rounded-circle mt-5" width="350" height="350" src="/InstructorProfilePicture" alt="Profile Picture"></span>
                                 </div>
                             </div>
                             <div class="profile-basic">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="profile-info-left">
-                                            <h3 class="user-name m-t-0 mb-0"><b>Ieskandar Zulqarnain</b></h3>
-                                            <small class="text-muted">Trainee</small>
-                                            <div class="user-id">Username : Zieszx</div>
+                                            <h3 class="user-name m-t-0 mb-0"><b th:text="*{firstName} + ' ' + *{lastName}"></b></h3>
+                                            <small class="text-muted">Instructor</small>
+                                            <div class="user-id">Username : <span th:text="*{InstructorUsername}"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-7">
                                         <ul class="personal-info">
                                             <li>
                                                 <span class="title">Phone:</span>
-                                                <span class="text">014-9161793</span>
-                                            </li>
-                                            <li>
-                                                <span class="title">Email:</span>
-                                                <span class="text">[email&#160;protected]</span>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="title">Birthday:</span>
-                                                <span class="text">3rd March</span>
-                                            </li>
-                                            <li>
-                                                <span class="title">Address:</span>
-                                                <span class="text">714 Burwell Heights Road, Bridge City, TX, 77611</span>
-                                            </li>
-                                            <li>
-                                                <span class="title">Gender:</span>
-                                                <span class="text">Female</span>
-                                            </li>
-                                        </ul>
+                                                <span class="text" th:text="*{phone}"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Email:</span>
+                                                    <span class="text" th:text="*{email}"></span>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Address:</span>
+                                                    <span class="text" th:text="*{address}">, </span>
+                                                    <span class="text" th:text="*{city}">, </span>
+                                                    <span class="text" th:text="*{zip}">, </span>
+                                                    <span class="text" th:text="*{state}"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Gender:</span>
+                                                    <span class="text" th:text="*{gender}"></span>
+                                                </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 </body>
 
 </html>
