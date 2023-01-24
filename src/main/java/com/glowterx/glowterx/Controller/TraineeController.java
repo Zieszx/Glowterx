@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -128,6 +129,7 @@ public class TraineeController {
             @RequestParam("paymentMethod") String paymentMethod,
             Model model, HttpSession session) throws SQLException {
             Trainee trainee = traineeDAO.getInfoTrainee();
+          //  System.out.println(d);
                 if(trainee!=null){
                     Payment payment = new Payment();
                     Membership membership = new Membership ();
@@ -147,8 +149,11 @@ public class TraineeController {
                     membership.setPerson_id(trainee.getId());
                     membership.setstartdate(d);
                     membership.setCategory(Category);
-        
+                    //session.setAttribute("date", d);
+                    System.out.println(d);
                     traineeDAO.createMembership(trainee,payment,membership);
+                    //Payment p = traineeDAO.getPaymentInfo();
+                  //  traineeDAO.updatePaymentID(p,trainee);
                     }
 
         return "Trainee/Subscribe";

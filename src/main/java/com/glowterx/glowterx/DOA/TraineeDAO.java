@@ -1,6 +1,7 @@
 package com.glowterx.glowterx.DOA;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -148,4 +149,52 @@ public class TraineeDAO {
             jdbcTemplate.update(sql3, trainee.getTraineeUsername());
         }
     }
+    /*public Payment getPaymentInfo ()
+    {
+       Date d= (Date) session.getAttribute("date");
+       java.sql.Date sqlDate = (java.sql.Date) d;
+       Trainee trainee = (Trainee) session.getAttribute("trainee");
+        Payment payment = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM payment WHERE person_id = ? and payment_date = ?")) {
+
+            statement.setInt(1, trainee.getId());
+            statement.setDate(2, sqlDate);              
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                payment = new Payment();
+                payment.setId(rs.getInt("id"));
+                payment.setPerson_id(rs.getInt("person_id"));
+                payment.setAmount(rs.getDouble("amount"));
+                payment.setPayment_date(rs.getDate("payment_date"));
+                payment.setPayment_status(rs.getString("payment_status"));
+                payment.setPayment_category(rs.getString("payment_category"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return payment;
+    }
+   
+
+    public void updatePaymentID(Payment payment, Trainee trainee) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        try {
+            String sql = "UPDATE membership SET payment_id = ? WHERE person_id = ? AND payment_date = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, payment.getId());
+            ps.setInt(2, trainee.getId());
+            java.util.Date utilDate = payment.getPayment_date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            ps.setDate(3, sqlDate);
+             ps.executeUpdate();
+             }
+         catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
+    
 }
