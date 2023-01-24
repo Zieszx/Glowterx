@@ -130,6 +130,7 @@ public class TraineeController {
 
                 if(session.getAttribute("trainee")!=null){
                     Trainee trainee = (Trainee) session.getAttribute("trainee");
+                    System.out.print(session.getAttribute(trainee.getFirstName()));
                     Payment payment = new Payment();
                     Membership membership = new Membership ();
                     double amount=0;
@@ -155,9 +156,13 @@ public class TraineeController {
         return "Trainee/Subscribe";
     }
 
-    @GetMapping("/Subscribe")
+    @GetMapping("/SubscribeP")
     public String register() {
         return "Trainee/Subscribepayment";
+    }
+    @GetMapping("/Subscribe")
+    public String subscribe() {
+        return "Trainee/Subscribe";
     }
 
 }
