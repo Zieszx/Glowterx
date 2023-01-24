@@ -27,7 +27,8 @@ public class InstructorDAO {
 
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM instructor WHERE username = ? AND password = ?")) {
+                        .prepareStatement(
+                                "SELECT * FROM instructor WHERE InstructorUsername = ? AND InstructorPass = ?")) {
 
             statement.setString(1, username);
             statement.setString(2, password);
@@ -37,8 +38,8 @@ public class InstructorDAO {
             if (rs.next()) {
                 instructor = new Instructor();
                 instructor.setId(rs.getInt("id"));
-                instructor.setInstructorUsername(rs.getString("username"));
-                instructor.setInstructorPass(rs.getString("password"));
+                instructor.setInstructorUsername(rs.getString("InstructorUsername"));
+                instructor.setInstructorPass(rs.getString("InstructorPass"));
                 instructor.setFirstName(rs.getString("firstname"));
                 instructor.setLastName(rs.getString("lastname"));
                 instructor.setAddress(rs.getString("address"));
@@ -62,7 +63,7 @@ public class InstructorDAO {
         Instructor instructor = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM instructor WHERE username = ?")) {
+                        .prepareStatement("SELECT * FROM instructor WHERE InstructorUsername = ?")) {
 
             statement.setString(1, username);
 
@@ -71,8 +72,8 @@ public class InstructorDAO {
             if (rs.next()) {
                 instructor = new Instructor();
                 instructor.setId(rs.getInt("id"));
-                instructor.setInstructorUsername(rs.getString("username"));
-                instructor.setInstructorPass(rs.getString("password"));
+                instructor.setInstructorUsername(rs.getString("InstructorUsername"));
+                instructor.setInstructorPass(rs.getString("InstructorPass"));
                 instructor.setFirstName(rs.getString("firstname"));
                 instructor.setLastName(rs.getString("lastname"));
                 instructor.setAddress(rs.getString("address"));
@@ -91,17 +92,17 @@ public class InstructorDAO {
     }
 
     public void uploadProfilePicture(String username, byte[] image) {
-        String sql = "UPDATE instructor SET profle_images = ? WHERE username = ?";
+        String sql = "UPDATE instructor SET profle_images = ? WHERE InstructorUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });
     }
 
     public byte[] getProfilePicture(String username) {
-        String sql = "SELECT profle_images FROM instructor WHERE username = ?";
+        String sql = "SELECT profle_images FROM instructor WHERE InstructorUsername = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
     }
 
     public void insertInstructor(Instructor instructor) {
-        String sql = "INSERT INTO instructor (firstname, lastname, username, password, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO instructor (firstname, lastname, InstructorUsername, InstructorPass, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, instructor.getFirstName(), instructor.getLastName(),
                 instructor.getInstructorUsername(),
                 instructor.getInstructorPass(), instructor.getPhone(), instructor.getEmail(),
@@ -110,7 +111,7 @@ public class InstructorDAO {
     }
 
     public void updateProfile(Instructor instructor) {
-        String sql = "UPDATE instructor SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        String sql = "UPDATE instructor SET firstName = ?, lastName = ?, gender = ?, InstructorUsername = ?, InstructorPass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE InstructorUsername = ?";
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, instructor.getFirstName());

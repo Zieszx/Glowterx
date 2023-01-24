@@ -47,9 +47,9 @@ public class loginController {
             check = true;
         }
         if (check) {
-            return "login";
+            return "fitnesslogin";
         }
-        return "login";
+        return "fitnesslogin";
     }
 
     @PostMapping("/login")

@@ -1,11 +1,12 @@
 <html>
 
 <!-- Admin Manage : Display User List > add User > View > Delete -->
+
 <head>
     <title>Manage User</title>
     <link rel="stylesheet" href="/css/HeaderNav.css" />
     <link rel="stylesheet" href="/css/Report.css" />
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS only -->
@@ -29,8 +30,8 @@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li class="Checked"><a href="ManageUser.html" class="nav-link px-2 link-light">USER</a></li>
-                <li ><a href="ReportTrainee.html" class="nav-link px-2 link-light">REPORT</a></li>
-                <li ><a href="#" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
+                <li><a href="ReportTrainee.html" class="nav-link px-2 link-light">REPORT</a></li>
+                <li><a href="#" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
                 <li><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
@@ -42,127 +43,118 @@
     </div>
     <!-- Navigation Bar -->
 
-    
+
     <div class="row">
-    <div class="p-3 py-5">
-        
-        <div class="d-flex justify-content-between align-items-center mb-0">
-            <div class="title">
-                <div>List of User</div>
-            </div>
-        </div>
-        <br><br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search User ID" aria-label="Search User ID" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Name" aria-label="Search Name" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-                    </div>
+        <div class="p-3 py-5">
+
+            <div class="d-flex justify-content-between align-items-center mb-0">
+                <div class="title">
+                    <div>List of User</div>
                 </div>
             </div>
-    </div>
-    <div class="container table-cont">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone Number</th>
-                        <th scope="col"> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"></th>
-                        <form>
-                            <td><input type="text"      class="form-control" size="5" name="username" id="username" required></td>
-                            <td><input type="password"  class="form-control" size="5" name="password" id="password" required></td>
-                            <td>
-                                <select name="role" class="form-control" required>
+            <br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search User ID" aria-label="Search User ID" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Name" aria-label="Search Name" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container table-cont">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <form action="/addManageUser" method="post">
+                                <td><input type="text" class="form-control" name="username" id="username" placeholder="Username" required></td>
+                                <td><input type="password" class="form-control" name="password" id="password" placeholder="Password" required></td>
+                                <td>
+                                    <select name="role" class="form-control" required>
                                     <option>Choose Role</option>
-                                    <option>Trainee</option>
-                                    <option>Instructor</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="trainee">Trainee</option>
+                                    <option value="instructor">Instructor</option>
                                 </select>
-                            </td>
-                            <td><input type="text" class="form-control"  name="fullName" required></td>
-                            <td><input type="text" class="form-control"  name="email" placeholder="xx@bb.cc" required></td>
-                            <td><input type="text" class="form-control"  name="phone" placeholder="0123456789" required></td>
-                            <td>
-                                <button class="btn btn-outline-info" type="submit" value="add">Add</button>
-                            </td>
-                        </form>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>glowterxAdmin</td>
-                        <td>*****</td>
-                        <td>Admin</td>
-                        <td>Glowterx</td>
-                        <td>glowterx@gmail.com</td>
-                        <td>0117891234</td>
-                        <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp; 
-                            <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Zieszx</td>
-                        <td>*****</td>
-                        <td>Trainee</td>
-                        <td>Ieskandar Zulqarnain</td>
-                        <td>zieskandar@gmail.com</td>
-                        <td>0149161793</td>
-                        <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp; 
-                            <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>nrlhude</td>
-                        <td>*****</td>
-                        <td>Trainee</td>
-                        <td>Nurul Huda</td>
-                        <td>nrlhu.daa88@gmail.com</td>
-                        <td>0177753837</td>
-                        <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp; 
-                            <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>nurafikah</td>
-                        <td>*****</td>
-                        <td>Instructor</td>
-                        <td>Nur Afikah</td>
-                        <td>afikah@gmail.com</td>
-                        <td>0123456788</td>
-                        <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp; 
-                            <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>nurin</td>
-                        <td>*****</td>
-                        <td>Instructor</td>
-                        <td>Nurin Farzanah</td>
-                        <td>nurin@gmail.com</td>
-                        <td>0123456790</td>
-                        <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp; 
-                            <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
-                            
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="firstname" placeholder="Firstname" required>
+                                    <input type="text" class="form-control" name="lastname" placeholder="Lastname" required>
+                                </td>
+                                <td>
+                                    <select name="gender" class="form-control" id="gender" required>
+                                        <option value="">Choose Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" class="form-control" name="email" placeholder="xx@bb.cc" required></td>
+                                <td><input type="text" class="form-control" name="phone" placeholder="0123456789" required></td>
+                                <td>
+                                    <button class="btn btn-outline-info" type="submit" value="add">Add</button>
+                                </td>
+                            </form>
+                        </tr>
+                        <tr th:each="admin : ${admindata}">
+                            <td th:text="${admin.id}"></td>
+                            <td th:text="${admin.adminUsername}"></td>
+                            <td th:text="${admin.adminPass}"></td>
+                            <td>Admin</td>
+                            <td th:text="${admin.firstName} + ' ' + ${admin.lastName}"></td>
+                            <td th:text="${admin.email}"></td>
+                            <td th:text="${admin.phone}"></td>
+                            <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp;
+                                <a class="btn btn-outline-danger" th:href="@{/deleteadmin(username=${admin.adminUsername})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+                        </tr>
+                        <tr th:each="instructor : ${instructordata}">
+                            <td th:text="${instructor.id}"></td>
+                            <td th:text="${instructor.InstructorUsername}"></td>
+                            <td th:text="${instructor.InstructorPass}"></td>
+                            <td>Instructor</td>
+                            <td th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></td>
+                            <td th:text="${instructor.email}"></td>
+                            <td th:text="${instructor.phone}"></td>
+                            <td><a class="btn btn-outline-info" href="ProfileIninstructor.html" role="button">View</a> &nbsp;
+                                <a class="btn btn-outline-danger" th:href="@{/deleteinstructor(username=${instructor.InstructorUsername}, id=${instructor.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+                        </tr>
+
+                        <tr th:each="trainee : ${traineedata}">
+                            <td th:text="${trainee.id}"></td>
+                            <td th:text="${trainee.TraineeUsername}"></td>
+                            <td th:text="${trainee.TraineePass}"></td>
+                            <td>trainee</td>
+                            <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>
+                            <td th:text="${trainee.email}"></td>
+                            <td th:text="${trainee.phone}"></td>
+                            <td><a class="btn btn-outline-info" href="ProfileIninstructor.html" role="button">View</a> &nbsp;
+                                <a class="btn btn-outline-danger" th:href="@{/deletetrainee(username=${trainee.TraineeUsername}, id=${trainee.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-    </div>
     </div>
 
 </body>
