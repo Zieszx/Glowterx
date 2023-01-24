@@ -76,17 +76,18 @@ public class TraineeController {
                     Trainee trainee = (Trainee) session.getAttribute("trainee");
                     Payment payment = new Payment();
                     Membership membership = new Membership ();
-                    if (Category == "Free")
-                   { payment.setAmount(0.00);}
-                   else if ( Category == "Customize")
-                   { payment.setAmount(155.00);}
-                   else if ( Category == "Unlimited")
-                   { payment.setAmount(250.00);}
-                  else
-                  { payment.setAmount(0.00);}
+                    double amount=0;
+                    if (Category.equals("Free"))
+                   { amount=0;}
+                   else if ( Category.equals("Customize"))
+                   {amount=155.00;}
+                   else if ( Category.equals("Unlimited"))
+                   {amount=250.00;}
+                 
+                    payment.setAmount(amount);
                     payment.setPayment_category(Category);
                     payment.setPerson_id(trainee.getId());
-                    payment.setPayment_status(paymentMethod);
+                    payment.setPayment_status("PAID");
                     payment.setPayment_date(d);
                     membership.setPerson_id(trainee.getId());
                     membership.setstartdate(d);
