@@ -14,8 +14,8 @@ public class Training {
     public Training() {
     }
 
-    public Training(String name, Date start_date, Date end_date, int duration, int sessionNum, int instructor_id) {
-        this.training_name = name;
+    public Training(String training_name, Date start_date, Date end_date, int training_duration, int training_session, int instructor_id) {
+        this.training_name = training_name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.training_duration = training_duration;
