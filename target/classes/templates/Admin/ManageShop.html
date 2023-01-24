@@ -111,12 +111,13 @@
                                 <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
                         </tr>
                     </tbody>
-                </table>
-                                
+                </table>    
+                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>      
             </div>
+            
         </div>
-        <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
         </div>
+        
 
        
     </body>

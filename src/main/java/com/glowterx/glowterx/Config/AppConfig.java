@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.CartDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
@@ -35,5 +36,10 @@ public class AppConfig {
     @Bean
     public ProductDAO productDOA() {
         return new ProductDAO();
+    }
+
+    @Bean
+    public CartDAO cartDOA() {
+        return new CartDAO();
     }
 }

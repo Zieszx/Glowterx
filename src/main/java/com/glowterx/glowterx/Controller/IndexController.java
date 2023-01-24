@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.CartDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Cart;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Product;
 import com.glowterx.glowterx.Model.Trainee;
@@ -34,6 +36,9 @@ public class IndexController {
 
     @Autowired
     ProductDAO productDAO;
+
+    @Autowired
+    CartDAO cartDAO;
 
     @RequestMapping(value = "/")
     public String firstpage(Model model) {
@@ -177,5 +182,17 @@ public class IndexController {
         model.addAttribute("instructordata", instructor);
         model.addAttribute("traineedata", trainee);
         return "Admin/ManageUser";
+    }
+
+    @GetMapping("/addCart")
+    public String addCart(Model model, HttpSession session) {
+        /*List<Cart> cart = cartDAO.getAllCart();
+        model.addAttribute("cart", cart);*/
+        return "Trainee/ListCart";
+    }
+
+    @GetMapping("/shop")
+    public String shop(Model model, HttpSession session) {
+        return "Trainee/AddToCart";
     }
 }
