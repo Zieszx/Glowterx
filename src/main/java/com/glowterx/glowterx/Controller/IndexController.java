@@ -109,6 +109,8 @@ public class IndexController {
 
     @GetMapping("/manageShop")
     public String manageShop(Model model, HttpSession session) {
+        List<Product> product = productDAO.getAllProduct();
+        model.addAttribute("product", product);
         return "Admin/ManageShop";
     }
 }

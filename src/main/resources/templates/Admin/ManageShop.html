@@ -100,53 +100,13 @@
                                 <td><button type="submit" class="btn btn-outline-success">Add</button></td>
                             </form>
                         </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Purple Dumbbell 1.5kg</td>
-                            <td>30.00</td>
-                            <td>15</td>
-                            <td>Equipment</td>
-                            <td>Available</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Purple Dumbbell 1.5kg</td>
-                            <td>30.00</td>
-                            <td>15</td>
-                            <td>Equipment</td>
-                            <td>Available</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Purple Dumbbell 1.5kg</td>
-                            <td>30.00</td>
-                            <td>15</td>
-                            <td>Equipment</td>
-                            <td>Available</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Purple Dumbbell 1.5kg</td>
-                            <td>30.00</td>
-                            <td>15</td>
-                            <td>Equipment</td>
-                            <td>Available</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Purple Dumbbell 1.5kg</td>
-                            <td>30.00</td>
-                            <td>15</td>
-                            <td>Equipment</td>
-                            <td>Available</td>
+                        <tr th:each="prod : ${product}">
+                            <td th:text="${prod.id}"></td>
+                            <td th:text="${prod.prod_name}"></td>
+                            <td th:text="${prod.prod_price}"></td>
+                            <td th:text="${prod.prod_quantity}"></td>
+                            <td th:text="${prod.prod_category}"></td>
+                            <td th:text="${prod.prod_status}"></td>
                             <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
                                 <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
                         </tr>
