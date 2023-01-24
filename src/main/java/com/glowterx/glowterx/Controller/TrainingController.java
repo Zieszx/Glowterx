@@ -38,5 +38,4 @@ public class TrainingController {
         return "/Admin/ManageTrainingClass";
     }
 
-    
 }
