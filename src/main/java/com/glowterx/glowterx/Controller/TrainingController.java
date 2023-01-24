@@ -29,6 +29,11 @@ public class TrainingController {
         model.addAttribute("message", "Training class added successfully!");
         return "/Admin/CreateTrainingClass";
     }
+    @PostMapping ("/Admin/manageTraining")
+    public String viewListTraining()
+    {
+        return "Admin/ManageTraining";
+    }
 
     
 }
