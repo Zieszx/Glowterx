@@ -127,10 +127,8 @@ public class TraineeController {
             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date d,
             @RequestParam("paymentMethod") String paymentMethod,
             Model model, HttpSession session) throws SQLException {
-
-                if(session.getAttribute("trainee")!=null){
-                    Trainee trainee = (Trainee) session.getAttribute("trainee");
-                    System.out.print(session.getAttribute(trainee.getFirstName()));
+            Trainee trainee = traineeDAO.getInfoTrainee();
+                if(trainee!=null){
                     Payment payment = new Payment();
                     Membership membership = new Membership ();
                     double amount=0;
@@ -142,7 +140,7 @@ public class TraineeController {
                    {amount=250.00;}
                  
                     payment.setAmount(amount);
-                    payment.setPayment_category(Category);
+                    payment.setPayment_category(paymentMethod);
                     payment.setPerson_id(trainee.getId());
                     payment.setPayment_status("PAID");
                     payment.setPayment_date(d);
@@ -150,7 +148,7 @@ public class TraineeController {
                     membership.setstartdate(d);
                     membership.setCategory(Category);
         
-                    traineeDAO.createMembership(payment,membership);
+                    traineeDAO.createMembership(trainee,payment,membership);
                     }
 
         return "Trainee/Subscribe";

@@ -1,7 +1,6 @@
 package com.glowterx.glowterx.DOA;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -136,23 +135,17 @@ public class TraineeDAO {
         }
     }
 
-    public void createMembership(Payment payment, Membership membership) throws SQLException {
+    public void createMembership(Trainee  trainee,Payment payment, Membership membership) throws SQLException {
         try (Connection connection = dataSource.getConnection();) {
+
             String sql1 = "INSERT INTO payment (person_id,amount, payment_date, payment_status, payment_category) VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
-            preparedStatement1.setInt(1, payment.getPerson_id());
-            preparedStatement1.setDouble(2, payment.getAmount());
-            preparedStatement1.setDate(3, (Date) payment.getPayment_date());
-            preparedStatement1.setString(4, payment.getPayment_status());
-            preparedStatement1.setString(5, payment.getPayment_category());
-            preparedStatement1.executeUpdate();
-            
-            String sql2 = "INSERT INTO membership (person_id, start_date, category) VALUES (?,?,?)";
-            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
-            preparedStatement2.setInt(1, membership.getPerson_id());
-            preparedStatement2.setDate(2, (Date) membership.startdate());
-            preparedStatement2.setString(3, membership.getCategory());
-            preparedStatement2.executeUpdate();    
+            jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(),
+                    payment.getPayment_status(), payment.getPayment_category());
+            String sql2 = "INSERT INTO membership (person_id, start_date, membership_category) VALUES (?,?,?)";
+            jdbcTemplate.update(sql2, membership.getPerson_id(),membership.startdate(), membership.getCategory());
+
+            String sql3="UPDATE trainee set MembershipStatus = 'PAID' WHERE username = ?";
+            jdbcTemplate.update(sql3, trainee.getTraineeUsername());
         }
     }
 }
