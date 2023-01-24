@@ -142,8 +142,7 @@ public class TraineeDAO {
             jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(),
                     payment.getPayment_status(), payment.getPayment_category());
             String sql2 = "INSERT INTO membership (person_id, startdate, category) VALUES (?,?,?)";
-            jdbcTemplate.update(sql2, membership.getPerson_id(), new java.sql.Date(membership.startdate().getTime()),
-                    membership.getCategory());
+            jdbcTemplate.update(sql2, membership.getPerson_id(),membership.startdate(), membership.getCategory());
         }
     }
 }
