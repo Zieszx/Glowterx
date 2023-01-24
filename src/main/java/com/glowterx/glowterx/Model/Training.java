@@ -4,22 +4,22 @@ import java.sql.Date;
 
 public class Training {
     private int id;
-    private String name;
+    private String training_name;
     private Date start_date;
     private Date end_date;
-    private int duration;
-    private int sessionNum;
     private int instructor_id;
+    private int training_session;
+    private int training_duration;
 
     public Training() {
     }
 
     public Training(String name, Date start_date, Date end_date, int duration, int sessionNum, int instructor_id) {
-        this.name = name;
+        this.training_name = name;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.duration = duration;
-        this.sessionNum = sessionNum;
+        this.training_duration = training_duration;
+        this.training_session= training_session;
         this.instructor_id = instructor_id;
 
     }
@@ -28,8 +28,8 @@ public class Training {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String training_name) {
+        this.training_name = training_name;
     }
 
     public void setStart_date(Date start_date) {
@@ -45,7 +45,7 @@ public class Training {
     }
 
     public String getName() {
-        return name;
+        return training_name;
     }
 
     public Date getStart_date() {
@@ -56,20 +56,20 @@ public class Training {
         return end_date;
     }
 
-    public void setSessionNum(int sessionNum) {
-        this.sessionNum = sessionNum;
+    public void setSessionNum(int training_session) {
+        this.training_session = training_session;
     }
 
     public int getSessionNum() {
-        return sessionNum;
+        return training_session;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setDuration(int training_duration) {
+        this.training_duration = training_duration;
     }
 
     public int getDuration() {
-        return duration;
+        return training_duration;
     }
 
     public void setInstructorID(int instructor_id) {
