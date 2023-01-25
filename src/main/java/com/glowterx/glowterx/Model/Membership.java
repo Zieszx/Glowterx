@@ -47,7 +47,7 @@ public class Membership {
     {
        this.id=id;
     }
-    public String getCategory()
+    public String getmembership_category()
     {
         return Category;
     }
@@ -55,7 +55,7 @@ public class Membership {
     {
        this.Category=Category;
     }
-    public Date startdate()
+    public Date getstart_date()
     {
         return startdate;
     }
@@ -63,7 +63,7 @@ public class Membership {
     {
        this.startdate=startdate;
     }
-    public Date enddate()
+    public Date getend_date()
     {
         return enddate;
     }
