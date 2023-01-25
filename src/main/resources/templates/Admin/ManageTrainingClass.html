@@ -85,7 +85,7 @@
                              <td th:text="${train.getSessionNum()}"></td>
                             <td th:text="${train.getDuration()}"></td>
                     
-                             <td><a class="btn btn-outline-info" href="#" role="button">Edit</a> &nbsp; 
+                             <td><a class="btn btn-outline-info" th:href="@{/editTraining(id=${train.id})}"  role="button">Edit</a> &nbsp; 
                             <a class="btn btn-outline-danger"  th:href="@{/deletetraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                  
                         </tr>
