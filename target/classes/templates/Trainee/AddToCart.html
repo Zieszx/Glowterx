@@ -39,26 +39,24 @@
         </header>
         </div>
 
-        <div class = "products"  >
+        <div class = "products"  th:each="prod : ${product}">
             <div class = "container cart">
             
-                <div class = "product-items">
+                <div class = "product-items" >
                     <!-- single product -->
-                    <div class = "product">
+                    <div class = "product" >
                         <div class = "product-content">
                             <div class = "product-img">
                                 <img src = "images/IMG1.png" alt = "product image">
                             </div>
                             <div class = "product-btns">
-                                <button type = "button" class = "btn-cart"> add to cart
-                                    <span><i class = "fas fa-plus"></i></span>
-                                </button>
+                                <a class="btn-cart" th:href="@{/TraineeaddCart(productId = ${prod.id})}" role="button" target="_blank" >Add To Cart</a>
                             </div>
                         </div>
 
-                        <div class = "product-info">
+                        <div class = "product-info" >
                             <div class = "product-info-top">
-                                <h2 class = "sm-title">EQUIPMENT</h2>
+                                <h2 class = "sm-title" th:text="${prod.prod_category}"></h2>
                                 <div class = "rating">
                                     <span><i class = "fas fa-star"></i></span>
                                     <span><i class = "fas fa-star"></i></span>
@@ -67,99 +65,10 @@
                                     <span><i class = "far fa-star"></i></span>
                                 </div>
                             </div>
-                            <a href = "#" class = "product-name">Purple Yoga Mat</a>
-                            <p class = "product-price">RM 55.00</p>
+                            <a href = "#" class = "product-name" th:text="${prod.prod_name}"></a>
+                            <p class = "product-price" th:text="${prod.prod_price}"></p>
                         </div>
                     </div>
-                    <!-- end of single product -->
-                    <!-- single product -->
-                    <div class = "product">
-                        <div class = "product-content">
-                            <div class = "product-img">
-                                <img src = "images/IMG1.png" alt = "product image">
-                            </div>
-                            <div class = "product-btns">
-                                <button type = "button" class = "btn-cart" onclick="window.location.href = 'ListCart.html';"> add to cart
-                                    <span><i class = "fas fa-plus"></i></span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class = "product-info">
-                            <div class = "product-info-top">
-                                <h2 class = "sm-title">EQUIPMENT</h2>
-                                <div class = "rating">
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "far fa-star"></i></span>
-                                </div>
-                            </div>
-                            <a href = "#" class = "product-name">Purple Dumbbell 1.5kg</a>
-                            <p class = "product-price">RM 30.00</p>
-                        </div>
-                    </div>
-                    <!-- end of single product -->
-                    <!-- single product -->
-                    <div class = "product">
-                        <div class = "product-content">
-                            <div class = "product-img">
-                                <img src = "images/IMG1.png" alt = "product image">
-                            </div>
-                            <div class = "product-btns">
-                                <button type = "button" class = "btn-cart"> add to cart
-                                    <span><i class = "fas fa-plus"></i></span>
-                                </button>
-                                
-                            </div>
-                        </div>
-
-                        <div class = "product-info">
-                            <div class = "product-info-top">
-                                <h2 class = "sm-title">EQUIPMENT</h2>
-                                <div class = "rating">
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "far fa-star"></i></span>
-                                </div>
-                            </div>
-                            <a href = "#" class = "product-name">Dumbbell 16kg</a>
-                            <p class = "product-price">RM 59.00</p>
-                        </div>
-                    </div>
-                    <!-- end of single product -->
-                    <!-- single product -->
-                    <div class = "product">
-                        <div class = "product-content">
-                            <div class = "product-img">
-                                <img src = "images/IMG1.png" alt = "product image">
-                            </div>
-                            <div class = "product-btns">
-                                <button type = "button" class = "btn-cart"> add to cart
-                                    <span><i class = "fas fa-plus"></i></span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class = "product-info">
-                            <div class = "product-info-top">
-                                <h2 class = "sm-title">Supplement</h2>
-                                <div class = "rating">
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "fas fa-star"></i></span>
-                                    <span><i class = "far fa-star"></i></span>
-                                </div>
-                            </div>
-                            <a href = "#" class = "product-name">Whey Protein</a>
-                            <p class = "product-price">RM 89.00</p>
-                        </div>
-                    </div>
-                    <!-- end of single product -->
                 </div>
             </div>
         </div>

@@ -102,13 +102,18 @@ body{
     cursor: pointer;
     border: none;
     transition: all 0.6s ease;
+    text-decoration: none;
+    text-align: center;
 }
 .btn-cart{
     background: black;
     color: white;
+    
 }
 .btn-cart:hover{
     background: var(--carribean-green);
+    color: white;
+   
 }
 .btn-buy{
     background: white;
@@ -234,7 +239,7 @@ body{
 
 
 /* Media Queries */
-@media screen and (min-width: 992px){
+@media screen and (min-width: 2000%){
     .product-items{
         display: grid;
         grid-template-columns: repeat(2, 1fr);

@@ -195,17 +195,10 @@ public class IndexController {
         return "Admin/ManageUser";
     }
 
-    @GetMapping("/addCart")
-    public String addCart(Model model, HttpSession session) {
-        /*
-         * List<Cart> cart = cartDAO.getAllCart();
-         * model.addAttribute("cart", cart);
-         */
-        return "Trainee/ListCart";
-    }
-
     @GetMapping("/shop")
     public String shop(Model model, HttpSession session) {
+        List<Product> product = productDAO.getAllProduct();
+        model.addAttribute("product", product);
         return "Trainee/AddToCart";
     }
 }
