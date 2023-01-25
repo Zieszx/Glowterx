@@ -12,10 +12,12 @@ import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
+import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Product;
 import com.glowterx.glowterx.Model.Trainee;
+import com.glowterx.glowterx.Model.Training;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +28,9 @@ public class IndexController {
 
     @Autowired
     TraineeDAO traineeDAO;
+
+    @Autowired
+    TrainingDAO trainingDAO;
 
     @Autowired
     InstructorDAO instructorDAO;
@@ -112,5 +117,11 @@ public class IndexController {
         List<Product> product = productDAO.getAllProduct();
         model.addAttribute("product", product);
         return "Admin/ManageShop";
+    }
+    @GetMapping ("/manageTrainingClass")
+    public String viewListTraining(Model model)
+    {   List <Training> training = trainingDAO.getAllTraining();
+        model.addAttribute("training",training);
+        return "/Admin/ManageTrainingClass";
     }
 }

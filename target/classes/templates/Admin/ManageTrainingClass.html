@@ -75,7 +75,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                   
                         <tr th:each="train : ${training}">
                             <td th:text="${train.id}"></td>
                             <td th:text="${train.training_name}"></td>
@@ -83,7 +82,7 @@
                             <td th:text="${train.end_date}"></td>
                             <td th:text="${train.training_session}"></td>
                             <td th:text="${train.training_duration}"></td>
-                           </tr>
+                        </tr>
                         
                     </tbody>
                 </table>

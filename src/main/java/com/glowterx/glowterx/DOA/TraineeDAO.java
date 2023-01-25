@@ -1,7 +1,7 @@
 package com.glowterx.glowterx.DOA;
 
 import java.sql.Connection;
-import java.util.Date;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -36,7 +36,7 @@ public class Membership {
     }
 
     public void setPayment_id(int person_id) {
-        this.payment_id = payment_id;
+        this.person_id = person_id;
     }
 
     public int getID()

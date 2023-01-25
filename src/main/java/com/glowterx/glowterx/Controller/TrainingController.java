@@ -31,12 +31,7 @@ public class TrainingController {
         model.addAttribute("message", "Training class added successfully!");
         return "/Admin/CreateTrainingClass";
     }
-    @GetMapping ("/Admin/manageTraining")
-    public String viewListTraining(Model model)
-    {   List <Training> training = trainingDAO.getAllTraining();
-        model.addAttribute("training",training);
-        return "/Admin/ManageTrainingClass";
-    }
+    
 
     
 }
