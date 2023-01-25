@@ -78,7 +78,7 @@
                     <tbody>
                         <tr th:each="train : ${training}">
                             <td th:text="${train.id}"></td>
-                            <td th:text="${train.training_name}"></td>
+                            <td th:text="${train.getName()}"></td>
                             <td th:text="${train.getStart_date()}"></td>
                             <td th:text="${train.getEnd_date()}"></td>
                             <td th:text="${train.getInstructorId()}"></td>
