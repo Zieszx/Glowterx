@@ -91,6 +91,38 @@ public class InstructorDAO {
         return instructor;
     }
 
+    public Instructor getInstructorID(int id) {
+        Instructor instructor = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM instructor WHERE id = ?")) {
+
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                instructor = new Instructor();
+                instructor.setId(rs.getInt("id"));
+                instructor.setInstructorUsername(rs.getString("InstructorUsername"));
+                instructor.setInstructorPass(rs.getString("InstructorPass"));
+                instructor.setFirstName(rs.getString("firstname"));
+                instructor.setLastName(rs.getString("lastname"));
+                instructor.setAddress(rs.getString("address"));
+                instructor.setCity(rs.getString("city"));
+                instructor.setState(rs.getString("state"));
+                instructor.setZip(rs.getString("zip"));
+                instructor.setPhone(rs.getString("phone"));
+                instructor.setEmail(rs.getString("email"));
+                instructor.setGender(rs.getString("gender"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return instructor;
+    }
+
     public void uploadProfilePicture(String username, byte[] image) {
         String sql = "UPDATE instructor SET profle_images = ? WHERE InstructorUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });
