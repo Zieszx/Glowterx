@@ -143,7 +143,7 @@ public class IndexController {
     }
     // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
 
-    // Profile begins here
+
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
         Admin admin = adminDAO.getInfoAdmin();
@@ -164,16 +164,12 @@ public class IndexController {
         model.addAttribute("instructor", instructor);
         return "Instructor/ProfileDetails";
     }
-    // Profile ends here
-
-    // Shop begins here
     @GetMapping("/manageShop")
     public String manageShop(Model model, HttpSession session) {
         List<Product> product = productDAO.getAllProduct();
         model.addAttribute("product", product);
         return "Admin/ManageShop";
     }
-    // Shop ends here
 
     // Training Class begins here
     @GetMapping("/manageTraining")
