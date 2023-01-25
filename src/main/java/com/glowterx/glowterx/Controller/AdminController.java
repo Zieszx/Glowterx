@@ -147,11 +147,14 @@ public class AdminController {
     @GetMapping("/editTraining")
     public String EditTraining(@RequestParam("id") int id, Model model,HttpSession session) {
         session.setAttribute("training_id", id);
-       Training training = trainingDAO.getInfoTraining();
+        Training training = trainingDAO.getInfoTraining();
+        List<Instructor> instructors = adminDAO.getAllInstructors();
         model.addAttribute("training", training);
+        model.addAttribute("instructors", instructors);
+       
         return "Admin/EditTrainingClass";
     }
-    @PostMapping("/updateTraining")
+  /*   @PostMapping("/updateTraining")
     public String updateTraining(@ModelAttribute("training") Training training, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "error";
@@ -160,5 +163,5 @@ public class AdminController {
         Training RefTraining = trainingDAO.getInfoTraining();
         model.addAttribute("trainee", RefTraining);
         return "Admin/ManageTrainingClass";
-    }
+    }*/
 }

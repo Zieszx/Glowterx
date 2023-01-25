@@ -43,11 +43,11 @@
     <p class="title">Edit Training Classes</p>
 
     <div class="box">
-        <form th:action="@{/updateTraining}" th:object="${training}" method="post">
+        <form action="" th:object="${training}" method="post">
             <table class="info">
                 <tr>
                     <td>Class Name</td>
-                    <td><input type="text" class="form-control" name="className" id="className" placeholder="XXXXXXXXXX"  th:field="*{training_name}" ></td>
+                    <td><input type="text" class="form-control" name="className" id="className" placeholder="XXXXXXXXXX"></td>
                 </tr>
                 <tr>
                     <td>Start Date</td>
@@ -59,17 +59,17 @@
                 </tr>
                 <tr>
                     <td>Duration (minutes)</td>
-                    <td><input type="number" class="form-control" name="duration" id="duration" placeholder="XX" min="5" max="500" th:field="*{training_duration}"></td>
+                    <td><input type="number" class="form-control" name="duration" id="duration" placeholder="XX" min="5" max="500" ></td>
                 </tr>
                 <tr>
                     <td>Session (number)</td>
-                    <td><input type="number" class="form-control" name="session" id="session" placeholder="XX" min="5" max="500" th:field="*{training_session}"></td>
+                    <td><input type="number" class="form-control" name="session" id="session" placeholder="XX" min="5" max="500" ></td>
                 </tr>
                 <tr>
                     <td>Instructor</td>
                     <td>
                         <select name="instructor_id" class="form-control">
-                            <option th:value="*{gender}"><span th:text="*{gender}"></option>
+                            <option value="" disabled selected>Select Instructor</option>
                             <option th:each="instructor : ${instructors}" th:value="${instructor.id}" th:text="${instructor.firstName}"></option>
                         </select>
 

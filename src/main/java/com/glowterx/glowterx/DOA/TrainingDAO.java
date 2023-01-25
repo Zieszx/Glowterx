@@ -31,13 +31,13 @@ public class TrainingDAO {
                 training.getDuration(), training.getSessionNum(), training.getInstructorId());
     }
     public Training getInfoTraining() {
-        String id= (String) session.getAttribute("training_id");
+        int id= (Integer) session.getAttribute("training_id");
         Training training = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement("SELECT * FROM training WHERE id = ?")) {
 
-            statement.setString(1, id);
+            statement.setInt(1, id);
 
             ResultSet rs = statement.executeQuery();
 
@@ -77,5 +77,6 @@ public class TrainingDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
+        
     }
 }
