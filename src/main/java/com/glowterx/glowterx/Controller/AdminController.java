@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
@@ -34,6 +35,8 @@ public class AdminController {
 
     @Autowired
     private AdminDAO adminDAO;
+    @Autowired
+    private TrainingDAO trainingDAO;
 
     @GetMapping("/adminProfilePicture")
     public ResponseEntity<byte[]> getProfilePicture() {
@@ -141,4 +144,24 @@ public class AdminController {
          model.addAttribute("training", training);
         return "Admin/ManageTrainingClass";
     }
+    @GetMapping("/editTraining")
+    public String EditTraining(@RequestParam("id") int id, Model model,HttpSession session) {
+        session.setAttribute("training_id", id);
+        Training training = trainingDAO.getInfoTraining();
+        List<Instructor> instructors = adminDAO.getAllInstructors();
+        model.addAttribute("training", training);
+        model.addAttribute("instructors", instructors);
+       
+        return "Admin/EditTrainingClass";
+    }
+  /*   @PostMapping("/updateTraining")
+    public String updateTraining(@ModelAttribute("training") Training training, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "error";
+        }
+        trainingDAO.updateProfile(training);
+        Training RefTraining = trainingDAO.getInfoTraining();
+        model.addAttribute("trainee", RefTraining);
+        return "Admin/ManageTrainingClass";
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.glowterx.glowterx.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,10 +178,16 @@ public class IndexController {
         model.addAttribute("product", product);
         return "Admin/ManageShop";
     }
-    @GetMapping ("/manageTrainingClass")
-    public String viewListTraining(Model model)
-    {   List <Training> training = adminDAO.getAllTraining();
-        model.addAttribute("training",training);
+
+    @GetMapping("/manageTrainingClass")
+    public String viewListTraining(Model model) {
+        List<Training> training = adminDAO.getAllTraining();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
         return "Admin/ManageTrainingClass";
     }
 

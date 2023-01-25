@@ -43,46 +43,45 @@
     <p class="title">Edit Training Classes</p>
 
     <div class="box">
-        <form action="CreateTrainingClass.html" method="post">
+        <form action="" th:object="${training}" method="post">
             <table class="info">
                 <tr>
-                    <td>Image File</td>
-                    <td><br>
-                        <img src="Images/beginnerYoga.jpg" style="position: center;" /><br><br>
-                        <input type="file" class="form-control" id="imageFile" name="imageFile" placeholder="MENS SHOES DN 23XX.jpg"></td>
+                    <td>Class Name</td>
+                    <td><input type="text" class="form-control" name="className" id="className" placeholder="XXXXXXXXXX"></td>
                 </tr>
                 <tr>
-                    <td>Class Name</td>
-                    <td><input type="text" class="form-control" name="className" id="className" placeholder="Beginner Yoga"></td>
+                    <td>Start Date</td>
+                    <td><input type="date" class="form-control" name="startdate" id="startdate" th:field="*{start_date}"></td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td><input type="date" class="form-control" name="enddate" id="enddate" th:field="*{end_date}"></td>
                 </tr>
                 <tr>
                     <td>Duration (minutes)</td>
-                    <td><input type="number" class="form-control" name="duration" id="duration" placeholder="60" min="5" max="500"></td>
+                    <td><input type="number" class="form-control" name="duration" id="duration" placeholder="XX" min="5" max="500" ></td>
                 </tr>
                 <tr>
-                    <td>Level</td>
-                    <td>
-                        <select id="level" name="level" class="form-control">
-                        <option value="easy" selected>Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                        </select>
-                    </td>
+                    <td>Session (number)</td>
+                    <td><input type="number" class="form-control" name="session" id="session" placeholder="XX" min="5" max="500" ></td>
                 </tr>
                 <tr>
-                    <td>Category</td>
+                    <td>Instructor</td>
                     <td>
-                        <select id="category" name="category" class="form-control">
-                        <option value="cardio">Cardio</option>
-                        <option value="flexibility" selected>Flexibility</option>
-                        <option value="strength">Strength</option>
-                        <option value="hiit">HIIT</option>
+                        <select name="instructor_id" class="form-control">
+                            <option value="" disabled selected>Select Instructor</option>
+                            <option th:each="instructor : ${instructors}" th:value="${instructor.id}" th:text="${instructor.firstName}"></option>
                         </select>
+
                     </td>
                 </tr>
             </table>
-            <button type="submit" id="submitEdit">Edit Class</button>
+            <div class="text-center pt-3 pb-3">
+                <input type="submit" class="btn btn-secondary btn-lg mx-auto" value="SAVE"></input>
+               
+            </div>
         </form>
+         </div>
     </div>
 </body>
 

@@ -14,12 +14,13 @@ public class Training {
     public Training() {
     }
 
-    public Training(String training_name, Date start_date, Date end_date, int training_duration, int training_session, int instructor_id) {
+    public Training(String training_name, Date start_date, Date end_date, int training_duration, int training_session,
+            int instructor_id) {
         this.training_name = training_name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.training_duration = training_duration;
-        this.training_session= training_session;
+        this.training_session = training_session;
         this.instructor_id = instructor_id;
 
     }
@@ -28,7 +29,7 @@ public class Training {
         this.id = id;
     }
 
-    public void setName(String training_name) {
+    public void setTraining_name(String training_name) {
         this.training_name = training_name;
     }
 
@@ -44,7 +45,7 @@ public class Training {
         return id;
     }
 
-    public String getName() {
+    public String getTraining_name() {
         return training_name;
     }
 
@@ -56,27 +57,27 @@ public class Training {
         return end_date;
     }
 
-    public void setSessionNum(int training_session) {
+    public void setTraining_session(int training_session) {
         this.training_session = training_session;
     }
 
-    public int getSessionNum() {
+    public int getTraining_session() {
         return training_session;
     }
 
-    public void setDuration(int training_duration) {
+    public void setTraining_duration(int training_duration) {
         this.training_duration = training_duration;
     }
 
-    public int getDuration() {
+    public int getTraining_duration() {
         return training_duration;
     }
 
-    public void setInstructorID(int instructor_id) {
+    public void setInstructor_id(int instructor_id) {
         this.instructor_id = instructor_id;
     }
 
-    public int getInstructorId() {
+    public int getInstructor_id() {
         return instructor_id;
     }
 

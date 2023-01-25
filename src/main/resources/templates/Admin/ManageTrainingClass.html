@@ -76,18 +76,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="train : ${training}">
-                            <td th:text="${train.id}"></td>
-                            <td th:text="${train.getName()}"></td>
-                            <td th:text="${train.getStart_date()}"></td>
-                            <td th:text="${train.getEnd_date()}"></td>
-                            <td th:text="${train.getInstructorId()}"></td>
-                             <td th:text="${train.getSessionNum()}"></td>
-                            <td th:text="${train.getDuration()}"></td>
-                    
-                             <td><a class="btn btn-outline-info" href="#" role="button">Edit</a> &nbsp; 
-                            <a class="btn btn-outline-danger"  th:href="@{/deletetraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
-                 
+                        <tr th:each="train, iterTr : ${training}">
+                            <td th:text="${train.training_name}"></td>
+                            <td th:text="${train.start_date}"></td>
+                            <td th:text="${train.end_date}"></td>
+                            <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
+                                <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
+                            </td>
+                            <td th:text="${train.training_session}"></td>
+                            <td th:text="${train.training_duration}"></td>
+
+                            <td><a class="btn btn-outline-info" th:href="@{/editTraining(id=${train.id})}" role="button">Edit</a> &nbsp;
+                                <a class="btn btn-outline-danger" th:href="@{/deletetraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+
                         </tr>
 
                     </tbody>
