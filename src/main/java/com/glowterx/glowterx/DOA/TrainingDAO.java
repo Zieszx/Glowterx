@@ -59,6 +59,33 @@ public class TrainingDAO {
         return training;
     }
 
+    public Training getInfoTrainingByID(int id) {
+        Training training = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM training WHERE id = ?")) {
+
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                training = new Training();
+                training.setId(rs.getInt("id"));
+                training.setTraining_name(rs.getString("training_name"));
+                training.setStart_date(rs.getDate("start_date"));
+                training.setEnd_date(rs.getDate("end_date"));
+                training.setInstructor_id(rs.getInt("instructor_id"));
+                training.setTraining_session(rs.getInt("training_session"));
+                training.setTraining_duration(rs.getInt("training_duration"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return training;
+    }
+
     public void updateProfile(Training training, int id) {
         
           String sql =
