@@ -29,7 +29,7 @@ public class TraineeDAO {
 
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM trainee WHERE username = ? AND password = ?")) {
+                        .prepareStatement("SELECT * FROM trainee WHERE TraineeUsername = ? AND TraineePass = ?")) {
 
             statement.setString(1, username);
             statement.setString(2, password);
@@ -39,8 +39,8 @@ public class TraineeDAO {
             if (rs.next()) {
                 trainee = new Trainee();
                 trainee.setId(rs.getInt("id"));
-                trainee.setTraineeUsername(rs.getString("username"));
-                trainee.setTraineePass(rs.getString("password"));
+                trainee.setTraineeUsername(rs.getString("TraineeUsername"));
+                trainee.setTraineePass(rs.getString("TraineePass"));
                 trainee.setFirstName(rs.getString("firstname"));
                 trainee.setLastName(rs.getString("lastname"));
                 trainee.setAddress(rs.getString("address"));
@@ -66,7 +66,7 @@ public class TraineeDAO {
         Trainee trainee = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM trainee WHERE username = ?")) {
+                        .prepareStatement("SELECT * FROM trainee WHERE TraineeUsername = ?")) {
 
             statement.setString(1, username);
 
@@ -75,8 +75,8 @@ public class TraineeDAO {
             if (rs.next()) {
                 trainee = new Trainee();
                 trainee.setId(rs.getInt("id"));
-                trainee.setTraineeUsername(rs.getString("username"));
-                trainee.setTraineePass(rs.getString("password"));
+                trainee.setTraineeUsername(rs.getString("TraineeUsername"));
+                trainee.setTraineePass(rs.getString("TraineePass"));
                 trainee.setFirstName(rs.getString("firstname"));
                 trainee.setLastName(rs.getString("lastname"));
                 trainee.setAddress(rs.getString("address"));
@@ -96,18 +96,18 @@ public class TraineeDAO {
     }
 
     public void uploadProfilePicture(String username, byte[] image) {
-        String sql = "UPDATE trainee SET profle_images = ? WHERE username = ?";
+        String sql = "UPDATE trainee SET profle_images = ? WHERE TraineeUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });
     }
 
     public byte[] getProfilePicture(String username) {
-        String sql = "SELECT profle_images FROM trainee WHERE username = ?";
+        String sql = "SELECT profle_images FROM trainee WHERE TraineeUsername = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
     }
 
     public void insertTrainee(Trainee trainee) {
         trainee.setMembershipStatus("Free");
-        String sql = "INSERT INTO trainee (firstname, lastname, username, password, MembershipStatus, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO trainee (firstname, lastname, TraineeUsername, TraineePass, MembershipStatus, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, trainee.getFirstName(), trainee.getLastName(), trainee.getTraineeUsername(),
                 trainee.getTraineePass(), trainee.getMembershipStatus(), trainee.getPhone(), trainee.getEmail(),
                 trainee.getGender(),
@@ -115,7 +115,7 @@ public class TraineeDAO {
     }
 
     public void updateProfile(Trainee trainee) {
-        String sql = "UPDATE trainee SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        String sql = "UPDATE trainee SET firstName = ?, lastName = ?, gender = ?, TraineeUsername = ?, TraineePass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE TraineeUsername = ?";
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, trainee.getFirstName());
@@ -136,65 +136,71 @@ public class TraineeDAO {
         }
     }
 
-    public void createMembership(Trainee  trainee,Payment payment, Membership membership) throws SQLException {
+    public void createMembership(Trainee trainee, Payment payment, Membership membership) throws SQLException {
         try (Connection connection = dataSource.getConnection();) {
 
             String sql1 = "INSERT INTO payment (person_id,amount, payment_date, payment_status, payment_category) VALUES (?,?,?,?,?)";
             jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(),
                     payment.getPayment_status(), payment.getPayment_category());
             String sql2 = "INSERT INTO membership (person_id, start_date, membership_category) VALUES (?,?,?)";
-            jdbcTemplate.update(sql2, membership.getPerson_id(),membership.startdate(), membership.getCategory());
+            jdbcTemplate.update(sql2, membership.getPerson_id(), membership.startdate(), membership.getCategory());
 
-            String sql3="UPDATE trainee set MembershipStatus = 'PAID' WHERE username = ?";
+            String sql3 = "UPDATE trainee set MembershipStatus = 'PAID' WHERE username = ?";
             jdbcTemplate.update(sql3, trainee.getTraineeUsername());
         }
     }
-    /*public Payment getPaymentInfo ()
-    {
-       Date d= (Date) session.getAttribute("date");
-       java.sql.Date sqlDate = (java.sql.Date) d;
-       Trainee trainee = (Trainee) session.getAttribute("trainee");
-        Payment payment = null;
-        try (Connection connection = dataSource.getConnection();
-                PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM payment WHERE person_id = ? and payment_date = ?")) {
+    /*
+     * public Payment getPaymentInfo ()
+     * {
+     * Date d= (Date) session.getAttribute("date");
+     * java.sql.Date sqlDate = (java.sql.Date) d;
+     * Trainee trainee = (Trainee) session.getAttribute("trainee");
+     * Payment payment = null;
+     * try (Connection connection = dataSource.getConnection();
+     * PreparedStatement statement = connection
+     * .prepareStatement("SELECT * FROM payment WHERE person_id = ? and payment_date = ?"
+     * )) {
+     * 
+     * statement.setInt(1, trainee.getId());
+     * statement.setDate(2, sqlDate);
+     * ResultSet rs = statement.executeQuery();
+     * 
+     * if (rs.next()) {
+     * payment = new Payment();
+     * payment.setId(rs.getInt("id"));
+     * payment.setPerson_id(rs.getInt("person_id"));
+     * payment.setAmount(rs.getDouble("amount"));
+     * payment.setPayment_date(rs.getDate("payment_date"));
+     * payment.setPayment_status(rs.getString("payment_status"));
+     * payment.setPayment_category(rs.getString("payment_category"));
+     * }
+     * 
+     * } catch (SQLException e) {
+     * e.printStackTrace();
+     * }
+     * return payment;
+     * }
+     * 
+     * 
+     * public void updatePaymentID(Payment payment, Trainee trainee) throws
+     * SQLException {
+     * Connection connection = dataSource.getConnection();
+     * try {
+     * String sql =
+     * "UPDATE membership SET payment_id = ? WHERE person_id = ? AND payment_date = ?"
+     * ;
+     * PreparedStatement ps = connection.prepareStatement(sql);
+     * ps.setInt(1, payment.getId());
+     * ps.setInt(2, trainee.getId());
+     * java.util.Date utilDate = payment.getPayment_date();
+     * java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+     * ps.setDate(3, sqlDate);
+     * ps.executeUpdate();
+     * }
+     * catch (SQLException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     */
 
-            statement.setInt(1, trainee.getId());
-            statement.setDate(2, sqlDate);              
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                payment = new Payment();
-                payment.setId(rs.getInt("id"));
-                payment.setPerson_id(rs.getInt("person_id"));
-                payment.setAmount(rs.getDouble("amount"));
-                payment.setPayment_date(rs.getDate("payment_date"));
-                payment.setPayment_status(rs.getString("payment_status"));
-                payment.setPayment_category(rs.getString("payment_category"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return payment;
-    }
-   
-
-    public void updatePaymentID(Payment payment, Trainee trainee) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        try {
-            String sql = "UPDATE membership SET payment_id = ? WHERE person_id = ? AND payment_date = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, payment.getId());
-            ps.setInt(2, trainee.getId());
-            java.util.Date utilDate = payment.getPayment_date();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            ps.setDate(3, sqlDate);
-             ps.executeUpdate();
-             }
-         catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
-    
 }

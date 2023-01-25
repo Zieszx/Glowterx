@@ -26,7 +26,7 @@ public class InitialDataLoader {
             System.out.println("Table 'admin' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE admin (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (username))");
+                    "CREATE TABLE admin (id INT(11) AUTO_INCREMENT PRIMARY KEY, adminUsername VARCHAR(255),adminPass VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (adminUsername))");
             System.out.println("Table 'admin' created.");
         }
 
@@ -34,14 +34,14 @@ public class InitialDataLoader {
             System.out.println("Table 'instructor' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE instructor (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (username))");
+                    "CREATE TABLE instructor (id INT(11) AUTO_INCREMENT PRIMARY KEY, InstructorUsername VARCHAR(255),InstructorPass VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (InstructorUsername))");
             System.out.println("Table 'instructor' created.");
         }
         if (tables.contains("trainee")) {
             System.out.println("Table 'trainee' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE trainee (id INT(11) AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), MembershipStatus VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (username))");
+                    "CREATE TABLE trainee (id INT(11) AUTO_INCREMENT PRIMARY KEY, TraineeUsername VARCHAR(255),TraineePass VARCHAR(255), MembershipStatus VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), gender VARCHAR(255), address VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), phone VARCHAR(255), email VARCHAR(255), profle_images LONGBLOB, UNIQUE KEY (TraineeUsername))");
             System.out.println("Table 'trainee' created.");
         }
         if (tables.contains("payment")) {
@@ -101,16 +101,16 @@ public class InitialDataLoader {
 
     public void loadInitialData() {
         jdbcTemplate.execute(
-                "INSERT INTO admin(username, password, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('iesz', '123', 'Ieskandar', 'Zulqarnain', 'Male', 'M21 KTDI', 'Skudai', 'Johor', '83130', '014916193', 'zieszx@gmail.com')");
+                "INSERT INTO admin(adminUsername, adminPass, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('iesz', '123', 'Ieskandar', 'Zulqarnain', 'Male', 'M21 KTDI', 'Skudai', 'Johor', '83130', '014916193', 'zieszx@gmail.com')");
         jdbcTemplate.execute(
-                "INSERT INTO admin(username, password, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('hude', '123', 'Nurul', 'Huda', 'Female', 'W3 KDSE', 'Masai', 'Johor', '83213', '0123456789', 'hude@gmail.com')");
+                "INSERT INTO admin(adminUsername, adminPass, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('hude', '123', 'Nurul', 'Huda', 'Female', 'W3 KDSE', 'Masai', 'Johor', '83213', '0123456789', 'hude@gmail.com')");
         jdbcTemplate.execute(
-                "INSERT INTO instructor(username, password, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('johndoe', '123', 'John', 'Doe', 'Male', 'MA1 KTDI', 'Johor', 'Impian Emas', '83130', '014934563', 'john@gmail.com')");
+                "INSERT INTO instructor(InstructorUsername, InstructorPass, firstname, lastname, gender, address, city, state, zip, phone, email) VALUES ('johndoe', '123', 'John', 'Doe', 'Male', 'MA1 KTDI', 'Johor', 'Impian Emas', '83130', '014934563', 'john@gmail.com')");
     }
 
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         createTables();
-     //loadInitialData(); // First time run should uncomment this line
+        ///loadInitialData(); // First time run should uncomment this line
     }
 }

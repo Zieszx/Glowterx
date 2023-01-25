@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.CartDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Cart;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Product;
 import com.glowterx.glowterx.Model.Trainee;
@@ -23,6 +25,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
+    @Autowired
+    HttpSession session;
     @Autowired
     AdminDAO adminDAO;
 
@@ -38,13 +42,68 @@ public class IndexController {
     @Autowired
     ProductDAO productDAO;
 
+    @Autowired
+    CartDAO cartDAO;
+
     @RequestMapping(value = "/")
-    public String firstpage() {
+    public String firstpage(Model model) {
+        boolean check = false;
+        // Check if user is already logged in
+        if (session.getAttribute("role") == "admin") {
+            Admin admin = adminDAO.getInfoAdmin();
+            model.addAttribute("admin", admin);
+            return "Admin/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (session.getAttribute("role") == "instructor") {
+            Instructor instructor = instructorDAO.getInfoinstructor();
+            model.addAttribute("instructor", instructor);
+            return "Instructor/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (session.getAttribute("role") == "trainee") {
+            Trainee trainee = traineeDAO.getInfoTrainee();
+            model.addAttribute("trainee", trainee);
+            return "Trainee/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (check) {
+            return "fitnesslogin";
+        }
         return "fitnesslogin";
     }
 
     @RequestMapping(value = "/index")
-    public String index() {
+    public String index(Model model) {
+        boolean check = false;
+        // Check if user is already logged in
+        if (session.getAttribute("role") == "admin") {
+            Admin admin = adminDAO.getInfoAdmin();
+            model.addAttribute("admin", admin);
+            return "Admin/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (session.getAttribute("role") == "instructor") {
+            Instructor instructor = instructorDAO.getInfoinstructor();
+            model.addAttribute("instructor", instructor);
+            return "Instructor/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (session.getAttribute("role") == "trainee") {
+            Trainee trainee = traineeDAO.getInfoTrainee();
+            model.addAttribute("trainee", trainee);
+            return "Trainee/ProfileDetails";
+        } else {
+            check = true;
+        }
+        if (check) {
+            return "fitnesslogin";
+        }
         return "fitnesslogin";
     }
 
@@ -62,30 +121,30 @@ public class IndexController {
 
     // Huda - Admin Generate Report Trainee & Instructor begins here
     @GetMapping("/reportTrainee")
-    public String adminGenerateReportTrainee (Model model) {
-        //List<Instructor> instructors = adminDAO.getAllInstructors();
-        //model.addAttribute("instructors", instructors);
+    public String adminGenerateReportTrainee(Model model) {
+        // List<Instructor> instructors = adminDAO.getAllInstructors();
+        // model.addAttribute("instructors", instructors);
         return "Admin/ReportTrainee";
     }
 
     @GetMapping("/reportInstructor")
-    public String adminGenerateReportInstructor (Model model) {
-        //List<Instructor> instructors = adminDAO.getAllInstructors();
-        //model.addAttribute("instructors", instructors);
+    public String adminGenerateReportInstructor(Model model) {
+        // List<Instructor> instructors = adminDAO.getAllInstructors();
+        // model.addAttribute("instructors", instructors);
         return "Admin/ReportInstructor";
     }
 
     @GetMapping("/gReportTrainee")
-    public String adminGeneratedReportTrainee (Model model) {
-        //List<Instructor> instructors = adminDAO.getAllInstructors();
-        //model.addAttribute("instructors", instructors);
+    public String adminGeneratedReportTrainee(Model model) {
+        // List<Instructor> instructors = adminDAO.getAllInstructors();
+        // model.addAttribute("instructors", instructors);
         return "Admin/ReportTrID";
     }
 
     @GetMapping("/gReportInstructor")
-    public String adminGeneratedReportInstructor (Model model) {
-        //List<Instructor> instructors = adminDAO.getAllInstructors();
-        //model.addAttribute("instructors", instructors);
+    public String adminGeneratedReportInstructor(Model model) {
+        // List<Instructor> instructors = adminDAO.getAllInstructors();
+        // model.addAttribute("instructors", instructors);
         return "Admin/ReportInID";
     }
 
@@ -123,5 +182,27 @@ public class IndexController {
     {   List <Training> training = trainingDAO.getAllTraining();
         model.addAttribute("training",training);
         return "/Admin/ManageTrainingClass";
+
+    @GetMapping("/manageUser")
+    public String manageUser(Model model, HttpSession session) {
+        List<Trainee> trainee = adminDAO.getAllTrainee();
+        List<Instructor> instructor = adminDAO.getAllInstructors();
+        List<Admin> admin = adminDAO.getAllAdmin();
+        model.addAttribute("admindata", admin);
+        model.addAttribute("instructordata", instructor);
+        model.addAttribute("traineedata", trainee);
+        return "Admin/ManageUser";
+    }
+
+    @GetMapping("/addCart")
+    public String addCart(Model model, HttpSession session) {
+        /*List<Cart> cart = cartDAO.getAllCart();
+        model.addAttribute("cart", cart);*/
+        return "Trainee/ListCart";
+    }
+
+    @GetMapping("/shop")
+    public String shop(Model model, HttpSession session) {
+        return "Trainee/AddToCart";
     }
 }

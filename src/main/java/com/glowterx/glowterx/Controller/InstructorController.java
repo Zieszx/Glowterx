@@ -75,4 +75,5 @@ public class InstructorController {
         System.out.println(instructor.getInstructorUsername());
         return "Instructor/EditProfileDetails";
     }
+
 }

@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
+import com.glowterx.glowterx.Model.Membership;
+import com.glowterx.glowterx.Model.Trainee;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -36,7 +38,7 @@ public class AdminDAO {
 
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM admin WHERE username = ? AND password = ?")) {
+                        .prepareStatement("SELECT * FROM admin WHERE adminUsername = ? AND adminPass = ?")) {
 
             statement.setString(1, username);
             statement.setString(2, password);
@@ -46,8 +48,8 @@ public class AdminDAO {
             if (rs.next()) {
                 admin = new Admin();
                 admin.setId(rs.getInt("id"));
-                admin.setAdminUsername(rs.getString("username"));
-                admin.setAdminPass(rs.getString("password"));
+                admin.setAdminUsername(rs.getString("adminUsername"));
+                admin.setAdminPass(rs.getString("adminPass"));
                 admin.setFirstName(rs.getString("firstname"));
                 admin.setLastName(rs.getString("lastname"));
                 admin.setAddress(rs.getString("address"));
@@ -70,7 +72,7 @@ public class AdminDAO {
         Admin admin = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM Admin WHERE username = ?")) {
+                        .prepareStatement("SELECT * FROM Admin WHERE adminUsername = ?")) {
 
             statement.setString(1, username);
 
@@ -79,8 +81,8 @@ public class AdminDAO {
             if (rs.next()) {
                 admin = new Admin();
                 admin.setId(rs.getInt("id"));
-                admin.setAdminUsername(rs.getString("username"));
-                admin.setAdminPass(rs.getString("password"));
+                admin.setAdminUsername(rs.getString("adminUsername"));
+                admin.setAdminPass(rs.getString("adminPass"));
                 admin.setFirstName(rs.getString("firstname"));
                 admin.setLastName(rs.getString("lastname"));
                 admin.setAddress(rs.getString("address"));
@@ -99,13 +101,19 @@ public class AdminDAO {
     }
 
     public void uploadProfilePicture(String username, byte[] image) {
-        String sql = "UPDATE admin SET profle_images = ? WHERE username = ?";
+        String sql = "UPDATE admin SET profle_images = ? WHERE adminUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });
     }
 
     public byte[] getProfilePicture(String username) {
-        String sql = "SELECT profle_images FROM admin WHERE username = ?";
+        String sql = "SELECT profle_images FROM admin WHERE adminUsername = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { username }, byte[].class);
+    }
+
+    public List<Admin> getAllAdmin() {
+        String username = (String) session.getAttribute("username");
+        String sql = "SELECT * FROM admin WHERE adminUsername != ?";
+        return jdbcTemplate.query(sql, new Object[] { username }, new BeanPropertyRowMapper<>(Admin.class));
     }
 
     public List<Instructor> getAllInstructors() {
@@ -113,8 +121,13 @@ public class AdminDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
     }
 
+    public List<Trainee> getAllTrainee() {
+        String sql = "SELECT * FROM trainee";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Trainee.class));
+    }
+
     public void updateProfile(Admin admin) {
-        String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?, username = ?, password = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE username = ?";
+        String sql = "UPDATE admin SET firstName = ?, lastName = ?, gender = ?, adminUsername = ?, adminPass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE adminUsername = ?";
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, admin.getFirstName());
@@ -135,4 +148,56 @@ public class AdminDAO {
         }
     }
 
+    // adminDAO.addManageUser(username, password, role, firstname, lastname, email,
+    // phone)
+    public void addManageUser(String username, String password, String role, String firstname,
+            String lastname, String gender, String email, String phone) {
+        String sql = "";
+        String membership = "Free";
+        if (role.equals("admin")) {
+            sql = "INSERT INTO admin (adminUsername, adminPass, firstname, lastname, gender, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, username, password, firstname, lastname, gender, email, phone);
+        } else if (role.equals("instructor")) {
+            sql = "INSERT INTO instructor (InstructorUsername, InstructorPass, firstname, lastname, gender, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, username, password, firstname, lastname, gender, email, phone);
+        } else if (role.equals("trainee")) {
+            sql = "INSERT INTO trainee (TraineeUsername, TraineePass, MembershipStatus, firstname, lastname, gender, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, username, password, membership, firstname, lastname, gender, email, phone);
+        }
+    }
+
+    public void deleteAdmin(String username) {
+        String sql = "DELETE FROM admin WHERE adminUsername = ?";
+        jdbcTemplate.update(sql, username);
+    }
+
+    public void deleteInstructor(String username, int id) {
+        // String sql = "DELETE FROM training WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        String sql = "DELETE FROM instructor WHERE InstructorUsername = ?";
+        jdbcTemplate.update(sql, username);
+    }
+
+    // if have association with other table, need to delete the association first
+    public void deleteTrainee(String username, int id) {
+        // String sql = "SELECT * FROM membership WHERE person_id = ?";
+        // List<Membership> membership = jdbcTemplate.query(sql, new Object[] { username
+        // },
+        // new BeanPropertyRowMapper<>(Membership.class));
+        // if (!membership.isEmpty()) {
+        // sql = "DELETE FROM membership WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        // }
+
+        // sql = "DELETE FROM payment WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        // sql = "DELETE FROM cart WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        // sql = "DELETE FROM order WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        // sql = "DELETE FROM attendance WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        String sql = "DELETE FROM trainee WHERE TraineeUsername = ?";
+        jdbcTemplate.update(sql, username);
+    }
 }

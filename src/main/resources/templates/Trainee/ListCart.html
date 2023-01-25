@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>List</title>
+    <link rel="stylesheet" href="css/HeaderNav.css" />
+    <link rel="stylesheet" href="css/Report.css" />
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+    <div class="nav-bar">
+
+        <div class="Header-Nav">
+            <div><img class="MalaysiaLogo" src="Images/MalaysiaLogo.png" /> Malaysia - MYR </div>
+        </div>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <div class="Nav-Logo">glowterx</div>
+            </a>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
+                <li><a href="#" class="nav-link px-2 link-light">USER</a></li>
+                <li><a href="#" class="nav-link px-2 link-light">REPORT</a></li>
+                <li ><a href="ManageTrainingClass.html" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
+                <li class="Checked"><a href="ManageShop.html" class="nav-link px-2 link-light">SHOP</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <a class="Nav-Item" href="#"><img src="Images/account.png" /></a>
+                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
+            </div>
+        </header>
+    </div>
+    <!-- Navigation Bar -->
+
+    <div class="row">
+        <div class="p-3 py-5">
+            
+            <div class="d-flex justify-content-between align-items-center mb-0">
+                <div class="title">
+                    <div>Shopping Cart</div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+        <div class="container table-cont">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Person Id</th>
+                            <th scope="col">Product Id</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="c : ${cart}">
+                            <td th:text="${c.id}"></td>
+                            <td th:text="${c.quantity}"></td>
+                            <td th:text="${c.person_id}"></td>
+                            <td th:text="${c.product_id}"></td>
+                            <td><a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>    
+                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>      
+            </div>
+            
+        </div>
+        </div>
+        
+
+       
+    </body>
+</html>
