@@ -113,13 +113,6 @@ public class IndexController {
         return "Register";
     }
 
-    @GetMapping("/manageTraining")
-    public String adminManageTraining(Model model) {
-        List<Instructor> instructors = adminDAO.getAllInstructors();
-        model.addAttribute("instructors", instructors);
-        return "Admin/CreateTrainingClass";
-    }
-
     // Huda - Admin Generate Report Trainee & Instructor begins here
     @GetMapping("/reportTrainee")
     public String adminGenerateReportTrainee(Model model) {
@@ -148,8 +141,8 @@ public class IndexController {
         // model.addAttribute("instructors", instructors);
         return "Admin/ReportInID";
     }
-
     // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
+
 
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
@@ -171,12 +164,19 @@ public class IndexController {
         model.addAttribute("instructor", instructor);
         return "Instructor/ProfileDetails";
     }
-
     @GetMapping("/manageShop")
     public String manageShop(Model model, HttpSession session) {
         List<Product> product = productDAO.getAllProduct();
         model.addAttribute("product", product);
         return "Admin/ManageShop";
+    }
+
+    // Training Class begins here
+    @GetMapping("/manageTraining")
+    public String adminManageTraining(Model model) {
+        List<Instructor> instructors = adminDAO.getAllInstructors();
+        model.addAttribute("instructors", instructors);
+        return "Admin/CreateTrainingClass";
     }
 
     @GetMapping("/manageTrainingClass")
@@ -191,6 +191,32 @@ public class IndexController {
         return "Admin/ManageTrainingClass";
     }
 
+    @GetMapping("/listTraineeTC")
+    public String traineeEnrollTC(Model model) {
+        List<Training> training = adminDAO.getAllTraining();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
+        return "Trainee/TraineeListTC";
+    }
+
+    @GetMapping("/listInstructorTC")
+    public String instructorEnrollTC(Model model) {
+        List<Training> training = adminDAO.getAllTraining();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
+        return "Instructor/InstructListTC";
+    }
+    // Training Class ends here
+
+
     @GetMapping("/manageUser")
     public String manageUser(Model model, HttpSession session) {
         List<Trainee> trainee = adminDAO.getAllTrainee();
@@ -200,6 +226,15 @@ public class IndexController {
         model.addAttribute("instructordata", instructor);
         model.addAttribute("traineedata", trainee);
         return "Admin/ManageUser";
+    }
+
+    @GetMapping("/addCart")
+    public String addCart(Model model, HttpSession session) {
+        /*
+         * List<Cart> cart = cartDAO.getAllCart();
+         * model.addAttribute("cart", cart);
+         */
+        return "Trainee/ListCart";
     }
 
     @GetMapping("/shop")
