@@ -26,15 +26,15 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">USER</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">REPORT</a></li>
-                <li ><a href="#" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
-                <li class="Checked"><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
+                <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
+                <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
+                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
+                <a class="Nav-Item" href="/adminProfile"><img src="Images/account.png" /></a>
             </div>
         </header>
     </div>
@@ -46,32 +46,32 @@
         <form action="AddProduct.html" method="post">
             <table class="info">
                 <tr>
-                    <td >Image File</td>
+                    <td>Image File</td>
                     <td><input type="file" class="form-control" id="imageFile" name="imageFile"></td>
                 </tr>
                 <tr>
-                    <td >Product Name</td>
-                    <td><input  type="text" class="form-control" name="productName" id="productName" placeholder="XXXXXXXXXX"></td>
+                    <td>Product Name</td>
+                    <td><input type="text" class="form-control" name="productName" id="productName" placeholder="XXXXXXXXXX"></td>
                 </tr>
-     
-                    <td>Category</td>
-                    <td>
-                        <select id="category" name="category" class="form-control">
+
+                <td>Category</td>
+                <td>
+                    <select id="category" name="category" class="form-control">
                         <option value="supplement">Supplement</option>
                         <option value="sportEquipment">Sport Equipment</option>
                         </select>
-                    </td>
+                </td>
                 </tr>
                 <tr>
-                    <td >Stock</td>
-                    <td><input  type="number" class="form-control" name="stock" id="stock" ></td>
+                    <td>Stock</td>
+                    <td><input type="number" class="form-control" name="stock" id="stock"></td>
                 </tr>
                 <tr>
-                    <td >Price (RM)</td>
+                    <td>Price (RM)</td>
                     <td><input type="text" class="form-control" name="price" id="price" placeholder="XX.XX"></td>
                 </tr>
             </table>
-            <button class="submit"type="submit" id="submit">Add Product</button>
+            <button class="submit" type="submit" id="submit">Add Product</button>
         </form>
     </div>
 </body>

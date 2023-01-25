@@ -1,9 +1,10 @@
 <html>
-    <head>
-        <title>Manage Shop</title>
+
+<head>
+    <title>Manage Shop</title>
     <link rel="stylesheet" href="css/HeaderNav.css" />
     <link rel="stylesheet" href="css/Report.css" />
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS only -->
@@ -11,9 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    </head>
-    <body>
-        <!-- Navigation Bar -->
+</head>
+
+<body>
+    <!-- Navigation Bar -->
     <div class="nav-bar">
 
         <div class="Header-Nav">
@@ -26,15 +28,15 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">USER</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">REPORT</a></li>
-                <li ><a href="ManageTrainingClass.html" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
-                <li class="Checked"><a href="ManageShop.html" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
+                <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
+                <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
+                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
+                <a class="Nav-Item" href="/adminProfile"><img src="Images/account.png" /></a>
             </div>
         </header>
     </div>
@@ -42,7 +44,7 @@
 
     <div class="row">
         <div class="p-3 py-5">
-            
+
             <div class="d-flex justify-content-between align-items-center mb-0">
                 <div class="title">
                     <div>List of Product</div>
@@ -64,8 +66,8 @@
                         </div>
                     </div>
                 </div>
-        </div>
-        <div class="container table-cont">
+            </div>
+            <div class="container table-cont">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -82,9 +84,10 @@
                         <tr>
                             <th scope="row"></th>
                             <form th:action="@{/Admin/addProduct}" method="post">
-                                <td><input type="text"      class="form-control" size="5" name="prod_name" id="prod_name"></td>
-                                <td><input type="text"  class="form-control" size="5" name="prod_price" id="prod_price"></td>
-                                <td><input type="number"      class="form-control" size="5" name="prod_quantity"></td></td>
+                                <td><input type="text" class="form-control" size="5" name="prod_name" id="prod_name"></td>
+                                <td><input type="text" class="form-control" size="5" name="prod_price" id="prod_price"></td>
+                                <td><input type="number" class="form-control" size="5" name="prod_quantity"></td>
+                                </td>
                                 <td><select name="prod_category" class="form-control">
                                     <option>Choose Category</option>
                                     <option>Equipment</option>
@@ -107,18 +110,19 @@
                             <td th:text="${prod.prod_quantity}"></td>
                             <td th:text="${prod.prod_category}"></td>
                             <td th:text="${prod.prod_status}"></td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp; 
+                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp;
                                 <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
                         </tr>
                     </tbody>
-                </table>    
-                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>      
+                </table>
+                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
             </div>
-            
-        </div>
-        </div>
-        
 
-       
-    </body>
+        </div>
+    </div>
+
+
+
+</body>
+
 </html>
