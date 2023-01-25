@@ -22,18 +22,17 @@
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <div class="Nav-Logo">glowterx</div>
             </a>
-
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">USER</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">REPORT</a></li>
-                <li class="Checked"><a href="#" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
-                <li ><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li><a href="#" class="nav-link px-2 link-light">MANAGE USER</a></li>
+                <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
+                <li><a href="AttendanceUser.html" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
+                <li><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
+                <a class="Nav-Item" href="/adminProfile"><img src="Images/account.png" /></a>
             </div>
         </header>
     </div>
@@ -64,7 +63,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col">Training ID</th>
                             <th scope="col">Training Name</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
@@ -77,11 +76,16 @@
                     <tbody>
                         <tr th:each="train : ${training}">
                             <td th:text="${train.id}"></td>
-                            <td th:text="${train.training_name}"></td>
-                            <td th:text="${train.start_date}"></td>
-                            <td th:text="${train.end_date}"></td>
-                            <td th:text="${train.training_session}"></td>
-                            <td th:text="${train.training_duration}"></td>
+                            <td th:text="${train.getName()}"></td>
+                            <td th:text="${train.getStart_date()}"></td>
+                            <td th:text="${train.getEnd_date()}"></td>
+                            <td th:text="${train.getInstructorId()}"></td>
+                             <td th:text="${train.getSessionNum()}"></td>
+                            <td th:text="${train.getDuration()}"></td>
+                    
+                             <td><a class="btn btn-outline-info" href="#" role="button">Edit</a> &nbsp; 
+                            <a class="btn btn-outline-danger"  th:href="@{/deletetraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+                 
                         </tr>
                         
                     </tbody>

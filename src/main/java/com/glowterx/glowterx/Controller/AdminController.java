@@ -25,6 +25,7 @@ import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
+import com.glowterx.glowterx.Model.Training;
 
 @Controller
 public class AdminController {
@@ -132,5 +133,12 @@ public class AdminController {
         model.addAttribute("instructordata", instructor);
         model.addAttribute("traineedata", trainee);
         return "Admin/ManageUser";
+    }
+    @GetMapping("/deletetraining")
+    public String deleteTraining(@RequestParam("id") int id, Model model) {
+        adminDAO.deleteTraining(id);
+        List<Training> training= adminDAO.getAllTraining();
+         model.addAttribute("training", training);
+        return "Admin/ManageTrainingClass";
     }
 }

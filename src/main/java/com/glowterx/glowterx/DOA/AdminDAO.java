@@ -20,6 +20,7 @@ import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Membership;
 import com.glowterx.glowterx.Model.Trainee;
+import com.glowterx.glowterx.Model.Training;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -116,6 +117,11 @@ public class AdminDAO {
         return jdbcTemplate.query(sql, new Object[] { username }, new BeanPropertyRowMapper<>(Admin.class));
     }
 
+    public List <Training> getAllTraining(){
+        String sql="SELECT * FROM training";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Training.class));
+    }
+    
     public List<Instructor> getAllInstructors() {
         String sql = "SELECT * FROM instructor";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
@@ -199,5 +205,11 @@ public class AdminDAO {
         // jdbcTemplate.update(sql, id);
         String sql = "DELETE FROM trainee WHERE TraineeUsername = ?";
         jdbcTemplate.update(sql, username);
+    }
+    public void deleteTraining( int id) {
+        // String sql = "DELETE FROM training WHERE person_id = ?";
+        // jdbcTemplate.update(sql, id);
+        String sql = "DELETE FROM training WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }

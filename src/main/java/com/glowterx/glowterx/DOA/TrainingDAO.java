@@ -30,7 +30,6 @@ public class TrainingDAO {
         jdbcTemplate.update(sql, training.getName(), training.getStart_date(), training.getEnd_date(),
                 training.getDuration(), training.getSessionNum(), training.getInstructorId());
     }
-    public List <Training> getAllTraining(){
-        return jdbcTemplate.query("SELECT * FROM training", new BeanPropertyRowMapper<>(Training.class));
-    }
+    
+   
 }

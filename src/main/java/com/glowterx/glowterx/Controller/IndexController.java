@@ -179,9 +179,10 @@ public class IndexController {
     }
     @GetMapping ("/manageTrainingClass")
     public String viewListTraining(Model model)
-    {   List <Training> training = trainingDAO.getAllTraining();
+    {   List <Training> training = adminDAO.getAllTraining();
         model.addAttribute("training",training);
-        return "/Admin/ManageTrainingClass";
+        return "Admin/ManageTrainingClass";
+    }
 
     @GetMapping("/manageUser")
     public String manageUser(Model model, HttpSession session) {
