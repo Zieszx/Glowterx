@@ -58,4 +58,14 @@ public class ProductDAO {
     public List <Product> getAllProduct(){
         return jdbcTemplate.query("SELECT * FROM product", new BeanPropertyRowMapper<>(Product.class));
     }
+
+    public void uploadProductImage(String prod_name, byte[] image) {
+        String sql = "UPDATE product SET prod_images = ? WHERE prod_name = ?";
+        jdbcTemplate.update(sql, new Object[] { image, prod_name });
+    }
+
+    public byte[] getProductImage(int prod_id) {
+        String sql = "SELECT prod_images FROM product WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { prod_id }, byte[].class);
+    }
 }

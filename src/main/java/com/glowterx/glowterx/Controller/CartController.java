@@ -1,5 +1,6 @@
 package com.glowterx.glowterx.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,10 @@ public class CartController {
         List <Cart> cartA = cartDAO.getAllCart();
         model.addAttribute("cart", cartA);
 
-        Product productCart = productDAO.getProduct(product_id);
+        List <Product> productCart = new ArrayList<Product>();
+        for (Cart c : cartA) {
+            productCart.add(productDAO.getProduct(c.getProduct_id()));
+        }
         model.addAttribute("product", productCart);
 
         model.addAttribute("message", "Product added successfully into the Cart!");

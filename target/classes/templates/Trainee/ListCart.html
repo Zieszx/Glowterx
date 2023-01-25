@@ -64,12 +64,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="c : ${cart}" th:object="${product}">
+                        <tr th:each="c,iterTr : ${cart}">
                             <td th:text="${c.id}"></td>
                             <td th:text="${c.product_id}"></td>
-                            <td th:text="*{prod_name"></td>
+                            <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                <span th:text="${prod.prod_name}"></span>
+                            </td>
                             <td th:text="${c.quantity}"></td>
-                            <td th:text="*{prod_price}"></td>
+                            <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                <span th:text="${prod.prod_price}"></span>
+                            </td>
                             <td><a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
                         </tr>
                     </tbody>
