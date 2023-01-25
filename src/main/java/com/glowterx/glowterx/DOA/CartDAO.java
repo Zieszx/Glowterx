@@ -67,4 +67,9 @@ public class CartDAO {
     public List <Cart> getAllCart(){
         return jdbcTemplate.query("SELECT * FROM cart", new BeanPropertyRowMapper<>(Cart.class));
     }
+
+    public void deleteCart(int cart_id) {
+        String sql = "DELETE FROM cart WHERE id = ?";
+        jdbcTemplate.update(sql, cart_id);
+    }
 }

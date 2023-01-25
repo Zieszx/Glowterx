@@ -35,17 +35,32 @@ public class CartController {
         Cart cart = new Cart(1,trainee.getId(), product_id);
         cartDAO.addCart(cart);
 
-        List <Cart> cartA = cartDAO.getAllCart();
-        model.addAttribute("cart", cartA);
+        List <Cart> cartAll = cartDAO.getAllCart();
+        model.addAttribute("cart", cartAll);
 
         List <Product> productCart = new ArrayList<Product>();
-        for (Cart c : cartA) {
+        for (Cart c : cartAll) {
             productCart.add(productDAO.getProduct(c.getProduct_id()));
         }
         model.addAttribute("product", productCart);
 
         model.addAttribute("message", "Product added successfully into the Cart!");
         return "/Trainee/ListCart";
+    }
+
+    @GetMapping("/deleteCart")
+    public String deleteCart(@RequestParam("cartId") int cart_id, Model model) {
+        cartDAO.deleteCart(cart_id);
+
+        List <Cart> cartAll = cartDAO.getAllCart();
+        model.addAttribute("cart", cartAll);
+
+        List<Product> productAll = productDAO.getAllProduct();
+        model.addAttribute("product", productAll);
+
+        model.addAttribute("message", "Cart deleted successfully!");
+
+        return "Trainee/ListCart";
     }
 
     

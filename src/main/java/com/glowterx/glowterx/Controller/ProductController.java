@@ -60,4 +60,13 @@ public class ProductController {
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
+
+    @GetMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam("productId") int prod_id, Model model) {
+        productDAO.deleteProduct(prod_id);
+        List<Product> productAll = productDAO.getAllProduct();
+        model.addAttribute("product", productAll);
+        model.addAttribute("message", "Product deleted successfully!");
+        return "Admin/ManageShop";
+    }
 }
