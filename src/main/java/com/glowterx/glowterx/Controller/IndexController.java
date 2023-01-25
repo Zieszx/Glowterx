@@ -197,8 +197,10 @@ public class IndexController {
 
     @GetMapping("/addCart")
     public String addCart(Model model, HttpSession session) {
-        /*List<Cart> cart = cartDAO.getAllCart();
-        model.addAttribute("cart", cart);*/
+        /*
+         * List<Cart> cart = cartDAO.getAllCart();
+         * model.addAttribute("cart", cart);
+         */
         return "Trainee/ListCart";
     }
 

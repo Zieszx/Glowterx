@@ -26,15 +26,15 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">USER</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">REPORT</a></li>
-                <li ><a href="#" class="nav-link px-2 link-light">TRAINING CLASSES</a></li>
-                <li class="Checked"><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
+                <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
+                <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
+                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
+                <a class="Nav-Item" href="/adminProfile"><img src="Images/account.png" /></a>
             </div>
         </header>
     </div>
@@ -47,7 +47,7 @@
             <table class="info">
                 <tr>
                     <td class="table-col-1">Product Id</td>
-                    <td><input  type="text" class="form-control" name="id" id="id" placeholder="1"></td>
+                    <td><input type="text" class="form-control" name="id" id="id" placeholder="1"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Image File</td>
@@ -55,21 +55,21 @@
                 </tr>
                 <tr>
                     <td class="table-col-1">Product Name</td>
-                    <td><input  type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Purple Dumbbell 1.5kg"></td>
+                    <td><input type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Purple Dumbbell 1.5kg"></td>
                 </tr>
-                
+
                 <tr>
                     <td class="table-col-1">Price (RM)</td>
                     <td><input type="text" class="form-control" name="prod_price" id="prod_price" placeholder="30.00"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Product Quantity</td>
-                    <td><input  type="number" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="30"></td>
+                    <td><input type="number" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="30"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Category</td>
                     <td>
-                        <select id="category" name="category" class="form-control" >
+                        <select id="category" name="category" class="form-control">
                         <option value="supplement">Supplement</option>
                         <option value="sportEquipment">Equipment</option>
                         </select>
@@ -78,15 +78,15 @@
                 <tr>
                     <td class="table-col-1">Status</td>
                     <td>
-                        <select id="prod_status" name="prod_status" class="form-control" >
+                        <select id="prod_status" name="prod_status" class="form-control">
                         <option value="available">Available</option>
                         <option value="outOfStock">Out Of Stock</option>
                         </select>
                     </td>
                 </tr>
-                
+
             </table>
-            <button class="submitEdit"type="submit" id="submitEdit">Edit Product</button>
+            <button class="submitEdit" type="submit" id="submitEdit">Edit Product</button>
         </form>
     </div>
 </body>
