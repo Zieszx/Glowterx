@@ -49,24 +49,27 @@
                 </div>
             </div>
             <br><br>
+            
         </div>
         <div class="container table-cont">
-                <table class="table table-hover">
+                <table class="table table-hover" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Person Id</th>
                             <th scope="col">Product Id</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Product Price</th>
                             <th scope="col"> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="c : ${cart}">
+                        <tr th:each="c : ${cart}" th:object="${product}">
                             <td th:text="${c.id}"></td>
-                            <td th:text="${c.quantity}"></td>
-                            <td th:text="${c.person_id}"></td>
                             <td th:text="${c.product_id}"></td>
+                            <td th:text="*{prod_name"></td>
+                            <td th:text="${c.quantity}"></td>
+                            <td th:text="*{prod_price}"></td>
                             <td><a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
                         </tr>
                     </tbody>

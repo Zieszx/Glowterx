@@ -31,28 +31,37 @@ public class CartDAO {
         jdbcTemplate.update(sql, cart.getQuantity(), cart.getPerson_id(), cart.getProduct_id());
     }
 
-    /*public Product getProduct() {
-        Product product = null;
+    /*public Cart getInfoAdmin() {
+        String username = (String) session.getAttribute("username");
+        Admin admin = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM Product")) {
+                        .prepareStatement("SELECT * FROM Admin WHERE adminUsername = ?")) {
+
+            statement.setString(1, username);
 
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                product = new Product();
-                product.setId(rs.getInt("id"));
-                product.setProd_name(rs.getString("prod_name"));
-                product.setProd_price(rs.getDouble("prod_price"));
-                product.setProd_quantity(rs.getInt("prod_quantity"));
-                product.setProd_category(rs.getString("prod_category"));
-                product.setProd_status(rs.getString("prod_status"));
+                admin = new Admin();
+                admin.setId(rs.getInt("id"));
+                admin.setAdminUsername(rs.getString("adminUsername"));
+                admin.setAdminPass(rs.getString("adminPass"));
+                admin.setFirstName(rs.getString("firstname"));
+                admin.setLastName(rs.getString("lastname"));
+                admin.setAddress(rs.getString("address"));
+                admin.setCity(rs.getString("city"));
+                admin.setState(rs.getString("state"));
+                admin.setZip(rs.getString("zip"));
+                admin.setPhone(rs.getString("phone"));
+                admin.setEmail(rs.getString("email"));
+                admin.setGender(rs.getString("gender"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return product;
+        return admin;
     }*/
 
     public List <Cart> getAllCart(){

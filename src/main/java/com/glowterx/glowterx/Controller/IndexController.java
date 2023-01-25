@@ -232,8 +232,6 @@ public class IndexController {
         return "Admin/ManageUser";
     }
 
-
-
     @GetMapping("/addCart")
     public String addCart(Model model, HttpSession session) {
         /*
@@ -245,6 +243,8 @@ public class IndexController {
 
     @GetMapping("/shop")
     public String shop(Model model, HttpSession session) {
+        List<Product> product = productDAO.getAllProduct();
+        model.addAttribute("product", product);
         return "Trainee/AddToCart";
     }
 }

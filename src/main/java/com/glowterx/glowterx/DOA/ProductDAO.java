@@ -30,12 +30,13 @@ public class ProductDAO {
         jdbcTemplate.update(sql, product.getProd_name(), product.getProd_price(), product.getProd_quantity(),product.getProd_category(), product.getProd_status());
     }
 
-    public Product getProduct() {
+    public Product getProduct(int product_id) {
         Product product = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM Product")) {
-
+                        .prepareStatement("SELECT * FROM Product WHERE id = ?")) {
+            
+            statement.setInt(1, product_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
