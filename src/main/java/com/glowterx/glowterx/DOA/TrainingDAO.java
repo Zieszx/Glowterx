@@ -27,11 +27,12 @@ public class TrainingDAO {
 
     public void addTraining(Training training) {
         String sql = "INSERT INTO training (training_name, start_date, end_date, training_duration, training_session, instructor_id) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, training.getName(), training.getStart_date(), training.getEnd_date(),
-                training.getDuration(), training.getSessionNum(), training.getInstructorId());
+        jdbcTemplate.update(sql, training.getTraining_name(), training.getStart_date(), training.getEnd_date(),
+                training.getTraining_duration(), training.getTraining_session(), training.getInstructor_id());
     }
+
     public Training getInfoTraining() {
-        int id= (Integer) session.getAttribute("training_id");
+        int id = (Integer) session.getAttribute("training_id");
         Training training = null;
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
@@ -44,12 +45,12 @@ public class TrainingDAO {
             if (rs.next()) {
                 training = new Training();
                 training.setId(rs.getInt("id"));
-                training.setName(rs.getString("training_name"));
+                training.setTraining_name(rs.getString("training_name"));
                 training.setStart_date(rs.getDate("start_date"));
                 training.setEnd_date(rs.getDate("end_date"));
-                training.setInstructorID(rs.getInt("instructor_id"));
-                training.setSessionNum(rs.getInt("training_session"));
-                training.setDuration(rs.getInt("training_duration"));
+                training.setInstructor_id(rs.getInt("instructor_id"));
+                training.setTraining_session(rs.getInt("training_session"));
+                training.setTraining_duration(rs.getInt("training_duration"));
             }
 
         } catch (SQLException e) {
@@ -57,26 +58,31 @@ public class TrainingDAO {
         }
         return training;
     }
-   public void updateProfile(Training training) {
-        /*String sql = "UPDATE training SET firstName = ?, lastName = ?, gender = ?, adminUsername = ?, adminPass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE adminUsername = ?";
-        try (Connection connection = dataSource.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
-           statement.setString(1, admin.getFirstName());
-            statement.setString(2, admin.getLastName());
-            statement.setString(3, admin.getGender());
-            statement.setString(4, admin.getAdminUsername());
-            statement.setString(5, admin.getAdminPass());
-            statement.setString(6, admin.getPhone());
-            statement.setString(7, admin.getAddress());
-            statement.setString(8, admin.getEmail());
-            statement.setString(9, admin.getState());
-            statement.setString(10, admin.getCity());
-            statement.setString(11, admin.getAdminUsername());
 
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-        
+    public void updateProfile(Training training) {
+        /*
+         * String sql =
+         * "UPDATE training SET firstName = ?, lastName = ?, gender = ?, adminUsername = ?, adminPass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE adminUsername = ?"
+         * ;
+         * try (Connection connection = dataSource.getConnection();
+         * PreparedStatement statement = connection.prepareStatement(sql)) {
+         * statement.setString(1, admin.getFirstName());
+         * statement.setString(2, admin.getLastName());
+         * statement.setString(3, admin.getGender());
+         * statement.setString(4, admin.getAdminUsername());
+         * statement.setString(5, admin.getAdminPass());
+         * statement.setString(6, admin.getPhone());
+         * statement.setString(7, admin.getAddress());
+         * statement.setString(8, admin.getEmail());
+         * statement.setString(9, admin.getState());
+         * statement.setString(10, admin.getCity());
+         * statement.setString(11, admin.getAdminUsername());
+         * 
+         * statement.executeUpdate();
+         * } catch (SQLException e) {
+         * e.printStackTrace();
+         * }
+         */
+
     }
 }

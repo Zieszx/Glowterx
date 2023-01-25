@@ -117,11 +117,11 @@ public class AdminDAO {
         return jdbcTemplate.query(sql, new Object[] { username }, new BeanPropertyRowMapper<>(Admin.class));
     }
 
-    public List <Training> getAllTraining(){
-        String sql="SELECT * FROM training";
+    public List<Training> getAllTraining() {
+        String sql = "SELECT * FROM training";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Training.class));
     }
-    
+
     public List<Instructor> getAllInstructors() {
         String sql = "SELECT * FROM instructor";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Instructor.class));
@@ -206,7 +206,8 @@ public class AdminDAO {
         String sql = "DELETE FROM trainee WHERE TraineeUsername = ?";
         jdbcTemplate.update(sql, username);
     }
-    public void deleteTraining( int id) {
+
+    public void deleteTraining(int id) {
         // String sql = "DELETE FROM training WHERE person_id = ?";
         // jdbcTemplate.update(sql, id);
         String sql = "DELETE FROM training WHERE id = ?";
