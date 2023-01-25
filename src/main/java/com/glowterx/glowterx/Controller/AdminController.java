@@ -1,6 +1,7 @@
 package com.glowterx.glowterx.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
@@ -37,6 +39,8 @@ public class AdminController {
     private AdminDAO adminDAO;
     @Autowired
     private TrainingDAO trainingDAO;
+    @Autowired
+    private InstructorDAO instructorDAO;
 
     @GetMapping("/adminProfilePicture")
     public ResponseEntity<byte[]> getProfilePicture() {
@@ -148,20 +152,27 @@ public class AdminController {
     public String EditTraining(@RequestParam("id") int id, Model model,HttpSession session) {
         session.setAttribute("training_id", id);
         Training training = trainingDAO.getInfoTraining();
+        Instructor instructor = instructorDAO.getInstructorID(training.getInstructor_id());
         List<Instructor> instructors = adminDAO.getAllInstructors();
         model.addAttribute("training", training);
         model.addAttribute("instructors", instructors);
+        model.addAttribute("currInstructor", instructor);
        
         return "Admin/EditTrainingClass";
     }
-  /*   @PostMapping("/updateTraining")
-    public String updateTraining(@ModelAttribute("training") Training training, BindingResult bindingResult, Model model) {
+   @PostMapping("/updateTraining")
+    public String updateTraining(@ModelAttribute("training") Training training, @RequestParam("instructor_id") int id,BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "error";
         }
-        trainingDAO.updateProfile(training);
-        Training RefTraining = trainingDAO.getInfoTraining();
-        model.addAttribute("trainee", RefTraining);
+        trainingDAO.updateProfile(training,id);
+        List<Training> t = adminDAO.getAllTraining();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Training train : t) {
+            instructor.add(instructorDAO.getInstructorID(train.getInstructor_id()));
+        }
+        model.addAttribute("instructor", instructor);
+         model.addAttribute("training", t);
         return "Admin/ManageTrainingClass";
-    }*/
+    }
 }

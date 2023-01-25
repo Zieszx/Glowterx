@@ -59,30 +59,26 @@ public class TrainingDAO {
         return training;
     }
 
-    public void updateProfile(Training training) {
-        /*
-         * String sql =
-         * "UPDATE training SET firstName = ?, lastName = ?, gender = ?, adminUsername = ?, adminPass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE adminUsername = ?"
-         * ;
-         * try (Connection connection = dataSource.getConnection();
-         * PreparedStatement statement = connection.prepareStatement(sql)) {
-         * statement.setString(1, admin.getFirstName());
-         * statement.setString(2, admin.getLastName());
-         * statement.setString(3, admin.getGender());
-         * statement.setString(4, admin.getAdminUsername());
-         * statement.setString(5, admin.getAdminPass());
-         * statement.setString(6, admin.getPhone());
-         * statement.setString(7, admin.getAddress());
-         * statement.setString(8, admin.getEmail());
-         * statement.setString(9, admin.getState());
-         * statement.setString(10, admin.getCity());
-         * statement.setString(11, admin.getAdminUsername());
-         * 
-         * statement.executeUpdate();
-         * } catch (SQLException e) {
-         * e.printStackTrace();
-         * }
-         */
+    public void updateProfile(Training training, int id) {
+        
+          String sql =
+          "UPDATE training SET  training_name= ?, start_date = ?, end_date = ?, instructor_id = ?, training_session = ?, training_duration = ? WHERE id = ?"
+          ;
+         try (Connection connection = dataSource.getConnection();
+          PreparedStatement statement = connection.prepareStatement(sql)) {
+         statement.setString(1, training.getTraining_name());
+         statement.setDate(2, training.getStart_date());
+          statement.setDate(3, training.getEnd_date());
+          statement.setInt(4, id);
+          statement.setInt(5, training.getTraining_session());
+          statement.setInt(6, training.getTraining_duration());
+          statement.setInt(7, training.getId());
+           
+          statement.executeUpdate();
+          } catch (SQLException e) {
+          e.printStackTrace();
+          }
+         
 
     }
 }
