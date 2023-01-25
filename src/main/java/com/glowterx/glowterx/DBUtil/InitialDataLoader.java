@@ -56,7 +56,7 @@ public class InitialDataLoader {
             System.out.println("Table 'product' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE product (id INT(11) AUTO_INCREMENT PRIMARY KEY, prod_name VARCHAR(255), prod_price DECIMAL(10,2), prod_quantity INT(11), prod_category VARCHAR(255), prod_status VARCHAR(255))");
+                    "CREATE TABLE product (id INT(11) AUTO_INCREMENT PRIMARY KEY, prod_images LONGBLOB, prod_name VARCHAR(255), prod_price DECIMAL(10,2), prod_quantity INT(11), prod_category VARCHAR(255), prod_status VARCHAR(255))");
             System.out.println("Table 'product' created.");
         }
 
@@ -111,6 +111,6 @@ public class InitialDataLoader {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         createTables();
-       // loadInitialData(); // First time run should uncomment this line
+       //loadInitialData(); // First time run should uncomment this line
     }
 }
