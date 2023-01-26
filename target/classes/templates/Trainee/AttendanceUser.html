@@ -26,15 +26,15 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">HIT THE GYM</a></li>
-                <li class="Checked"><a href="#" class="nav-link px-2 link-light">ATTENDANCE</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/Subscribe" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
+                <li><a href="/listTraineeTC" class="nav-link px-2 link-light">HIT THE GYM</a></li>
+                <li><a href="/AttendanceTC" class="nav-link px-2 link-light">ATTENDANCE</a></li>
+                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
                 <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
-                <a class="Nav-Item" href="ProfileDetails.html"><img src="Images/account.png" /></a>
+                <a class="Nav-Item" href="/traineeProfile"><img src="Images/account.png" /></a>
                 <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
@@ -97,36 +97,36 @@
                                 <th scope="col" class="th-lg">Schedule</th>
                                 <th scope="col" class="th-lg">Session</th>
                                 <th scope="col" class="th-lg">Check-Ins</th>
+                                <th scope="col" class="th-lg">Status</th>
                                 <th scope="col" class="th-lg"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Open Mat<br><small class="text-muted">Basic</small></td>
-                                <td>Steven Seagal<br><small class="text-muted">Instructor</small></td>
-                                <td>Sunday <br><small class="text-muted">12.00pm-1.30pm</small></td>
-                                <td>20 <br><small class="text-muted">Sessions</small></td>
-                                <td>44 <br><small class="text-muted">Check-Ins</small></td>
-                                <td><input type="submit" value="Check-Ins" class="btn btn-secondary"></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Open Mat<br><small class="text-muted">Basic</small></td>
-                                <td>Steven Seagal<br><small class="text-muted">Instructor</small></td>
-                                <td>Sunday <br><small class="text-muted">12.00pm-1.30pm</small></td>
-                                <td>20 <br><small class="text-muted">Sessions</small></td>
-                                <td>44 <br><small class="text-muted">Check-Ins</small></td>
-                                <td><input type="submit" value="Check-Ins" class="btn btn-secondary"></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Open Mat<br><small class="text-muted">Basic</small></td>
-                                <td>Steven Seagal<br><small class="text-muted">Instructor</small></td>
-                                <td>Sunday <br><small class="text-muted">12.00pm-1.30pm</small></td>
-                                <td>20 <br><small class="text-muted">Sessions</small></td>
-                                <td>44 <br><small class="text-muted">Check-Ins</small></td>
-                                <td><input type="submit" value="Check-Ins" class="btn btn-secondary"></td>
+                            <tr th:each="attend, iterTr : ${attendance}">
+                                <th scope="row" th:text="${attend.id}"></th>
+                                <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                    <span th:text="${train.training_name}"></span>
+                                </td>
+                                <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
+                                    <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
+                                    <br><small class="text-muted">Instructor</small>
+                                </td>
+                                <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                    <span th:text="${#dates.format(train.start_date, 'MM/dd/yyyy')}"></span> to <span th:text="${#dates.format(train.end_date, 'MM/dd/yyyy')}"></span>
+                                    <br><small class="text-muted" th:text="${train.training_duration}"></small>
+                                    <small class="text-muted"> Minutes</small>
+                                </td>
+                                <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                    <span th:text="${train.training_session}"></span>
+                                    <br><small class="text-muted">Sessions</small>
+                                </td>
+                                <td><span th:text="${attend.attendance_checkins}"></span><br><small class="text-muted">Check-Ins</small></td>
+                                <td><span th:text="${attend.attendance_status}"></span><br><small class="text-muted">Status</small></td>
+                                <td>
+                                    <button class="btn btn-secondary">
+                                        <a th:href="@{/checkinsAttendance(id=${attend.id})}"  class="nav-link px-2 link-light">Check-Ins</a>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

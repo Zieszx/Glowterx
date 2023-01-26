@@ -29,11 +29,45 @@ public class AttendanceDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
-    public void enrollTraining (Trainee trainee, Training training){
+
+    public void enrollTraining(Trainee trainee, Training training) {
         String sql = "INSERT INTO attendance (person_id, training_id, attendance_status, attendance_checkins) VALUES (?, ?, ?, ?)";
         String status = "Enrolled";
         int checkins = 0;
         jdbcTemplate.update(sql, trainee.getId(), training.getId(), status, checkins);
+    }
+
+    public List<Attendance> getTraineeAttendance(Trainee trainee) {
+        String sql = "SELECT * FROM attendance WHERE person_id = ?";
+        List<Attendance> attendance = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Attendance>(Attendance.class),
+                trainee.getId());
+        return attendance;
+    }
+
+    public Attendance getAttendancebyID(int attendance_id) {
+        String sql = "SELECT * FROM attendance WHERE id = ?";
+        Attendance attendance = jdbcTemplate.queryForObject(sql,
+                new BeanPropertyRowMapper<Attendance>(Attendance.class), attendance_id);
+        return attendance;
+    }
+
+    public void checkIn(int attendance_id, Trainee trainee, Training training) {
+        String sql = "SELECT * FROM attendance WHERE id = ?";
+        Attendance attendance = jdbcTemplate.queryForObject(sql,
+                new BeanPropertyRowMapper<Attendance>(Attendance.class), attendance_id);
+        int checkins = attendance.getAttendance_checkins();
+        sql = "UPDATE attendance SET attendance_status = ?, attendance_checkins = ? WHERE person_id = ? AND id = ?";
+        if (checkins == training.getTraining_session()) {
+            String status = "Completed";
+            jdbcTemplate.update(sql, status, checkins, trainee.getId(), attendance_id);
+        } else {
+            checkins++;
+            if (checkins == training.getTraining_session()) {
+                String status = "Completed";
+                jdbcTemplate.update(sql, status, checkins, trainee.getId(), attendance_id);
+            }
+            String status = "Ongoing";
+            jdbcTemplate.update(sql, status, checkins, trainee.getId(), attendance_id);
+        }
     }
 }
