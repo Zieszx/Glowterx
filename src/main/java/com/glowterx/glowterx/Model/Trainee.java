@@ -139,7 +139,7 @@ public class Trainee {
         return MembershipStatus;
     }
 
-    public void setMembershipStatus(String membershipStatus) {
-        MembershipStatus = membershipStatus;
+    public void setMembershipStatus(String MembershipStatus) {
+        this.MembershipStatus = MembershipStatus;
     }
 }

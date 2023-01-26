@@ -1,4 +1,5 @@
 package com.glowterx.glowterx.Controller;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class AttendanceController {
         Training training = trainingDAO.getInfoTrainingByID(training_id);
         attendanceDAO.enrollTraining(trainee, training);
         model.addAttribute("message", "You have successfully enrolled for this training!");
-        
+
         List<Training> trainings = adminDAO.getAllTraining();
         List<Instructor> instructor = new ArrayList<Instructor>();
         for (Training t : trainings) {
@@ -65,7 +66,28 @@ public class AttendanceController {
         }
         model.addAttribute("instructor", instructor);
         model.addAttribute("training", trainings);
-        
+
         return "/Trainee/TraineeListTC";
+    }
+
+    @GetMapping("/checkinsAttendance")
+    public String checkinsAttendance(@RequestParam("id") int attendance_id, Model model, HttpSession session) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        Attendance tempAttendance = attendanceDAO.getAttendancebyID(attendance_id);
+        Training tempTraining = trainingDAO.getInfoTrainingByID(tempAttendance.getTraining_id());
+        attendanceDAO.checkIn(attendance_id, trainee, tempTraining);
+        List<Attendance> attendance = attendanceDAO.getTraineeAttendance(trainee);
+        List<Training> training = new ArrayList<Training>();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Attendance a : attendance) {
+            training.add(trainingDAO.getInfoTrainingByID(a.getTraining_id()));
+        }
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("attendance", attendance);
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
+        return "Trainee/AttendanceUser";
     }
 }

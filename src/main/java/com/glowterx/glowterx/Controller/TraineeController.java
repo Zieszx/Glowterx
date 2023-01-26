@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -85,6 +84,14 @@ public class TraineeController {
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/TraineeProfilePicturebyUsername")
+    public ResponseEntity<byte[]> getProfilePicturebyUsername(@RequestParam("username") String username) {
+        byte[] image = traineeDAO.getProfilePicture(username);
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+
     @PostMapping("/uploadTraineeProfilePicture")
     public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) {
         Trainee trainee = traineeDAO.getInfoTrainee();
@@ -128,33 +135,34 @@ public class TraineeController {
             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date d,
             @RequestParam("paymentMethod") String paymentMethod,
             Model model, HttpSession session) throws SQLException {
-            Trainee trainee = traineeDAO.getInfoTrainee();
-          //  System.out.println(d);
-                if(trainee!=null){
-                    Payment payment = new Payment();
-                    Membership membership = new Membership ();
-                    double amount=0;
-                    if (Category.equals("Free"))
-                   { amount=0;}
-                   else if ( Category.equals("Customize"))
-                   {amount=155.00;}
-                   else if ( Category.equals("Unlimited"))
-                   {amount=250.00;}
-                 
-                    payment.setAmount(amount);
-                    payment.setPayment_category(paymentMethod);
-                    payment.setPerson_id(trainee.getId());
-                    payment.setPayment_status("PAID");
-                    payment.setPayment_date(d);
-                    membership.setPerson_id(trainee.getId());
-                    membership.setstartdate(d);
-                    membership.setCategory(Category);
-                    //session.setAttribute("date", d);
-                    System.out.println(d);
-                    traineeDAO.createMembership(trainee,payment,membership);
-                    //Payment p = traineeDAO.getPaymentInfo();
-                  //  traineeDAO.updatePaymentID(p,trainee);
-                    }
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        // System.out.println(d);
+        if (trainee != null) {
+            Payment payment = new Payment();
+            Membership membership = new Membership();
+            double amount = 0;
+            if (Category.equals("Free")) {
+                amount = 0;
+            } else if (Category.equals("Customize")) {
+                amount = 155.00;
+            } else if (Category.equals("Unlimited")) {
+                amount = 250.00;
+            }
+
+            payment.setAmount(amount);
+            payment.setPayment_category(paymentMethod);
+            payment.setPerson_id(trainee.getId());
+            payment.setPayment_status("PAID");
+            payment.setPayment_date(d);
+            membership.setPerson_id(trainee.getId());
+            membership.setstartdate(d);
+            membership.setCategory(Category);
+            // session.setAttribute("date", d);
+            System.out.println(d);
+            traineeDAO.createMembership(trainee, payment, membership);
+            // Payment p = traineeDAO.getPaymentInfo();
+            // traineeDAO.updatePaymentID(p,trainee);
+        }
 
         return "Trainee/Subscribe";
     }
@@ -163,6 +171,7 @@ public class TraineeController {
     public String register() {
         return "Trainee/Subscribepayment";
     }
+
     @GetMapping("/Subscribe")
     public String subscribe() {
         return "Trainee/Subscribe";

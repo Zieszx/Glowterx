@@ -36,6 +36,14 @@ public class InstructorController {
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/instructorProfilePicturebyUsername")
+    public ResponseEntity<byte[]> getProfilePicturebyUsername(@RequestParam("username") String username) {
+        byte[] image = instructorDAO.getProfilePicture(username);
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+
     @PostMapping("/uploadInstructorProfilePicture")
     public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Model model) {
         Instructor Instructor = instructorDAO.getInfoinstructor();

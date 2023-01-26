@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.AttendanceDAO;
 import com.glowterx.glowterx.DOA.CartDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Attendance;
 import com.glowterx.glowterx.Model.Cart;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Product;
@@ -45,6 +47,9 @@ public class IndexController {
 
     @Autowired
     CartDAO cartDAO;
+
+    @Autowired
+    AttendanceDAO attendanceDAO;
 
     @RequestMapping(value = "/")
     public String firstpage(Model model) {
@@ -143,7 +148,6 @@ public class IndexController {
     }
     // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
 
-
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
         Admin admin = adminDAO.getInfoAdmin();
@@ -164,6 +168,7 @@ public class IndexController {
         model.addAttribute("instructor", instructor);
         return "Instructor/ProfileDetails";
     }
+
     @GetMapping("/manageShop")
     public String manageShop(Model model, HttpSession session) {
         List<Product> product = productDAO.getAllProduct();
@@ -216,7 +221,6 @@ public class IndexController {
     }
     // Training Class ends here
 
-
     @GetMapping("/manageUser")
     public String manageUser(Model model, HttpSession session) {
         List<Trainee> trainee = adminDAO.getAllTrainee();
@@ -242,5 +246,23 @@ public class IndexController {
         List<Product> product = productDAO.getAllProduct();
         model.addAttribute("product", product);
         return "Trainee/AddToCart";
+    }
+
+    @GetMapping("/AttendanceTC")
+    public String attendanceTC(Model model, HttpSession session) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        List<Attendance> attendance = attendanceDAO.getTraineeAttendance(trainee);
+        List<Training> training = new ArrayList<Training>();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Attendance a : attendance) {
+            training.add(trainingDAO.getInfoTrainingByID(a.getTraining_id()));
+        }
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("attendance", attendance);
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
+        return "Trainee/AttendanceUser";
     }
 }
