@@ -55,7 +55,6 @@ public class AttendanceController {
     public String enrollTraining(@RequestParam("id") int training_id, Model model, HttpSession session) {
         Trainee trainee = traineeDAO.getInfoTrainee();
         Training training = trainingDAO.getInfoTrainingByID(training_id);
-        Attendance attendance;
         attendanceDAO.enrollTraining(trainee, training);
         model.addAttribute("message", "You have successfully enrolled for this training!");
         
