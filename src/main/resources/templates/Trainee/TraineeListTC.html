@@ -28,15 +28,15 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="Subscribe.html" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
-                <li class="Checked"><a href="/listTraineeTC" class="nav-link px-2 link-light">HIT THE GYM</a></li>
+                <li><a href="/Subscribe" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
+                <li><a href="/listTraineeTC" class="nav-link px-2 link-light">HIT THE GYM</a></li>
                 <li><a href="/AttendanceTC" class="nav-link px-2 link-light">ATTENDANCE</a></li>
-                <li><a href="AddToCart.html" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
                 <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
-                <a class="Nav-Item" href="ProfileDetails.html"><img src="Images/account.png" /></a>
+                <a class="Nav-Item" href="/traineeProfile"><img src="Images/account.png" /></a>
                 <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
@@ -56,51 +56,19 @@
                     </div>
                 </div>
                 <br>
-                <div class="container table-cont">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Training Name</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Instructor Name</th>
-                                <th scope="col">Training Session</th>
-                                <th scope="col">Training Duration</th>
-                                <th scope="col"> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="train, iterTr : ${training}">
-                                <td th:text="${train.training_name}"></td>
-                                <td th:text="${train.start_date}"></td>
-                                <td th:text="${train.end_date}"></td>
-                                <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
-                                    <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
-                                </td>
-                                <td th:text="${train.training_session}"></td>
-                                <td th:text="${train.training_duration}"></td>
-
-                                <!-- Enroll-->
-                                <td><a class="btn btn-outline-danger" th:href="@{/enrollTraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to enroll this training class?')">Enroll</a></td>
-
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                </div>
+                
             </div>
             <br>
             <div class="container table-cont">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Training Name</th>
+                            <th scope="col">Training Class Name</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
                             <th scope="col">Instructor Name</th>
-                            <th scope="col">Training Session</th>
-                            <th scope="col">Training Duration</th>
+                            <th scope="col" style="text-align:center;">Number of Session</th>
+                            <th scope="col" style="text-align:center;">Duration</th>
                             <th scope="col"> </th>
                         </tr>
                     </thead>
@@ -112,19 +80,20 @@
                             <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
                                 <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
                             </td>
-                            <td th:text="${train.training_session}"></td>
-                            <td th:text="${train.training_duration}"></td>
+                            <td th:text="${train.training_session}" style="text-align:center;"></td>
+                            <td th:text="${train.training_duration} + ' minutes'" style="text-align:center;"></td>
 
                             <!-- Enroll-->
                             <td><a class="btn btn-outline-danger" th:href="@{/enrollTraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to enroll this training class?')">Enroll</a></td>
 
                         </tr>
+                        <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
 
                     </tbody>
                 </table>
-                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
             </div>
         </div>
+    </div>
 
 </body>
 
