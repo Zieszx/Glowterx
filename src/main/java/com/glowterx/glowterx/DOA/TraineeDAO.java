@@ -86,7 +86,40 @@ public class TraineeDAO {
                 trainee.setPhone(rs.getString("phone"));
                 trainee.setEmail(rs.getString("email"));
                 trainee.setGender(rs.getString("gender"));
-                trainee.setMembershipStatus(rs.getNString("MembershipStatus"));
+                trainee.setMembershipStatus(rs.getString("MembershipStatus"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return trainee;
+    }
+
+    public Trainee getInfoTraineebyUsername(String username) {
+        Trainee trainee = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM trainee WHERE TraineeUsername = ?")) {
+
+            statement.setString(1, username);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                trainee = new Trainee();
+                trainee.setId(rs.getInt("id"));
+                trainee.setTraineeUsername(rs.getString("TraineeUsername"));
+                trainee.setTraineePass(rs.getString("TraineePass"));
+                trainee.setFirstName(rs.getString("firstname"));
+                trainee.setLastName(rs.getString("lastname"));
+                trainee.setAddress(rs.getString("address"));
+                trainee.setCity(rs.getString("city"));
+                trainee.setState(rs.getString("state"));
+                trainee.setZip(rs.getString("zip"));
+                trainee.setPhone(rs.getString("phone"));
+                trainee.setEmail(rs.getString("email"));
+                trainee.setGender(rs.getString("gender"));
+                trainee.setMembershipStatus(rs.getString("MembershipStatus"));
             }
 
         } catch (SQLException e) {
@@ -143,7 +176,8 @@ public class TraineeDAO {
             jdbcTemplate.update(sql1, payment.getPerson_id(), payment.getAmount(), payment.getPayment_date(),
                     payment.getPayment_status(), payment.getPayment_category());
             String sql2 = "INSERT INTO membership (person_id, start_date, membership_category) VALUES (?,?,?)";
-            jdbcTemplate.update(sql2, membership.getPerson_id(), membership.getstart_date(), membership.getmembership_category());
+            jdbcTemplate.update(sql2, membership.getPerson_id(), membership.getstart_date(),
+                    membership.getmembership_category());
 
             String sql3 = "UPDATE trainee set MembershipStatus = 'PAID' WHERE TraineeUsername = ?";
             jdbcTemplate.update(sql3, trainee.getTraineeUsername());

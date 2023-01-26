@@ -124,7 +124,7 @@
                             <td th:text="${admin.firstName} + ' ' + ${admin.lastName}"></td>
                             <td th:text="${admin.email}"></td>
                             <td th:text="${admin.phone}"></td>
-                            <td><a class="btn btn-outline-info" href="ProfileInAdmin.html" role="button">View</a> &nbsp;
+                            <td><a class="btn btn-outline-info" th:href="@{/viewAdminDetails(username=${admin.adminUsername})}" role="button">View</a> &nbsp;
                                 <a class="btn btn-outline-danger" th:href="@{/deleteadmin(username=${admin.adminUsername})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                         </tr>
                         <tr th:each="instructor : ${instructordata}">
@@ -135,7 +135,7 @@
                             <td th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></td>
                             <td th:text="${instructor.email}"></td>
                             <td th:text="${instructor.phone}"></td>
-                            <td><a class="btn btn-outline-info" href="ProfileIninstructor.html" role="button">View</a> &nbsp;
+                            <td><a class="btn btn-outline-info" th:href="@{/viewInstructorDetails(username=${instructor.InstructorUsername})}" role="button">View</a> &nbsp;
                                 <a class="btn btn-outline-danger" th:href="@{/deleteinstructor(username=${instructor.InstructorUsername}, id=${instructor.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                         </tr>
 
@@ -147,7 +147,7 @@
                             <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>
                             <td th:text="${trainee.email}"></td>
                             <td th:text="${trainee.phone}"></td>
-                            <td><a class="btn btn-outline-info" href="ProfileIninstructor.html" role="button">View</a> &nbsp;
+                            <td><a class="btn btn-outline-info" th:href="@{/viewTraineeDetails(username=${trainee.TraineeUsername})}" role="button">View</a> &nbsp;
                                 <a class="btn btn-outline-danger" th:href="@{/deletetrainee(username=${trainee.TraineeUsername}, id=${trainee.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                         </tr>
                     </tbody>

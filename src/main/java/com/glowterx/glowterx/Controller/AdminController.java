@@ -24,6 +24,7 @@ import jakarta.servlet.http.HttpSession;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
+import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
@@ -41,10 +42,20 @@ public class AdminController {
     private TrainingDAO trainingDAO;
     @Autowired
     private InstructorDAO instructorDAO;
+    @Autowired
+    private TraineeDAO traineeDAO;
 
     @GetMapping("/adminProfilePicture")
     public ResponseEntity<byte[]> getProfilePicture() {
         String username = (String) session.getAttribute("username");
+        byte[] image = adminDAO.getProfilePicture(username);
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/adminProfilePicturebyUsername")
+    public ResponseEntity<byte[]> getProfilePicturebyUsername(@RequestParam("username") String username) {
         byte[] image = adminDAO.getProfilePicture(username);
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
@@ -141,15 +152,17 @@ public class AdminController {
         model.addAttribute("traineedata", trainee);
         return "Admin/ManageUser";
     }
+
     @GetMapping("/deletetraining")
     public String deleteTraining(@RequestParam("id") int id, Model model) {
         adminDAO.deleteTraining(id);
-        List<Training> training= adminDAO.getAllTraining();
-         model.addAttribute("training", training);
+        List<Training> training = adminDAO.getAllTraining();
+        model.addAttribute("training", training);
         return "Admin/ManageTrainingClass";
     }
+
     @GetMapping("/editTraining")
-    public String EditTraining(@RequestParam("id") int id, Model model,HttpSession session) {
+    public String EditTraining(@RequestParam("id") int id, Model model, HttpSession session) {
         session.setAttribute("training_id", id);
         Training training = trainingDAO.getInfoTraining();
         Instructor instructor = instructorDAO.getInstructorID(training.getInstructor_id());
@@ -157,22 +170,45 @@ public class AdminController {
         model.addAttribute("training", training);
         model.addAttribute("instructors", instructors);
         model.addAttribute("currInstructor", instructor);
-       
+
         return "Admin/EditTrainingClass";
     }
-   @PostMapping("/updateTraining")
-    public String updateTraining(@ModelAttribute("training") Training training, @RequestParam("instructor_id") int id,BindingResult bindingResult, Model model) {
+
+    @PostMapping("/updateTraining")
+    public String updateTraining(@ModelAttribute("training") Training training, @RequestParam("instructor_id") int id,
+            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "error";
         }
-        trainingDAO.updateProfile(training,id);
+        trainingDAO.updateProfile(training, id);
         List<Training> t = adminDAO.getAllTraining();
         List<Instructor> instructor = new ArrayList<Instructor>();
         for (Training train : t) {
             instructor.add(instructorDAO.getInstructorID(train.getInstructor_id()));
         }
         model.addAttribute("instructor", instructor);
-         model.addAttribute("training", t);
+        model.addAttribute("training", t);
         return "Admin/ManageTrainingClass";
+    }
+
+    @GetMapping("/viewAdminDetails")
+    public String viewAdmin(@RequestParam("username") String username, Model model) {
+        Admin admin = adminDAO.getInfoAdminbyUsername(username);
+        model.addAttribute("admin", admin);
+        return "Admin/viewDetailsAdmin";
+    }
+
+    @GetMapping("/viewInstructorDetails")
+    public String viewInstructor(@RequestParam("username") String username, Model model) {
+        Instructor instructor = instructorDAO.getInfoinstructorbyUsername(username);
+        model.addAttribute("instructor", instructor);
+        return "Admin/viewDetailsInstructor";
+    }
+
+    @GetMapping("/viewTraineeDetails")
+    public String viewTrainee(@RequestParam("username") String username, Model model) {
+        Trainee trainee = traineeDAO.getInfoTraineebyUsername(username);
+        model.addAttribute("trainee", trainee);
+        return "Admin/viewDetailsTrainee";
     }
 }

@@ -101,6 +101,38 @@ public class AdminDAO {
         return admin;
     }
 
+    public Admin getInfoAdminbyUsername(String username) {
+        Admin admin = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM Admin WHERE adminUsername = ?")) {
+
+            statement.setString(1, username);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                admin = new Admin();
+                admin.setId(rs.getInt("id"));
+                admin.setAdminUsername(rs.getString("adminUsername"));
+                admin.setAdminPass(rs.getString("adminPass"));
+                admin.setFirstName(rs.getString("firstname"));
+                admin.setLastName(rs.getString("lastname"));
+                admin.setAddress(rs.getString("address"));
+                admin.setCity(rs.getString("city"));
+                admin.setState(rs.getString("state"));
+                admin.setZip(rs.getString("zip"));
+                admin.setPhone(rs.getString("phone"));
+                admin.setEmail(rs.getString("email"));
+                admin.setGender(rs.getString("gender"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
+
     public void uploadProfilePicture(String username, byte[] image) {
         String sql = "UPDATE admin SET profle_images = ? WHERE adminUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });
