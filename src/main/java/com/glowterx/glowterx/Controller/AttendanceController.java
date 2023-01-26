@@ -55,7 +55,19 @@ public class AttendanceController {
     @GetMapping("/enrollTraining")
     public String enrollTraining(@RequestParam("id") int training_id, Model model, HttpSession session) {
         Trainee trainee = traineeDAO.getInfoTrainee();
+        Attendance tempAttendance = attendanceDAO.getAttendancebyID(trainee.getId());
         Training training = trainingDAO.getInfoTrainingByID(training_id);
+        if (tempAttendance != null) {
+            model.addAttribute("message", "You have already enrolled for this training!");
+            List<Training> trainings = adminDAO.getAllTraining();
+            List<Instructor> instructor = new ArrayList<Instructor>();
+            for (Training t : trainings) {
+                instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+            }
+            model.addAttribute("instructor", instructor);
+            model.addAttribute("training", trainings);
+            return "/Trainee/TraineeListTC";
+        }
         attendanceDAO.enrollTraining(trainee, training);
         model.addAttribute("message", "You have successfully enrolled for this training!");
 
