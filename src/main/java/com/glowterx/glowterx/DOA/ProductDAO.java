@@ -84,7 +84,7 @@ public class ProductDAO {
             statement.setInt(3, product.getProd_quantity());
             statement.setString(4, product.getProd_category());
             statement.setString(5, product.getProd_status());
-
+            statement.setInt(6, product.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,27 @@ public class ProductController {
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
+    @PostMapping("/uploadProductImage")
+    public String uploadProfilePicture(@RequestParam("id") int id,
+            @RequestParam("imageFile") MultipartFile file, Model model) {
+        Product product = productDAO.getProduct(id);
+        model.addAttribute("product", product);
+        if (!file.isEmpty()) {
+            try {
+                productDAO.uploadProductImage(product.getProd_name(), file.getBytes());
+                model.addAttribute("message", "Successfully uploaded image");
+                model.addAttribute("message", "Product updated successfully!");
+                return "Admin/EditProduct";
+            } catch (IOException e) {
+                model.addAttribute("message", "Failed to upload image");
+                return "Admin/EditProduct";
+            }
+        } else {
+            model.addAttribute("message", "File is empty");
+            return "Admin/EditProduct";
+        }
+    }
+
     @GetMapping("/deleteProduct")
     public String deleteProduct(@RequestParam("productId") int prod_id, Model model) {
         productDAO.deleteProduct(prod_id);
@@ -79,7 +101,12 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(@ModelAttribute("product") Product product, Model model) {
+    public String updateProduct(
+    @ModelAttribute("product") Product product, @RequestParam("category")String catergory, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "error";
+        }
+        product.setProd_category(catergory);
         productDAO.updateProduct(product);
         List<Product> productAll = productDAO.getAllProduct();
         model.addAttribute("product", productAll);
