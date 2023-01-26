@@ -85,7 +85,7 @@
                         <tr>
                             <th scope="row"></th>
                             <form th:action="@{/AdminaddProduct}" enctype="multipart/form-data" method="post">
-                                <td style="width: 20%;"><input type="file" class="form-control" size="5" name="prod_image" id="prod_image" ></td>
+                                <td style="width: 20%;"><input type="file" class="form-control" size="5" name="prod_image" id="prod_image"></td>
                                 <td style="width: 21%;"><input type="text" class="form-control" size="5" name="prod_name" id="prod_name"></td>
                                 <td><input type="text" class="form-control" size="5" name="prod_price" id="prod_price"></td>
                                 <td style="width: 8%;"><input type="number" class="form-control" size="5" name="prod_quantity"></td>
@@ -107,7 +107,7 @@
                         </tr>
                         <tr th:each="prod : ${product}">
                             <td th:text="${prod.id}"></td>
-                            <td><img width="150" height="150" src="@{/ProductImage(productId = ${prod.id})}" alt="Product Image"></td>
+                            <td><img width="150" height="150" th:src="@{/ProductImage(productId = ${prod.id})}" alt="Product Image"></td>
                             <td th:text="${prod.prod_name}"></td>
                             <td th:text="${prod.prod_price}"></td>
                             <td th:text="${prod.prod_quantity}"></td>
