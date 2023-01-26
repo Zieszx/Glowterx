@@ -149,11 +149,11 @@ public class TraineeController {
             Payment payment = new Payment();
             Membership membership = new Membership();
             double amount = 0;
-            if (Category.equals("Free")) {
+            if (Category.equals("Free Trial")) {
                 amount = 0;
-            } else if (Category.equals("Customize")) {
+            } else if (Category.equals("Customize Plan")) {
                 amount = 155.00;
-            } else if (Category.equals("Unlimited")) {
+            } else if (Category.equals("Unlimited Access")) {
                 amount = 250.00;
             }
 
@@ -173,7 +173,7 @@ public class TraineeController {
             List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
             List<Payment> payments = new ArrayList<Payment>();
             for (Membership m : members) {
-                payments.add(paymentDAO.getPaymentbyID(m.getID()));
+                payments.add(paymentDAO.getPaymentbyID(m.getPayment_id()));
             }
             model.addAttribute("members", members);
             model.addAttribute("payments", payments);
@@ -195,8 +195,7 @@ public class TraineeController {
         model.addAttribute("trainee", trainee);
         List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
         List<Payment> payments = new ArrayList<Payment>();
-        System.out.print(members.get(0).getmembership_category());
-
+       
         for (Membership m : members) {
             payments.add(paymentDAO.getPaymentbyID(m.getPayment_id()));
         }
