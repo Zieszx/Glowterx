@@ -27,7 +27,8 @@ public class ProductDAO {
 
     public void addProduct(Product product) {
         String sql = "INSERT INTO product (prod_name, prod_price, prod_quantity, prod_category, prod_status) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, product.getProd_name(), product.getProd_price(), product.getProd_quantity(),product.getProd_category(), product.getProd_status());
+        jdbcTemplate.update(sql, product.getProd_name(), product.getProd_price(), product.getProd_quantity(),
+                product.getProd_category(), product.getProd_status());
     }
 
     public Product getProduct(int product_id) {
@@ -35,7 +36,7 @@ public class ProductDAO {
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement("SELECT * FROM Product WHERE id = ?")) {
-            
+
             statement.setInt(1, product_id);
             ResultSet rs = statement.executeQuery();
 
@@ -55,7 +56,7 @@ public class ProductDAO {
         return product;
     }
 
-    public List <Product> getAllProduct(){
+    public List<Product> getAllProduct() {
         return jdbcTemplate.query("SELECT * FROM product", new BeanPropertyRowMapper<>(Product.class));
     }
 
@@ -72,6 +73,22 @@ public class ProductDAO {
     public void deleteProduct(int prod_id) {
         String sql = "DELETE FROM product WHERE id = ?";
         jdbcTemplate.update(sql, prod_id);
+    }
+
+    public void updateProduct(Product product) {
+        String sql = "UPDATE product SET prod_name = ?, prod_price = ?, prod_quantity = ?, prod_category = ?, prod_status = ? WHERE id = ?";
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, product.getProd_name());
+            statement.setDouble(2, product.getProd_price());
+            statement.setInt(3, product.getProd_quantity());
+            statement.setString(4, product.getProd_category());
+            statement.setString(5, product.getProd_status());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

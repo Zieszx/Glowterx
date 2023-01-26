@@ -19,7 +19,6 @@ public class Product {
         this.prod_status = prod_status;
     }
 
-    
     public String getProd_name() {
         return prod_name;
     }

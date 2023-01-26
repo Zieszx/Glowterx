@@ -43,33 +43,36 @@
     <p class="title">Edit Product</p>
 
     <div class="box">
-        <form action="EditProduct.html" method="post">
+        <form th:action="@{/updateProduct}" th:object="${product}" method="post">
             <table class="info">
                 <tr>
                     <td class="table-col-1">Product Id</td>
-                    <td><input type="text" class="form-control" name="id" id="id" placeholder="1"></td>
+                    <td><input type="text" class="form-control" name="id" id="id" placeholder="Product Id" th:field="*{id}" readonly></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Image File</td>
-                    <td><img src="Images/IMG4.png" style="position: center;" /><br><input type="file" class="form-control" id="imageFile" name="imageFile" placeholder="MENS SHOES DN 23XX.jpg"></td>
+                    <td><img th:src="@{/ProductImage(productId=*{id})}" style="position: center;" /><br>
+                        <input type="file" class="form-control" id="imageFile" name="imageFile" placeholder="MENS SHOES DN 23XX.jpg">
+                    </td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Product Name</td>
-                    <td><input type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Purple Dumbbell 1.5kg"></td>
+                    <td><input type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Enter Product Name" th:field="*{prod_name}"></td>
                 </tr>
 
                 <tr>
                     <td class="table-col-1">Price (RM)</td>
-                    <td><input type="text" class="form-control" name="prod_price" id="prod_price" placeholder="30.00"></td>
+                    <td><input type="text" class="form-control" name="prod_price" id="prod_price" placeholder="Enter price" th:field="*{prod_price}"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Product Quantity</td>
-                    <td><input type="number" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="30"></td>
+                    <td><input type="number" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Enter quantity" th:field="*{prod_quantity}"></td>
                 </tr>
                 <tr>
                     <td class="table-col-1">Category</td>
                     <td>
                         <select id="category" name="category" class="form-control">
+                        <option th:value="*{prod_category}"><span th:text="*{prod_category}"></option>
                         <option value="supplement">Supplement</option>
                         <option value="sportEquipment">Equipment</option>
                         </select>
@@ -79,6 +82,7 @@
                     <td class="table-col-1">Status</td>
                     <td>
                         <select id="prod_status" name="prod_status" class="form-control">
+                        <option th:value="*{prod_status}"><span th:text="*{prod_status}"></option>
                         <option value="available">Available</option>
                         <option value="outOfStock">Out Of Stock</option>
                         </select>

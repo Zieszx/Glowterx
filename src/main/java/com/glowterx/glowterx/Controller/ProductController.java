@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,7 @@ public class ProductController {
             @RequestParam("prod_category") String prod_category,
             @RequestParam("prod_status") String prod_status,
             @RequestParam("prod_image") MultipartFile file, Model model) {
-        
+
         Product product = new Product(prod_name, prod_price, prod_quantity, prod_category, prod_status);
         productDAO.addProduct(product);
 
@@ -54,7 +55,7 @@ public class ProductController {
 
     @GetMapping("/ProductImage")
     public ResponseEntity<byte[]> getProfilePicture(
-        @RequestParam("productId") int product_id,  Model model) {
+            @RequestParam("productId") int product_id, Model model) {
         byte[] image = productDAO.getProductImage(product_id);
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
@@ -67,6 +68,22 @@ public class ProductController {
         List<Product> productAll = productDAO.getAllProduct();
         model.addAttribute("product", productAll);
         model.addAttribute("message", "Product deleted successfully!");
+        return "Admin/ManageShop";
+    }
+
+    @GetMapping("/editProduct")
+    public String editProduct(@RequestParam("productId") int prod_id, Model model) {
+        Product product = productDAO.getProduct(prod_id);
+        model.addAttribute("product", product);
+        return "Admin/EditProduct";
+    }
+
+    @PostMapping("/updateProduct")
+    public String updateProduct(@ModelAttribute("product") Product product, Model model) {
+        productDAO.updateProduct(product);
+        List<Product> productAll = productDAO.getAllProduct();
+        model.addAttribute("product", productAll);
+        model.addAttribute("message", "Product updated successfully!");
         return "Admin/ManageShop";
     }
 }
