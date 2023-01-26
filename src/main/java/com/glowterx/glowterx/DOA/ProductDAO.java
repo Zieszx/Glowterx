@@ -68,4 +68,10 @@ public class ProductDAO {
         String sql = "SELECT prod_images FROM product WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { prod_id }, byte[].class);
     }
+
+    public void deleteProduct(int prod_id) {
+        String sql = "DELETE FROM product WHERE id = ?";
+        jdbcTemplate.update(sql, prod_id);
+    }
+
 }

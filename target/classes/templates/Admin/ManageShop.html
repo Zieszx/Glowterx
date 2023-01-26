@@ -114,7 +114,7 @@
                             <td th:text="${prod.prod_category}"></td>
                             <td th:text="${prod.prod_status}"></td>
                             <td><a class="btn btn-outline-info" href="#" role="button">Edit</a> &nbsp;
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
+                                <a class="btn btn-outline-danger" th:href="@{/deleteProduct(productId=${prod.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>

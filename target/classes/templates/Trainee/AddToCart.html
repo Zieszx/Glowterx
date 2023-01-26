@@ -47,7 +47,7 @@
                     <div class = "product" >
                         <div class = "product-content">
                             <div class = "product-img">
-                                <img src = "images/IMG1.png" alt = "product image">
+                                <img src="@{/ProductImage(productId = ${prod.id})}" alt = "product image">
                             </div>
                             <div class = "product-btns">
                                 <a class="btn-cart" th:href="@{/TraineeaddCart(productId = ${prod.id})}" role="button" target="_blank" >Add To Cart</a>

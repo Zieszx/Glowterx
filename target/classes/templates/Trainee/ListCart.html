@@ -74,7 +74,7 @@
                             <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
                                 <span th:text="${prod.prod_price}"></span>
                             </td>
-                            <td><a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
+                            <td><a class="btn btn-outline-danger" th:href="@{/deleteCart(cartId=${c.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>    
