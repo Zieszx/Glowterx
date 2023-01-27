@@ -43,18 +43,28 @@
     <p class="title">Edit Product</p>
 
     <div class="box">
-        <form th:action="@{/updateProduct}" th:object="${product}" method="post">
-            <table class="info">
+        <table class="info">
+        <form th:action="@{/uploadProductImage}" method="post" enctype="multipart/form-data">
+        <tr>
+            <td class="table-col-1">Image File</td>
+
+            <td><div class="text-center">
+                <img th:src="@{/ProductImage(productId=${product.id})}" style="position: center;" /><br>
+                <input type="hidden" name="id" th:field="${product.id}"/>
+                <input type="file" name="imageFile" value="Change Profile Pictures" class="form-control">
+                    <button type="submit" value="Upload Image"  id="submitEdit">Upload Image</button><br>
+                </div>
+                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
+            </td>
+        </tr>
+        </form>
+        <form th:action="@{/updateProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+            
                 <tr>
                     <td class="table-col-1">Product Id</td>
                     <td><input type="text" class="form-control" name="id" id="id" placeholder="Product Id" th:field="*{id}" readonly></td>
                 </tr>
-                <tr>
-                    <td class="table-col-1">Image File</td>
-                    <td><img th:src="@{/ProductImage(productId=*{id})}" style="position: center;" /><br>
-                        <input type="file" class="form-control" id="imageFile" name="imageFile" placeholder="MENS SHOES DN 23XX.jpg">
-                    </td>
-                </tr>
+                
                 <tr>
                     <td class="table-col-1">Product Name</td>
                     <td><input type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Enter Product Name" th:field="*{prod_name}"></td>
@@ -73,8 +83,8 @@
                     <td>
                         <select id="category" name="category" class="form-control">
                         <option th:value="*{prod_category}"><span th:text="*{prod_category}"></option>
-                        <option value="supplement">Supplement</option>
-                        <option value="sportEquipment">Equipment</option>
+                        <option value="Supplement">Supplement</option>
+                        <option value="Equipment">Equipment</option>
                         </select>
                     </td>
                 </tr>
@@ -83,14 +93,17 @@
                     <td>
                         <select id="prod_status" name="prod_status" class="form-control">
                         <option th:value="*{prod_status}"><span th:text="*{prod_status}"></option>
-                        <option value="available">Available</option>
-                        <option value="outOfStock">Out Of Stock</option>
+                        <option value="Available">Available</option>
+                        <option value="Out of Stock">Out Of Stock</option>
                         </select>
                     </td>
                 </tr>
 
             </table>
-            <button class="submitEdit" type="submit" id="submitEdit">Edit Product</button>
+            <div class="mt-5 text-center">
+                <button class="submitEdit" type="submit" id="submitEdit">Edit Product</button>
+            </div>
+            
         </form>
     </div>
 </body>

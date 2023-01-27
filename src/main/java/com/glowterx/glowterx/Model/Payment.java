@@ -1,4 +1,5 @@
 package com.glowterx.glowterx.Model;
+
 import java.util.Date;
 
 public class Payment {
@@ -9,9 +10,11 @@ public class Payment {
     private String payment_status;
     private String payment_category;
 
-    public Payment() {}
+    public Payment() {
+    }
 
-    public Payment(int id, int person_id, double amount, Date payment_date, String payment_status, String payment_category) {
+    public Payment(int id, int person_id, double amount, Date payment_date, String payment_status,
+            String payment_category) {
         this.id = id;
         this.person_id = person_id;
         this.amount = amount;
@@ -67,6 +70,5 @@ public class Payment {
     public void setPayment_category(String payment_category) {
         this.payment_category = payment_category;
     }
+
 }
-
-
