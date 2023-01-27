@@ -1,9 +1,12 @@
 package com.glowterx.glowterx.Controller;
 
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -118,35 +121,27 @@ public class IndexController {
         return "Register";
     }
 
-    // Huda - Admin Generate Report Trainee & Instructor begins here
     @GetMapping("/reportTrainee")
     public String adminGenerateReportTrainee(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
+        List<Trainee> trainee = adminDAO.getAllTrainee();
+        List<Instructor> instructor = adminDAO.getAllInstructors();
+        List<Admin> admin = adminDAO.getAllAdmin();
+        model.addAttribute("admindata", admin);
+        model.addAttribute("instructordata", instructor);
+        model.addAttribute("traineedata", trainee);
         return "Admin/ReportTrainee";
     }
 
     @GetMapping("/reportInstructor")
     public String adminGenerateReportInstructor(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
+        List<Trainee> trainee = adminDAO.getAllTrainee();
+        List<Instructor> instructor = adminDAO.getAllInstructors();
+        List<Admin> admin = adminDAO.getAllAdmin();
+        model.addAttribute("admindata", admin);
+        model.addAttribute("instructordata", instructor);
+        model.addAttribute("traineedata", trainee);
         return "Admin/ReportInstructor";
     }
-
-    @GetMapping("/gReportTrainee")
-    public String adminGeneratedReportTrainee(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
-        return "Admin/ReportTrID";
-    }
-
-    @GetMapping("/gReportInstructor")
-    public String adminGeneratedReportInstructor(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
-        return "Admin/ReportInID";
-    }
-    // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
 
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
@@ -265,4 +260,19 @@ public class IndexController {
         model.addAttribute("training", training);
         return "Trainee/AttendanceUser";
     }
+
+    @GetMapping("/checkout")
+    public String checkout(Model model, HttpSession session) {
+        return "Trainee/CustomerCheckout";
+    }
+
+    @GetMapping("/InstructorEditProfile")
+    public String EditProfileInstructor(Model model, HttpSession session) {
+        Instructor instructor = instructorDAO.getInfoinstructor();
+        model.addAttribute("instructor", instructor);
+        System.out.println(instructor.getInstructorUsername());
+        return "Instructor/EditProfileDetails";
+    }
+
+   
 }

@@ -84,12 +84,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="instructor : ${instructordata}">
+                                <tr th:each="instructor, iterTr : ${instructordata}">
+                                    <td th:text="${iterTr.count}"></td>
                                     <td th:text="${instructor.InstructorUsername}"></td>
                                     <td th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></td>
                                     <td th:text="${instructor.email}"></td>
                                     <td th:text="${instructor.phone}"></td>
-                                    <td><a class="btn btn-light" href="gReportInstructor" role="button" target="_blank">Generate Report</a></td>
+                                    <td><a class="btn btn-light" th:href="@{/gReportInstructor(username=${instructor.InstructorUsername})}" role="button" target="_blank">Generate Report</a></td>
                                 </tr>
 
                             </tbody>

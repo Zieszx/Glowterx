@@ -11,16 +11,18 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Attendance;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
 import com.glowterx.glowterx.Model.Training;
 import com.glowterx.glowterx.Model.Membership;
-// import com.glowterx.glowterx.Model.Attendance;
+import com.glowterx.glowterx.Model.Attendance;
 
 import jakarta.servlet.http.HttpSession;
-
+@Repository
 public class ReportDAO {
     @Autowired
     private DataSource dataSource;
@@ -58,4 +60,6 @@ public class ReportDAO {
         String sql = "SELECT * FROM trainee";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Trainee.class));
     }
+
+    
 }

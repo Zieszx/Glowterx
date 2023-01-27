@@ -11,6 +11,7 @@ import com.glowterx.glowterx.DOA.MembershipDAO;
 import com.glowterx.glowterx.DOA.OrderDAO;
 import com.glowterx.glowterx.DOA.PaymentDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
+import com.glowterx.glowterx.DOA.ReportDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 
@@ -65,5 +66,10 @@ public class AppConfig {
     @Bean
     public OrderDAO orderDAO() {
         return new OrderDAO();
+    }
+
+    @Bean
+    public ReportDAO reportDOA() {
+        return new ReportDAO();
     }
 }
