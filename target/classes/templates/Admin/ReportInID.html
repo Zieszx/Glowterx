@@ -43,7 +43,7 @@
     </div>
     <!-- Navigation Bar -->
 
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="container rounded bg-white mt-5 mb-5" th:object="${instructor}">
         <div class="row">
             <div class="col-md-2 border-right">
                 <div class="p-2 px-md-1">
@@ -67,8 +67,9 @@
             </div>
 
             <div class="col-md-3 border-right">
-                <div class="d-flex list-group-item flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="Images/profile_picture.png">afikah@gmail.com</span>
-                    <span><p class="text-left"><small class="text-muted">Instructor</small></p></span></div>
+                <div class="d-flex list-group-item flex-column align-items-center text-center mb-4"><img class="rounded-circle mt-5" width="350" height="350" src="/InstructorProfilePicture" alt="Profile Picture">
+                <span class="text" th:text="*{email}"></span>
+                <span><p class="text-left"><small class="text-muted">Instructor</small></p></span></div>
 
             </div>
             <div class="col-md-7 border-right">
@@ -85,19 +86,20 @@
                         <h4 class="text-right">Details Information</h4>
                         <table class="table">
                             <th scope="row">Username</th>
-                            <td>nurafikah</td>
+                            <td th:text="*{InstructorUsername}"></td>
                             </tr>
                             <tr>
                                 <th scope="row">Full Name</th>
-                                <td>Nur Afikah</td>
+                                <td th:text="*{firstName} + ' ' + *{lastName}"></td>
                             </tr>
                             <tr>
                                 <th scope="row">Phone Number</th>
-                                <td>0123456788</td>
+                                <td th:text="*{phone}"></td>
                             </tr>
                             <tr>
                                 <th scope="row">Address</th>
-                                <td></td>
+                                <td th:text="*{address} + ', ' + *{zip} + ', ' + *{city} + ', ' + *{state}"></td>
+                            </tr>
                         </table>
                         <hr class="style2">
                     </div>

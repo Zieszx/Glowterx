@@ -75,6 +75,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Email</th>
@@ -83,12 +84,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="trainee : ${traineedata}">
+                                <tr th:each="trainee, iterTr : ${traineedata}">
+                                    <td th:text="${iterTr.count}"></td>
                                     <td th:text="${trainee.TraineeUsername}"></td>
                                     <td th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></td>
                                     <td th:text="${trainee.email}"></td>
                                     <td th:text="${trainee.phone}"></td>
-                                    <td><a class="btn btn-light" href="/gReportTrainee" role="button" target="_blank">Generate Report</a></td>
+                                    <td><a class="btn btn-light" th:href="@{/gReportTrainee(username=${trainee.TraineeUsername})}" role="button" target="_blank">Generate Report</a></td>
                                 </tr>
 
                             </tbody>

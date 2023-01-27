@@ -20,6 +20,32 @@ import com.glowterx.glowterx.Model.Training;
 import com.glowterx.glowterx.Model.Membership;
 import com.glowterx.glowterx.Model.Attendance;
 
+@Controller
 public class ReportController {
+    @Autowired
+    private AttendanceDAO attendanceDAO;
+
+    @Autowired
+    private TraineeDAO traineeDAO;
+
+    @Autowired
+    private TrainingDAO trainingDAO;
+
+    @Autowired
+    private InstructorDAO instructorDAO;
     
+
+    @GetMapping("/gReportInstructor")
+    public String adminGeneratedReportInstructor(@RequestParam("username") String username, Model model) {
+        Instructor instructor = instructorDAO.getInfoinstructorbyUsername(username);
+        model.addAttribute("instructor", instructor);
+        return "Admin/ReportInID";
+    }
+
+    @GetMapping("/gReportTrainee")
+    public String adminGeneratedReportTrainee(@RequestParam("username") String username, Model model) {
+        Trainee trainee = traineeDAO.getInfoTraineebyUsername(username);
+        model.addAttribute("trainee", trainee);
+        return "Admin/ReportTrID";
+    }
 }

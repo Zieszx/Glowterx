@@ -118,35 +118,27 @@ public class IndexController {
         return "Register";
     }
 
-    // Huda - Admin Generate Report Trainee & Instructor begins here
     @GetMapping("/reportTrainee")
     public String adminGenerateReportTrainee(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
+        List<Trainee> trainee = adminDAO.getAllTrainee();
+        List<Instructor> instructor = adminDAO.getAllInstructors();
+        List<Admin> admin = adminDAO.getAllAdmin();
+        model.addAttribute("admindata", admin);
+        model.addAttribute("instructordata", instructor);
+        model.addAttribute("traineedata", trainee);
         return "Admin/ReportTrainee";
     }
 
     @GetMapping("/reportInstructor")
     public String adminGenerateReportInstructor(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
+        List<Trainee> trainee = adminDAO.getAllTrainee();
+        List<Instructor> instructor = adminDAO.getAllInstructors();
+        List<Admin> admin = adminDAO.getAllAdmin();
+        model.addAttribute("admindata", admin);
+        model.addAttribute("instructordata", instructor);
+        model.addAttribute("traineedata", trainee);
         return "Admin/ReportInstructor";
     }
-
-    @GetMapping("/gReportTrainee")
-    public String adminGeneratedReportTrainee(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
-        return "Admin/ReportTrID";
-    }
-
-    @GetMapping("/gReportInstructor")
-    public String adminGeneratedReportInstructor(Model model) {
-        // List<Instructor> instructors = adminDAO.getAllInstructors();
-        // model.addAttribute("instructors", instructors);
-        return "Admin/ReportInID";
-    }
-    // Huda - Admin Generate Report Trainee & Instructor end here sadaqaAllahu adzim
 
     @GetMapping("/adminProfile")
     public String adminProfile(Model model, HttpSession session) {
