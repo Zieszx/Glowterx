@@ -52,7 +52,7 @@
                 <img th:src="@{/ProductImage(productId=${product.id})}" style="position: center;" /><br>
                 <input type="hidden" name="id" th:field="${product.id}"/>
                 <input type="file" name="imageFile" value="Change Profile Pictures" class="form-control">
-                    <button type="submit" value="Upload Image"  id="submitEdit">Upload Image</button><br>
+                    <button type="submit" value="Upload Image"  id="submitUpload">Upload Image</button><br>
                 </div>
                 <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
             </td>

@@ -94,7 +94,7 @@ img{
 
   /* Rectangle */
   width: 490px;
-  height: 50px;
+  height: 75px;
   left: 550px;
   top: 840px;
 
@@ -120,12 +120,18 @@ img{
   color: #FFFFFF;
 
   /* Rectangle */
-  width: 490px;
-  height: 50px;
+  width: 1050px;
+  height: 40px;
   left: 550px;
   top: 840px;
 
   background: #783A4D;
   border-radius: 10px;
   border: none;
+}
+#submitUpload:hover {
+  color: white; background: black;
+  border: 2px solid whitesmoke;
+  box-shadow: 0 15px 12px 0 whitesmoke(0,0,0,0.2);
+  
 }
