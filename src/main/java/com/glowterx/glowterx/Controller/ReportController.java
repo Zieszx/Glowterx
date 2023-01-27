@@ -1,5 +1,8 @@
 package com.glowterx.glowterx.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.DOA.MembershipDAO;
+import com.glowterx.glowterx.DOA.ReportDAO;
 import com.glowterx.glowterx.DOA.AttendanceDAO;
 import com.glowterx.glowterx.Model.Admin;
 import com.glowterx.glowterx.Model.Instructor;
@@ -43,9 +47,24 @@ public class ReportController {
     }
 
     @GetMapping("/gReportTrainee")
-    public String adminGeneratedReportTrainee(@RequestParam("username") String username, Model model) {
+    public String adminGeneratedReportTrainee(@RequestParam("username") String username, @RequestParam("id") int attendance_id, Model model) {
         Trainee trainee = traineeDAO.getInfoTraineebyUsername(username);
         model.addAttribute("trainee", trainee);
+        Trainee trainees = traineeDAO.getInfoTrainee();
+        Attendance tempAttendance = attendanceDAO.getAttendancebyID(attendance_id);
+        Training tempTraining = trainingDAO.getInfoTrainingByID(tempAttendance.getTraining_id());
+        List<Attendance> attendance = attendanceDAO.getTraineeAttendance(trainee);
+        List<Training> training = new ArrayList<Training>();
+        List<Instructor> instructor = new ArrayList<Instructor>();
+        for (Attendance a : attendance) {
+            training.add(trainingDAO.getInfoTrainingByID(a.getTraining_id()));
+        }
+        for (Training t : training) {
+            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+        }
+        model.addAttribute("attendance", attendance);
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("training", training);
         return "Admin/ReportTrID";
     }
 }

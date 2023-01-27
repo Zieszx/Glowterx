@@ -112,25 +112,40 @@
 
                     <div class="container table-cont">
                         <h4 class="text-right">Training Classes Information</h4>
-                        <table class="table">
+                        <table class="table table-striped table-hover table-bordered my-5">
                             <thead>
-                                <tr>
-                                    <th scope="col">Class Name</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">Number of Session</th>
-                                    <th scope="col">Attendance</th>
+                                <tr class="">
+                                    <th scope="col" class="th-lg">#</th>
+                                    <th scope="col" class="th-lg">Training Name</th>
+                                    <th scope="col" class="th-lg">Instructor</th>
+                                    <th scope="col" class="th-lg">Schedule</th>
+                                    <th scope="col" class="th-lg">Session</th>
+                                    <th scope="col" class="th-lg">Check-Ins</th>
+                                    <th scope="col" class="th-lg">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Advanced Flow Yoga</td>
-                                    <td>2023/01/01</td>
-                                    <td>2023/02/01</td>
-                                    <td>60 minutes</td>
-                                    <td>10</td>
-                                    <td>60%</td>
+                                <tr th:each="attend, iterTr : ${attendance}">
+                                    <th scope="row" th:text="${attend.id}"></th>
+                                    <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                        <span th:text="${train.training_name}"></span>
+                                    </td>
+                                    <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
+                                        <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
+                                        <br><small class="text-muted">Instructor</small>
+                                    </td>
+                                    <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                        <span th:text="${#dates.format(train.start_date, 'MM/dd/yyyy')}"></span> to <span th:text="${#dates.format(train.end_date, 'MM/dd/yyyy')}"></span>
+                                        <br><small class="text-muted" th:text="${train.training_duration}"></small>
+                                        <small class="text-muted"> Minutes</small>
+                                    </td>
+                                    <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
+                                        <span th:text="${train.training_session}"></span>
+                                        <br><small class="text-muted">Sessions</small>
+                                    </td>
+                                    <td><span th:text="${attend.attendance_checkins}"></span><br><small class="text-muted">Check-Ins</small></td>
+                                    <td><span th:text="${attend.attendance_status}"></span><br><small class="text-muted">Status</small></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
