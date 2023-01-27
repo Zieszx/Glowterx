@@ -56,6 +56,32 @@ public class AttendanceController {
     public String enrollTraining(@RequestParam("id") int training_id, Model model, HttpSession session) {
         Trainee trainee = traineeDAO.getInfoTrainee();
         Training training = trainingDAO.getInfoTrainingByID(training_id);
+        List<Attendance> tempAttendance = attendanceDAO.getTraineeAttendance(trainee);
+        if (trainee.getMembershipStatus().equals("Free Trial")) {
+            if (tempAttendance.size() == 1) {
+                model.addAttribute("message", "You need to Subscribe to Enroll More!");
+                List<Training> trainings = adminDAO.getAllTraining();
+                List<Instructor> instructor = new ArrayList<Instructor>();
+                for (Training t : trainings) {
+                    instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+                }
+                model.addAttribute("instructor", instructor);
+                model.addAttribute("training", trainings);
+                return "/Trainee/TraineeListTC";
+            }
+        } else if (trainee.getMembershipStatus().equals("Customize Plan")) {
+            if (tempAttendance.size() == 2) {
+                model.addAttribute("message", "You need to Subscribe to Unlimited Access to Enroll More!");
+                List<Training> trainings = adminDAO.getAllTraining();
+                List<Instructor> instructor = new ArrayList<Instructor>();
+                for (Training t : trainings) {
+                    instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+                }
+                model.addAttribute("instructor", instructor);
+                model.addAttribute("training", trainings);
+                return "/Trainee/TraineeListTC";
+            }
+        }
         if (attendanceDAO.enrollCheck(trainee, training)) {
             model.addAttribute("message", "You have already enrolled for this training!");
             List<Training> trainings = adminDAO.getAllTraining();
