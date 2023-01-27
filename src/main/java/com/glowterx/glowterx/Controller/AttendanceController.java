@@ -55,9 +55,8 @@ public class AttendanceController {
     @GetMapping("/enrollTraining")
     public String enrollTraining(@RequestParam("id") int training_id, Model model, HttpSession session) {
         Trainee trainee = traineeDAO.getInfoTrainee();
-        Attendance tempAttendance = attendanceDAO.getAttendancebyID(trainee.getId());
         Training training = trainingDAO.getInfoTrainingByID(training_id);
-        if (tempAttendance != null) {
+        if (attendanceDAO.enrollCheck(trainee, training)) {
             model.addAttribute("message", "You have already enrolled for this training!");
             List<Training> trainings = adminDAO.getAllTraining();
             List<Instructor> instructor = new ArrayList<Instructor>();

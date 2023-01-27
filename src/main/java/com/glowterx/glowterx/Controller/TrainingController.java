@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.glowterx.glowterx.DOA.AdminDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
+import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Training;
 
 @Controller
 public class TrainingController {
     @Autowired
     private TrainingDAO trainingDAO;
+
+    @Autowired
+    private TraineeDAO traineeDAO;
+
+    @Autowired
+    private AdminDAO adminDAO;
 
     @PostMapping("/Admin/addTraining")
     public String addTraining(@RequestParam("className") String className,
@@ -28,9 +36,10 @@ public class TrainingController {
             @RequestParam("instructor_id") int instructorId, Model model) {
         Training training = new Training(className, startDate, endDate, duration, session, instructorId);
         trainingDAO.addTraining(training);
+        List<Instructor> instructors = adminDAO.getAllInstructors();
+        model.addAttribute("instructors", instructors);
         model.addAttribute("message", "Training class added successfully!");
         return "/Admin/CreateTrainingClass";
     }
-    
 
 }

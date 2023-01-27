@@ -1,9 +1,10 @@
 <html>
-    <head>
-        <title>List</title>
+
+<head>
+    <title>List</title>
     <link rel="stylesheet" href="css/HeaderNav.css" />
     <link rel="stylesheet" href="css/Report.css" />
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS only -->
@@ -11,9 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    </head>
-    <body>
-     <!-- Navigation Bar -->
+</head>
+
+<body>
+    <!-- Navigation Bar -->
     <div class="nav-bar">
 
         <div class="Header-Nav">
@@ -43,49 +45,53 @@
 
     <div class="row">
         <div class="p-3 py-5">
-            
+
             <div class="d-flex justify-content-between align-items-center mb-0">
                 <div class="title">
-                    <div>Shopping Cart</div>
+                    <div class="text-center">Shopping Cart</div>
                 </div>
             </div>
             <br><br>
-            
+
         </div>
         <div class="container table-cont">
-                <table class="table table-hover" style="text-align: center;">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Product Id</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Product Price</th>
-                            <th scope="col"> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="c,iterTr : ${cart}">
-                            <td th:text="${c.id}"></td>
-                            <td th:text="${c.product_id}"></td>
-                            <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
-                                <span th:text="${prod.prod_name}"></span>
-                            </td>
-                            <td th:text="${c.quantity}"></td>
-                            <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
-                                <span th:text="${prod.prod_price}"></span>
-                            </td>
-                            <td><a class="btn btn-outline-danger" th:href="@{/deleteCart(cartId=${c.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
-                        </tr>
-                    </tbody>
-                </table>    
-                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>      
+            <table class="table table-hover" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c,iterTr : ${cart}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.product_id}"></td>
+                        <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                            <span th:text="${prod.prod_name}"></span>
+                        </td>
+                        <td th:text="${c.quantity}"></td>
+                        <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                            <span th:text="${prod.prod_price}"></span>
+                        </td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deleteCart(cartId=${c.id})}" role="button" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a class="btn btn-outline-primary" th:href="@{/checkout}" role="button">Checkout</a>
             </div>
-            
+            <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
         </div>
-        </div>
-        
 
-       
-    </body>
+    </div>
+    </div>
+
+
+
+</body>
+
 </html>
