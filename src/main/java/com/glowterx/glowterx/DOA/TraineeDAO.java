@@ -139,7 +139,7 @@ public class TraineeDAO {
     }
 
     public void insertTrainee(Trainee trainee) {
-        trainee.setMembershipStatus("Free");
+        trainee.setMembershipStatus("Free Trial");
         String sql = "INSERT INTO trainee (firstname, lastname, TraineeUsername, TraineePass, MembershipStatus, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, trainee.getFirstName(), trainee.getLastName(), trainee.getTraineeUsername(),
                 trainee.getTraineePass(), trainee.getMembershipStatus(), trainee.getPhone(), trainee.getEmail(),
