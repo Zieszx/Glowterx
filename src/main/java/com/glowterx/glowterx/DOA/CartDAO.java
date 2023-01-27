@@ -31,45 +31,49 @@ public class CartDAO {
         jdbcTemplate.update(sql, cart.getQuantity(), cart.getPerson_id(), cart.getProduct_id());
     }
 
-    /*public Cart getInfoAdmin() {
-        String username = (String) session.getAttribute("username");
-        Admin admin = null;
-        try (Connection connection = dataSource.getConnection();
-                PreparedStatement statement = connection
-                        .prepareStatement("SELECT * FROM Admin WHERE adminUsername = ?")) {
+    /*
+     * public Cart getInfoAdmin() {
+     * String username = (String) session.getAttribute("username");
+     * Admin admin = null;
+     * try (Connection connection = dataSource.getConnection();
+     * PreparedStatement statement = connection
+     * .prepareStatement("SELECT * FROM Admin WHERE adminUsername = ?")) {
+     * 
+     * statement.setString(1, username);
+     * 
+     * ResultSet rs = statement.executeQuery();
+     * 
+     * if (rs.next()) {
+     * admin = new Admin();
+     * admin.setId(rs.getInt("id"));
+     * admin.setAdminUsername(rs.getString("adminUsername"));
+     * admin.setAdminPass(rs.getString("adminPass"));
+     * admin.setFirstName(rs.getString("firstname"));
+     * admin.setLastName(rs.getString("lastname"));
+     * admin.setAddress(rs.getString("address"));
+     * admin.setCity(rs.getString("city"));
+     * admin.setState(rs.getString("state"));
+     * admin.setZip(rs.getString("zip"));
+     * admin.setPhone(rs.getString("phone"));
+     * admin.setEmail(rs.getString("email"));
+     * admin.setGender(rs.getString("gender"));
+     * }
+     * 
+     * } catch (SQLException e) {
+     * e.printStackTrace();
+     * }
+     * return admin;
+     * }
+     */
 
-            statement.setString(1, username);
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                admin = new Admin();
-                admin.setId(rs.getInt("id"));
-                admin.setAdminUsername(rs.getString("adminUsername"));
-                admin.setAdminPass(rs.getString("adminPass"));
-                admin.setFirstName(rs.getString("firstname"));
-                admin.setLastName(rs.getString("lastname"));
-                admin.setAddress(rs.getString("address"));
-                admin.setCity(rs.getString("city"));
-                admin.setState(rs.getString("state"));
-                admin.setZip(rs.getString("zip"));
-                admin.setPhone(rs.getString("phone"));
-                admin.setEmail(rs.getString("email"));
-                admin.setGender(rs.getString("gender"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return admin;
-    }*/
-
-    public List <Cart> getAllCart(){
-        return jdbcTemplate.query("SELECT * FROM cart", new BeanPropertyRowMapper<>(Cart.class));
+    public List<Cart> getAllCartTrainee(int id) {
+        String sql = "SELECT * FROM cart WHERE person_id = ?";
+        List<Cart> cart = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Cart>(Cart.class), id);
+        return cart;
     }
 
-    public void deleteCart(int cart_id) {
-        String sql = "DELETE FROM cart WHERE id = ?";
-        jdbcTemplate.update(sql, cart_id);
+    public void deleteCart(int c_id, int p_id) {
+        String sql = "DELETE FROM cart WHERE id = ? AND person_id = ?";
+        jdbcTemplate.update(sql, c_id, p_id);
     }
 }

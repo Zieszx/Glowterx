@@ -91,4 +91,13 @@ public class ProductDAO {
         }
     }
 
+    public Product getProductByID(int prod_id) {
+        String sql = "SELECT * FROM product WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { prod_id }, new BeanPropertyRowMapper<>(Product.class));
+    }
+
+    public void updateProductQuantity(int prod_id, int prod_quantity) {
+        String sql = "UPDATE product SET prod_quantity = ? WHERE id = ?";
+        jdbcTemplate.update(sql, prod_quantity, prod_id);
+    }
 }

@@ -33,7 +33,7 @@
             </ul>
 
             <div class="col-md-3 text-end">
-                <a class="Nav-Item" href="#"><img src="Images/shopping-bag.png" /></a>
+                <a class="Nav-Item" href="/TraineeListCart"><img src="Images/shopping-bag.png" /></a>
                 <a class="Nav-Item" href="/traineeProfile"><img src="Images/account.png" /></a>
                 <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
@@ -42,246 +42,159 @@
     <!-- Navigation Bar -->
 
     <div class="container">
-        <main>
-            <div class="py-5 text-center">
-                <p class="nav-link fw-bold py-1 px-0 lead">CHECKOUT FORM</p>
-            </div>
+        <div class="row px-md-4 px-2 pt-4">
+            <div class="col-lg-8">
+                <p class="pb-2 fw-bold">
+                    <h4 class="mb-3">Order Summary</h4>
+                </p>
+                <div class="card">
+                    <div class="ribbon ribbon-top-right"><span>CHECKOUT</span></div>
+                    <div>
+                        <div class="table-responsive px-md-4 px-2 pt-3">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr class="border-bottom" th:each="c,iterTr : ${cart}">
+                                        <td th:text="${iterTr.count}"></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <img class="border border-2 rounded" width="110" height="110" th:src="@{/ProductImage(productId = ${prod.id})}" alt=""> </div>
+                                                <div class="ps-3 d-flex flex-column justify-content" th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <p class="fw-bold"><span class="ps-1" th:text="${prod.prod_name}"></span></p> <small class=" d-flex"> <span class=" text-muted">Category: </span> <span class=" fw-bold" th:text="${prod.prod_category}"></span> </small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex" th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                <p class="pe-3"><span class="text-secondary">RM <span th:text="${prod.prod_price}"></span> </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="pe-3 text-muted">Quantity</span> <span class="pe-3" th:text="${c.quantity}"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-            <div class="row g-5">
-                <div class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-Cart">Your cart</span>
-                        <span class="badge bg-Cart rounded-pill">3</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Stockin</h6>
-                                <small class="text-muted">Cotton Stockin</small>
-                            </div>
-                            <span class="text-muted">$99.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Head Band</h6>
-                                <small class="text-muted">Adibas</small>
-                            </div>
-                            <span class="text-muted">$99.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Shoes</h6>
-                                <small class="text-muted">Neki</small>
-                            </div>
-                            <span class="text-muted">$99.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Membership</h6>
-                            </div>
-                            <span class="text-success">−$5.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
-                            </div>
-                            <span class="text-success">−$0.00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="ShippedItem my-0">Standard Delivery</h6>
-                                <small class="ShippedItem">Receive by 29-31 Dec</small>
-                            </div>
-                            <span class="text-muted">$5.60</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$302.60</strong>
-                        </li>
-                    </ul>
-
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Promo code" name="PromoCode">
-                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                                </tbody>
+                            </table>
                         </div>
-                    </form>
-                </div>
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="firstName" class="form-label">First name</label>
-                                <input type="text" name="firstname" class="form-control" id="firstName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="lastName" class="form-label">Last name</label>
-                                <input type="text" name="lastname" class="form-control" id="lastName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="username" class="form-label">Username</label>
-                                <div class="input-group has-validation">
-                                    <span class="input-group-text">@</span>
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
-                                    <div class="invalid-feedback">
-                                        Your username is required.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" name="address1" class="form-control" id="address" placeholder="No Unit or block" required>
-                                <div class="invalid-feedback">
-                                    Please enter your shipping address.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                <input type="text" name="address2" class="form-control" id="address2" placeholder="Apartment or suite">
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="State" class="form-label">State</label>
-                                <select name="state" class="form-select" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option value="Johor">Johor</option>
-                                    <option value="Kedah">Kedah</option>
-                                    <option value="Kelantan">Kelantan</option>
-                                    <option value="Melaka">Melaka</option>
-                                    <option value="Negeri Sembilan">Negeri Sembilan</option>
-                                    <option value="Pahang">Pahang</option>
-                                    <option value="Penang">Penang</option>
-                                    <option value="Perak">Perak</option>
-                                    <option value="Perlis">Perlis</option>
-                                    <option value="Sabah">Sabah</option>
-                                    <option value="Sarawak">Sarawak</option>
-                                    <option value="Selangor">Selangor</option>
-                                    <option value="Terengganu">Terengganu</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid State.
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="city" class="form-label">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    City required.
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label for="zip" class="form-label">Zip</label>
-                                    <input type="text" name="zipcode" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Zip code required.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-4">
-
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="same-address">
-                                <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input type="checkbox" name="remember-me" class="form-check-input" id="save-info">
-                                <label class="form-check-label" for="save-info">Save this information for next time</label>
-                            </div>
-
-                            <hr class="my-4">
-
-                            <h4 class="mb-3">Payment</h4>
-
-                            <div class="my-3">
-                                <div class="form-check">
-                                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                                    <label class="form-check-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-                                    <label class="form-check-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-                                    <label class="form-check-label" for="paypal">FPX</label>
-                                </div>
-                            </div>
-
-                            <div class="row gy-3">
-                                <div class="col-md-6">
-                                    <label for="cc-name" class="form-label">Name on card</label>
-                                    <input type="text" name="creditcard-name" class="form-control" id="cc-name" placeholder="" required>
-                                    <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback">
-                                        Name on card is required
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="cc-number" class="form-label">Credit card number</label>
-                                    <input type="text" name="creditcard-no" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Credit card number is required
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label for="cc-expiration" class="form-label">Expiration</label>
-                                    <input type="text" name="creditcard-expired" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Expiration date required
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label for="cc-cvv" class="form-label">CVV</label>
-                                    <input type="text" name="creditcard-cvv" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Security code required
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-4">
-
-                            <input class="w-100 btn btn-primary btn-lg" type="submit" value="Continue to checkout"></input>
-                    </form>
                     </div>
                 </div>
-        </main>
-
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">&copy; 2017–2022 Company Name</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-        </footer>
+            </div>
+            <div class="col-lg-4 payment-summary">
+                <p class="fw-bold pt-lg-0 pt-4 pb-2">
+                    <h4 class="mb-3">Payment Summary</h4>
+                </p>
+                <div class="card px-md-3 px-2 pt-4">
+                    <div class="unregistered mb-4"> <span class="py-1">Billing Details</span> </div>
+                    <div th:object="${trainee}">
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Name: </small>
+                            <p class="" th:text="*{firstName} + ' ' + *{lastName}"></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Phone: </small>
+                            <p class="" th:text="*{phone}"></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Email: </small>
+                            <p class="" th:text="*{email}"></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Address: </small>
+                            <p class="" th:text="*{address}+ ', ' + *{zip}+ ' ' + *{city}+ ', ' + *{state}"></p>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="d-flex flex-column b-bottom">
+                        <div class="d-flex justify-content-between py-3"> <small class="text-muted">Order Summary</small>
+                            <p>RM <span th:text="${subtotal}"></span></p>
+                        </div>
+                        <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Shipping Fee</small>
+                            <p>RM 10</p>
+                        </div>
+                        <div class="d-flex justify-content-between"> <small class="text-muted">Total Amount</small>
+                            <p>RM <span th:text="${total}"></span></p>
+                        </div>
+                    </div>
+                    <div class="sale my-3">
+                        <span class="text-secondary" th:text="${#strings.concat(currentDate, ' ', currentDateTime)}"></span>
+                    </div>
+                </div>
+            </div>
         </div>
+        <hr class="my-4">
+
+        <h4 class="mb-3">Payment Method</h4>
+        <form class="form-check needs-validation" th:action="@{/checkout}" method="post" novalidate th:object="${trainee}">
+            <div class="my-3">
+                <div class="form-check">
+                    <input id="credit" name="paymentMethod" value="Credit card" type="radio" class="form-check-input" checked required>
+                    <label class="form-check-label" for="credit">Credit card</label>
+                </div>
+                <div class="form-check">
+                    <input id="debit" name="paymentMethod" value="Debit card" type="radio" class="form-check-input" required>
+                    <label class="form-check-label" for="debit">Debit card</label>
+                </div>
+                <div class="form-check">
+                    <input id="paypal" name="paymentMethod" value="Paypal" type="radio" class="form-check-input" required>
+                    <label class="form-check-label" for="paypal">PayPal</label>
+                </div>
+            </div>
+
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Name on card</label>
+                    <input type="text" name="creditcard-name" class="form-control" id="cc-name" placeholder="" required>
+                    <small class="text-muted">Full name as displayed on card</small>
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Credit card number</label>
+                    <input type="text" name="creditcard-no" class="form-control" id="cc-number" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Credit card number is required
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="cc-expiration" class="form-label">Expiration</label>
+                    <input type="text" name="creditcard-expired" class="form-control" id="cc-expiration" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Expiration date required
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="cc-cvv" class="form-label">CVV</label>
+                    <input type="text" name="creditcard-cvv" class="form-control" id="cc-cvv" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Security code required
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <input type="hidden" name="total" th:value="${total}">
+            <input class="w-100 btn btn-primary btn-lg" type="submit" value="Continue to payment"></input>
+        </form>
+        <div></div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small ">
+        <p class="mb-1 ">&copy; 2017–2022 Company Name</p>
+        <ul class="list-inline ">
+            <li class="list-inline-item "><a href="# ">Privacy</a></li>
+            <li class="list-inline-item "><a href="# ">Terms</a></li>
+            <li class="list-inline-item "><a href="# ">Support</a></li>
+        </ul>
+    </footer>
+    </div>
 </body>
 
 </html>

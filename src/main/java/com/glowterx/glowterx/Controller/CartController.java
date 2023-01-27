@@ -28,17 +28,32 @@ public class CartController {
     @Autowired
     private ProductDAO productDAO;
 
-    @GetMapping("/TraineeaddCart")
-    public String addCart(
-     @RequestParam("productId") int product_id, Model model) {
+    @GetMapping("/TraineeListCart")
+    public String listCart(Model model) {
         Trainee trainee = traineeDAO.getInfoTrainee();
-        Cart cart = new Cart(1,trainee.getId(), product_id);
-        cartDAO.addCart(cart);
-
-        List <Cart> cartAll = cartDAO.getAllCart();
+        List<Cart> cartAll = cartDAO.getAllCartTrainee(trainee.getId());
         model.addAttribute("cart", cartAll);
 
-        List <Product> productCart = new ArrayList<Product>();
+        List<Product> productCart = new ArrayList<Product>();
+        for (Cart c : cartAll) {
+            productCart.add(productDAO.getProduct(c.getProduct_id()));
+        }
+        model.addAttribute("product", productCart);
+
+        return "/Trainee/ListCart";
+    }
+
+    @GetMapping("/TraineeaddCart")
+    public String addCart(
+            @RequestParam("productId") int product_id, Model model) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        Cart cart = new Cart(1, trainee.getId(), product_id);
+        cartDAO.addCart(cart);
+
+        List<Cart> cartAll = cartDAO.getAllCartTrainee(trainee.getId());
+        model.addAttribute("cart", cartAll);
+
+        List<Product> productCart = new ArrayList<Product>();
         for (Cart c : cartAll) {
             productCart.add(productDAO.getProduct(c.getProduct_id()));
         }
@@ -50,18 +65,21 @@ public class CartController {
 
     @GetMapping("/deleteCart")
     public String deleteCart(@RequestParam("cartId") int cart_id, Model model) {
-        cartDAO.deleteCart(cart_id);
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        cartDAO.deleteCart(cart_id, trainee.getId());
 
-        List <Cart> cartAll = cartDAO.getAllCart();
+        List<Cart> cartAll = cartDAO.getAllCartTrainee(trainee.getId());
         model.addAttribute("cart", cartAll);
 
-        List<Product> productAll = productDAO.getAllProduct();
-        model.addAttribute("product", productAll);
+        List<Product> productCart = new ArrayList<Product>();
+        for (Cart c : cartAll) {
+            productCart.add(productDAO.getProduct(c.getProduct_id()));
+        }
+        model.addAttribute("product", productCart);
 
         model.addAttribute("message", "Cart deleted successfully!");
 
         return "Trainee/ListCart";
     }
 
-    
 }
