@@ -83,6 +83,7 @@
                         <div class="row mt-4">
                             <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" placeholder="First name" th:field="*{firstName}" name="firstname"></div>
                             <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" placeholder="Last name" th:field="*{lastName}" name="lastname"></div>
+                            <input type="hidden" th:field="*{MembershipStatus}" />
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Enter Username" th:field="*{TraineeUsername}" name="username"></div>

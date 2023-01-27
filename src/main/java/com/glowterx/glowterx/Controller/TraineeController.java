@@ -167,8 +167,8 @@ public class TraineeController {
             membership.setPerson_id(trainee.getId());
             membership.setstart_date(d);
             membership.setmembership_category(Category);
-            trainee.setMembershipStatus("PAID");
-            membershipDAO.createMembership(membership,trainee);
+            trainee.setMembershipStatus(Category);
+            membershipDAO.createMembership(membership, trainee);
             model.addAttribute("trainee", trainee);
             List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
             List<Payment> payments = new ArrayList<Payment>();
@@ -195,7 +195,7 @@ public class TraineeController {
         model.addAttribute("trainee", trainee);
         List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
         List<Payment> payments = new ArrayList<Payment>();
-       
+
         for (Membership m : members) {
             payments.add(paymentDAO.getPaymentbyID(m.getPayment_id()));
         }
