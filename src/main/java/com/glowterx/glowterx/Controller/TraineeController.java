@@ -2,7 +2,9 @@ package com.glowterx.glowterx.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,8 @@ import com.glowterx.glowterx.Model.Payment;
 import com.glowterx.glowterx.Model.Trainee;
 import com.glowterx.glowterx.Model.Membership;
 import com.glowterx.glowterx.DOA.MembershipDAO;
+import com.glowterx.glowterx.DOA.PaymentDAO;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -34,8 +38,12 @@ public class TraineeController {
 
     @Autowired
     private TraineeDAO traineeDAO;
+
     @Autowired
-    private TraineeDAO MembershipDAO;
+    private MembershipDAO membershipDAO;
+
+    @Autowired
+    private PaymentDAO paymentDAO;
 
     @PostMapping("/registerTrainee")
     public String registerTrainee(@RequestParam("firstname") String firstname,
@@ -141,11 +149,11 @@ public class TraineeController {
             Payment payment = new Payment();
             Membership membership = new Membership();
             double amount = 0;
-            if (Category.equals("Free")) {
+            if (Category.equals("Free Trial")) {
                 amount = 0;
-            } else if (Category.equals("Customize")) {
+            } else if (Category.equals("Customize Plan")) {
                 amount = 155.00;
-            } else if (Category.equals("Unlimited")) {
+            } else if (Category.equals("Unlimited Access")) {
                 amount = 250.00;
             }
 
@@ -154,14 +162,23 @@ public class TraineeController {
             payment.setPerson_id(trainee.getId());
             payment.setPayment_status("PAID");
             payment.setPayment_date(d);
+            int payment_id = paymentDAO.createPayment(payment);
+            membership.setPayment_id(payment_id);
             membership.setPerson_id(trainee.getId());
-            membership.setstartdate(d);
-            membership.setCategory(Category);
-            // session.setAttribute("date", d);
-            System.out.println(d);
-            traineeDAO.createMembership(trainee, payment, membership);
-            // Payment p = traineeDAO.getPaymentInfo();
-            // traineeDAO.updatePaymentID(p,trainee);
+            membership.setstart_date(d);
+            membership.setmembership_category(Category);
+            trainee.setMembershipStatus("PAID");
+            membershipDAO.createMembership(membership,trainee);
+            model.addAttribute("trainee", trainee);
+            List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
+            List<Payment> payments = new ArrayList<Payment>();
+            for (Membership m : members) {
+                payments.add(paymentDAO.getPaymentbyID(m.getPayment_id()));
+            }
+            model.addAttribute("members", members);
+            model.addAttribute("payments", payments);
+            return "Trainee/Subscribe";
+
         }
 
         return "Trainee/Subscribe";
@@ -173,7 +190,18 @@ public class TraineeController {
     }
 
     @GetMapping("/Subscribe")
-    public String subscribe() {
+    public String subscribe(Model model, HttpSession session) {
+        Trainee trainee = traineeDAO.getInfoTrainee();
+        model.addAttribute("trainee", trainee);
+        List<Membership> members = membershipDAO.getAllMembershipbyID(trainee.getId());
+        List<Payment> payments = new ArrayList<Payment>();
+       
+        for (Membership m : members) {
+            payments.add(paymentDAO.getPaymentbyID(m.getPayment_id()));
+        }
+        model.addAttribute("members", members);
+        model.addAttribute("payments", payments);
+
         return "Trainee/Subscribe";
     }
 
