@@ -4,6 +4,7 @@
         <title>List Training Class in Instructor Page</title>
         <link rel="stylesheet" href="/css/HeaderNav.css" />
         <link rel="stylesheet" href="/css/ManageTrainingClass.css" />
+        <link rel="stylesheet" href="/css/Report.css" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSS only -->
@@ -37,10 +38,16 @@
         </header>
     </div>
     <!-- Navigation Bar -->
-
+    
 
         <div class="row">
             <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-0">
+                    <div class="title">
+                        <div class="text-center">Enrolled Training Class</div>
+                    </div>
+                </div>
+    
                 <br><br>
                 <div class="container">
                     <div class="row">
@@ -57,29 +64,25 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">Training Name</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
-                                <th scope="col">Instructor Name</th>
-                                <th scope="col">Training Session</th>
+                                <th scope="col">Number of Session</th>
                                 <th scope="col">Training Duration</th>
-                                <th scope="col"> </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="train, iterTr : ${training}">
+                                <td th:text="${iterTr.count}"></td>
                                 <td th:text="${train.training_name}"></td>
                                 <td th:text="${train.start_date}"></td>
                                 <td th:text="${train.end_date}"></td>
-                                <td th:each="instr, iterIn : ${instructor}" th:if="${iterTr.index} == ${iterIn.index}">
-                                    <span th:text="${instr.firstName}+ ' ' + ${instr.lastName}"></span>
-                                </td>
-                                <td th:text="${train.training_session}"></td>
-                                <td th:text="${train.training_duration}"></td>
                                 
-                                <!-- Enroll-->
-                                <td><a class="btn btn-outline-danger" th:href="@{/enrollTraining(id=${train.id})}" role="button" onclick="return confirm('Are you sure you want to enroll this training class?')">Enroll</a></td>
-    
+                                <td th:text="${train.training_session}"></td>
+                                <td th:text="${train.training_duration} + ' minutes'"></td>
+                                
+                                
                             </tr>
     
                         </tbody>
@@ -88,7 +91,8 @@
                 </div>
             </div>
         </div>
-
+        
+    
        
     </body>
 </html>

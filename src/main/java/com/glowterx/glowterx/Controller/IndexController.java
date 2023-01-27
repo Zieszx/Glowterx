@@ -202,12 +202,9 @@ public class IndexController {
 
     @GetMapping("/listInstructorTC")
     public String instructorEnrollTC(Model model) {
-        List<Training> training = adminDAO.getAllTraining();
-        List<Instructor> instructor = new ArrayList<Instructor>();
-        for (Training t : training) {
-            instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
-        }
-        model.addAttribute("instructor", instructor);
+        Instructor instructor2 = instructorDAO.getInfoinstructor();
+        model.addAttribute("instructor", instructor2);
+        List<Training> training = trainingDAO.getInstructorTraining(instructor2);
         model.addAttribute("training", training);
         return "Instructor/InstructListTC";
     }

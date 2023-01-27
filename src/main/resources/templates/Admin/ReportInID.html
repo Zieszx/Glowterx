@@ -106,25 +106,25 @@
                    
                     <div class="container table-cont">
                         <h4 class="text-right">Training Classes Information</h4>
-                        <table class="table">
+                        <table class="table table-striped table-hover table-bordered my-5">
                             <thead>
-                                <tr>
-                                    <th scope="col">Class Name</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">Number of Session</th>
-                                    <th scope="col">Number of Trainees</th>
+                                <tr class="">
+                                    <th scope="col" class="th-lg">#</th>
+                                    <th scope="col" class="th-lg">Training Name</th>
+                                    <th scope="col" class="th-lg">Schedule</th>
+                                    <th scope="col" class="th-lg">Number of Session</th>
+                                    <th scope="col" class="th-lg">Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Advanced Flow Yoga</td>
-                                    <td>2023/01/01</td>
-                                    <td>2023/02/01</td>
-                                    <td>60 minutes</td>
-                                    <td>10</td>
-                                    <td>15</td>
+                                <tr th:each="train, iterTr : ${training}">
+                                    <th scope="row" th:text="${iterTr.count}"></th>
+                                    <td th:text="${train.training_name}"></td>
+                                    <td th:text="${train.start_date} + ' to ' + ${train.end_date}"></td>
+                                    <td th:text="${train.training_session}"></td>
+                                    <td th:text="${train.training_duration} + ' minutes'"></td>
+                                    
+                                    
                                 </tr>
                             </tbody>
                         </table>

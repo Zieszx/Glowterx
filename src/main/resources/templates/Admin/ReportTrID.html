@@ -119,14 +119,13 @@
                                     <th scope="col" class="th-lg">Training Name</th>
                                     <th scope="col" class="th-lg">Instructor</th>
                                     <th scope="col" class="th-lg">Schedule</th>
-                                    <th scope="col" class="th-lg">Session</th>
-                                    <th scope="col" class="th-lg">Check-Ins</th>
+                                    <th scope="col" class="th-lg">Attendance</th>
                                     <th scope="col" class="th-lg">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 <tr th:each="attend, iterTr : ${attendance}">
-                                    <th scope="row" th:text="${attend.id}"></th>
+                                    <th scope="row" th:text="${iterTr.count}"></th>
                                     <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
                                         <span th:text="${train.training_name}"></span>
                                     </td>
@@ -135,15 +134,15 @@
                                         <br><small class="text-muted">Instructor</small>
                                     </td>
                                     <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
-                                        <span th:text="${#dates.format(train.start_date, 'MM/dd/yyyy')}"></span> to <span th:text="${#dates.format(train.end_date, 'MM/dd/yyyy')}"></span>
+                                        <span th:text="${#dates.format(train.start_date, 'MM/dd/yyyy')}"></span> to <br><span th:text="${#dates.format(train.end_date, 'MM/dd/yyyy')}"></span>
                                         <br><small class="text-muted" th:text="${train.training_duration}"></small>
                                         <small class="text-muted"> Minutes</small>
                                     </td>
                                     <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
-                                        <span th:text="${train.training_session}"></span>
-                                        <br><small class="text-muted">Sessions</small>
+                                        <span th:text="${attend.attendance_checkins} + ' '"></span><small class="text-muted">Check-Ins</small>
+                                         / <br>
+                                        <span th:text="${train.training_session} + ' '"></span> <small class="text-muted">Sessions</small>
                                     </td>
-                                    <td><span th:text="${attend.attendance_checkins}"></span><br><small class="text-muted">Check-Ins</small></td>
                                     <td><span th:text="${attend.attendance_status}"></span><br><small class="text-muted">Status</small></td>
                                     
                                 </tr>
