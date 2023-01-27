@@ -1,9 +1,12 @@
 package com.glowterx.glowterx.Controller;
 
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -257,4 +260,19 @@ public class IndexController {
         model.addAttribute("training", training);
         return "Trainee/AttendanceUser";
     }
+
+    @GetMapping("/checkout")
+    public String checkout(Model model, HttpSession session) {
+        return "Trainee/CustomerCheckout";
+    }
+
+    @GetMapping("/InstructorEditProfile")
+    public String EditProfileInstructor(Model model, HttpSession session) {
+        Instructor instructor = instructorDAO.getInfoinstructor();
+        model.addAttribute("instructor", instructor);
+        System.out.println(instructor.getInstructorUsername());
+        return "Instructor/EditProfileDetails";
+    }
+
+   
 }
