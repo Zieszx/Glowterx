@@ -4,24 +4,23 @@ import java.util.Date;
 
 public class Membership {
     private int id;
-    private String Category;
-    private Date startdate;
-    private Date enddate;
+    private String membership_category;
+    private Date start_date;
+    private Date end_date;
     private double amount;
     private int person_id;
     private int payment_id;
-    public Membership()
-    {
-    
+
+    public Membership() {
+
     }
 
-    public Membership ( int id, String Category, Date startdate , Date enddate, double amount)
-    {
-    this.id=id;
-    this.Category=Category;
-    this.startdate=startdate;
-    this.enddate=enddate;
-    this.amount=amount;
+    public Membership(int id, String membership_category, Date start_date, Date end_date, double amount) {
+        this.id = id;
+        this.membership_category = membership_category;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.amount = amount;
     }
 
     public int getPerson_id() {
@@ -31,52 +30,52 @@ public class Membership {
     public void setPerson_id(int person_id) {
         this.person_id = person_id;
     }
+
     public int getPayment_id() {
         return payment_id;
     }
 
-    public void setPayment_id(int person_id) {
-        this.person_id = person_id;
+    public void setPayment_id(int payment_id) {
+        this.payment_id = payment_id;
     }
 
-    public int getID()
-    {
+    public int getID() {
         return id;
     }
-    public void setID( int id)
-    {
-       this.id=id;
+
+    public void setID(int id) {
+        this.id = id;
     }
-    public String getmembership_category()
-    {
-        return Category;
+
+    public String getmembership_category() {
+        return membership_category;
     }
-    public void setCategory( String Category)
-    {
-       this.Category=Category;
+
+    public void setmembership_category(String membership_category) {
+        this.membership_category = membership_category;
     }
-    public Date getstart_date()
-    {
-        return startdate;
+
+    public Date getstart_date() {
+        return start_date;
     }
-    public void setstartdate(Date startdate)
-    {
-       this.startdate=startdate;
+
+    public void setstart_date(Date start_date) {
+        this.start_date = start_date;
     }
-    public Date getend_date()
-    {
-        return enddate;
+
+    public Date getend_date() {
+        return end_date;
     }
-    public void setenddate(Date enddate)
-    {
-       this.enddate=enddate;
+
+    public void setend_date(Date end_date) {
+        this.end_date = end_date;
     }
-    public double getAmount()
-    {
+
+    public double getAmount() {
         return amount;
     }
-    public void setAmount( double amount)
-    {
-       this.amount=amount;
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

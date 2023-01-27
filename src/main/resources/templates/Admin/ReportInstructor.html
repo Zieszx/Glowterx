@@ -84,12 +84,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>nurafikah</td>
-                                    <td>Nur Afikah</td>
-                                    <td>afikah@gmail.com</td>
-                                    <td>0123456788</td>
+                                <tr th:each="instructor : ${instructordata}">
+                                    <td th:text="${instructor.InstructorUsername}"></td>
+                                    <td th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></td>
+                                    <td th:text="${instructor.email}"></td>
+                                    <td th:text="${instructor.phone}"></td>
                                     <td><a class="btn btn-light" href="gReportInstructor" role="button" target="_blank">Generate Report</a></td>
                                 </tr>
 
