@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.glowterx.glowterx.Model.Attendance;
+import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
 import com.glowterx.glowterx.Model.Training;
 

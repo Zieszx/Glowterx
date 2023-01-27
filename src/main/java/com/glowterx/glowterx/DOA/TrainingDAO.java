@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Training;
 
 import jakarta.servlet.http.HttpSession;
@@ -107,5 +108,18 @@ public class TrainingDAO {
           }
          
 
+    }
+
+    public List<Training> getTrainingList() {
+        String sql = "SELECT * FROM training";
+        List<Training> trainingList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Training.class));
+        return trainingList;
+    }
+
+    public List<Training> getInstructorTraining(Instructor instructor) {
+        String sql = "SELECT * FROM training WHERE instructor_id = ?";
+        List<Training> trainingList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Training.class),
+                instructor.getId());
+        return trainingList;
     }
 }
