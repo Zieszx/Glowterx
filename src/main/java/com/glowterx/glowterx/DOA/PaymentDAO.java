@@ -2,6 +2,7 @@ package com.glowterx.glowterx.DOA;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,6 +62,27 @@ public class PaymentDAO {
         }
         return id;
 
+    }
+
+    public Payment createPaymentOrder(int id, double total, Date date, String payment_category) {
+        String sql = "INSERT INTO payment (amount, payment_category, person_id, payment_status, payment_date) VALUES (?, ?, ?, ?, ?)";
+
+        KeyHolder holder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setDouble(1, total);
+                ps.setString(2, payment_category);
+                ps.setInt(3, id);
+                ps.setString(4, "PAID");
+                ps.setDate(5, date);
+                return ps;
+            }
+        }, holder);
+        int newPaymentId = holder.getKey().intValue();
+        return jdbcTemplate.queryForObject("SELECT * FROM payment WHERE id = ?",
+                new BeanPropertyRowMapper<Payment>(Payment.class), newPaymentId);
     }
 
     public Payment getPaymentbyID(int id) {

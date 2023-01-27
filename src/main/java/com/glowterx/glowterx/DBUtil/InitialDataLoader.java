@@ -67,12 +67,12 @@ public class InitialDataLoader {
                     "CREATE TABLE cart (id INT(11) AUTO_INCREMENT PRIMARY KEY, quantity INT(11), person_id INT(11), product_id INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (product_id) REFERENCES product(id))");
             System.out.println("Table 'cart' created.");
         }
-        if (tables.contains("order")) {
-            System.out.println("Table 'order' already exists.");
+        if (tables.contains("orderuser")) {
+            System.out.println("Table 'orderuser' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE `order` (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (payment_id) REFERENCES payment(id))");
-            System.out.println("Table 'order' created.");
+                    "CREATE TABLE orderuser (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (payment_id) REFERENCES payment(id))");
+            System.out.println("Table 'orderUser' created.");
         }
 
         if (tables.contains("training")) {
@@ -111,6 +111,6 @@ public class InitialDataLoader {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         createTables();
-        //loadInitialData(); // First time run should uncomment this line
+        // loadInitialData(); // First time run should uncomment this line
     }
 }

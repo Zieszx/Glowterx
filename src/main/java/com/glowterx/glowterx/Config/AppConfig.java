@@ -8,6 +8,7 @@ import com.glowterx.glowterx.DOA.AttendanceDAO;
 import com.glowterx.glowterx.DOA.CartDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.MembershipDAO;
+import com.glowterx.glowterx.DOA.OrderDAO;
 import com.glowterx.glowterx.DOA.PaymentDAO;
 import com.glowterx.glowterx.DOA.ProductDAO;
 import com.glowterx.glowterx.DOA.ReportDAO;
@@ -51,13 +52,20 @@ public class AppConfig {
     public AttendanceDAO attendanceDOA() {
         return new AttendanceDAO();
     }
+
     @Bean
     public MembershipDAO membershipDOA() {
         return new MembershipDAO();
     }
+
     @Bean
     public PaymentDAO paymentDOA() {
         return new PaymentDAO();
+    }
+
+    @Bean
+    public OrderDAO orderDAO() {
+        return new OrderDAO();
     }
 
     @Bean

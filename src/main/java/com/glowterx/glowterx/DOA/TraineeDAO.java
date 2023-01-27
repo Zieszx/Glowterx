@@ -148,7 +148,7 @@ public class TraineeDAO {
     }
 
     public void updateProfile(Trainee trainee) {
-        String sql = "UPDATE trainee SET firstName = ?, lastName = ?, gender = ?, TraineeUsername = ?, TraineePass = ?, phone = ?, address = ?, email = ?, state = ?, city = ? WHERE TraineeUsername = ?";
+        String sql = "UPDATE trainee SET firstName = ?, lastName = ?, gender = ?, TraineeUsername = ?, TraineePass = ?, phone = ?, address = ?, email = ?, state = ?, city = ?, zip = ? WHERE TraineeUsername = ?";
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, trainee.getFirstName());
@@ -161,14 +161,13 @@ public class TraineeDAO {
             statement.setString(8, trainee.getEmail());
             statement.setString(9, trainee.getState());
             statement.setString(10, trainee.getCity());
-            statement.setString(11, trainee.getTraineeUsername());
+            statement.setString(11, trainee.getZip());
+            statement.setString(12, trainee.getTraineeUsername());
 
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-   
 
 }
