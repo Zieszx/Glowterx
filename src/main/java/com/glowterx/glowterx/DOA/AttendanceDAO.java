@@ -37,6 +37,17 @@ public class AttendanceDAO {
         jdbcTemplate.update(sql, trainee.getId(), training.getId(), status, checkins);
     }
 
+    public boolean enrollCheck(Trainee trainee, Training training) {
+        String sql = "SELECT * FROM attendance WHERE person_id = ? AND training_id = ?";
+        List<Attendance> attendance = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Attendance>(Attendance.class),
+                trainee.getId(), training.getId());
+        if (attendance.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<Attendance> getTraineeAttendance(Trainee trainee) {
         String sql = "SELECT * FROM attendance WHERE person_id = ?";
         List<Attendance> attendance = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Attendance>(Attendance.class),
