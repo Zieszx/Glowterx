@@ -100,7 +100,7 @@
                         <td th:each="payment, iterIn : ${payments}" th:if="${iterTr.index} == ${iterIn.index}">
                             <span th:text="${payment.amount}">RM</span>
                         </td>
-                        <td th:text="${m.getstart_date()}"></td>
+                        <td th:text="${#dates.format(m.getstart_date(), 'dd/MM/yyyy')}"></td>
                         <td th:each="payment, iterIn : ${payments}" th:if="${iterTr.index} == ${iterIn.index}">
                             <span th:text="${payment.payment_status}"></span>
                         </td>
