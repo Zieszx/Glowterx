@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Attendance;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Membership;
 import com.glowterx.glowterx.Model.Trainee;
@@ -210,39 +211,37 @@ public class AdminDAO {
     }
 
     public void deleteInstructor(String username, int id) {
-        // String sql = "DELETE FROM training WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        String sql = "DELETE FROM instructor WHERE InstructorUsername = ?";
+        String sql = "DELETE FROM training WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM instructor WHERE InstructorUsername = ?";
         jdbcTemplate.update(sql, username);
     }
 
     // if have association with other table, need to delete the association first
     public void deleteTrainee(String username, int id) {
-        // String sql = "SELECT * FROM membership WHERE person_id = ?";
-        // List<Membership> membership = jdbcTemplate.query(sql, new Object[] { username
-        // },
-        // new BeanPropertyRowMapper<>(Membership.class));
-        // if (!membership.isEmpty()) {
-        // sql = "DELETE FROM membership WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        // }
-
-        // sql = "DELETE FROM payment WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        // sql = "DELETE FROM cart WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        // sql = "DELETE FROM order WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        // sql = "DELETE FROM attendance WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
-        String sql = "DELETE FROM trainee WHERE TraineeUsername = ?";
+        String sql = "DELETE FROM attendance WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM cart WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM payment WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM membership WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM orderuser WHERE person_id = ?";
+        jdbcTemplate.update(sql, id);
+        sql = "DELETE FROM trainee WHERE TraineeUsername = ?";
         jdbcTemplate.update(sql, username);
     }
 
-    public void deleteTraining(int id) {
-        // String sql = "DELETE FROM training WHERE person_id = ?";
-        // jdbcTemplate.update(sql, id);
+    public void deleteTrainingNAtendance(int training_id, int attendance_id) {
+        String sql = "DELETE FROM attendance WHERE id = ?";
+        jdbcTemplate.update(sql, attendance_id);
+        sql = "DELETE FROM training WHERE id = ?";
+        jdbcTemplate.update(sql, training_id);
+    }
+
+    public void deleteTraining(int training_id) {
         String sql = "DELETE FROM training WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, training_id);
     }
 }

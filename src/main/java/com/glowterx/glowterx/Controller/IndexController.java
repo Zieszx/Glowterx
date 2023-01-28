@@ -204,8 +204,18 @@ public class IndexController {
         boolean check = true;
         Trainee trainee = traineeDAO.getInfoTrainee();
         List<Attendance> tempAttendance = attendanceDAO.getTraineeAttendance(trainee);
-        if (trainee.getMembershipStatus().equals("Free Trial")) {
-            if (tempAttendance.size() == 1) {
+        if (trainee.getMembershipStatus().equals("NONE")) {
+            model.addAttribute("message", "You need to Subscribe to Enroll!");
+            List<Training> trainings = adminDAO.getAllTraining();
+            List<Instructor> instructor = new ArrayList<Instructor>();
+            for (Training t : trainings) {
+                instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+            }
+            model.addAttribute("instructor", instructor);
+            model.addAttribute("training", trainings);
+            return "/Trainee/TraineeListTC";
+        } else if (trainee.getMembershipStatus().equals("Free Trial")) {
+            if (tempAttendance.size() >= 1) {
                 model.addAttribute("message", "You need to Subscribe to Enroll More!");
                 List<Training> trainings = adminDAO.getAllTraining();
                 List<Instructor> instructor = new ArrayList<Instructor>();
@@ -217,13 +227,15 @@ public class IndexController {
                 return "/Trainee/TraineeListTC";
             }
         } else if (trainee.getMembershipStatus().equals("Customize Plan")) {
-            if (tempAttendance.size() == 2) {
+            if (tempAttendance.size() >= 2) {
                 model.addAttribute("message", "You need to Subscribe to Unlimited Access to Enroll More!");
                 List<Training> trainings = adminDAO.getAllTraining();
                 List<Instructor> instructor = new ArrayList<Instructor>();
                 for (Training t : trainings) {
                     instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
                 }
+                check = false;
+                model.addAttribute("check", check);
                 model.addAttribute("instructor", instructor);
                 model.addAttribute("training", trainings);
                 return "/Trainee/TraineeListTC";
@@ -236,7 +248,6 @@ public class IndexController {
                     model.addAttribute("message", "You are already enrolled in all training classes.");
                     check = false;
                     model.addAttribute("check", check);
-                    break;
                 } else {
                     attendanceDAO.enrollTraining(trainee, t);
                 }

@@ -48,7 +48,7 @@ public class InitialDataLoader {
             System.out.println("Table 'payment' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE payment (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), amount DECIMAL(10,2), payment_date DATE, payment_status VARCHAR(255), payment_category VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id))");
+                    "CREATE TABLE payment (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), amount DECIMAL(10,2), payment_date DATE, payment_status VARCHAR(255), payment_category VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id) ON DELETE CASCADE)");
             System.out.println("Table 'payment' created.");
         }
 
@@ -64,14 +64,14 @@ public class InitialDataLoader {
             System.out.println("Table 'cart' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE cart (id INT(11) AUTO_INCREMENT PRIMARY KEY, quantity INT(11), person_id INT(11), product_id INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (product_id) REFERENCES product(id))");
+                    "CREATE TABLE cart (id INT(11) AUTO_INCREMENT PRIMARY KEY, quantity INT(11), person_id INT(11), product_id INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE)");
             System.out.println("Table 'cart' created.");
         }
         if (tables.contains("orderuser")) {
             System.out.println("Table 'orderuser' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE orderuser (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), product_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id), FOREIGN KEY (product_id) REFERENCES product(id),FOREIGN KEY (payment_id) REFERENCES payment(id))");
+                    "CREATE TABLE orderuser (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), product_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id) ON DELETE CASCADE, FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,FOREIGN KEY (payment_id) REFERENCES payment(id) ON DELETE CASCADE)");
             System.out.println("Table 'orderUser' created.");
         }
 
@@ -79,7 +79,7 @@ public class InitialDataLoader {
             System.out.println("Table 'training' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE training (id INT(11) AUTO_INCREMENT PRIMARY KEY, training_name VARCHAR(255), start_date DATE, end_date DATE, instructor_id INT(11), training_session INT(11), training_duration INT(11), FOREIGN KEY (instructor_id) REFERENCES instructor(id))");
+                    "CREATE TABLE training (id INT(11) AUTO_INCREMENT PRIMARY KEY, training_name VARCHAR(255), start_date DATE, end_date DATE, instructor_id INT(11), training_session INT(11), training_duration INT(11), FOREIGN KEY (instructor_id) REFERENCES instructor(id) ON DELETE CASCADE)");
             System.out.println("Table 'training' created.");
         }
 
@@ -87,14 +87,14 @@ public class InitialDataLoader {
             System.out.println("Table 'attendance' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE attendance (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), training_id INT(11), attendance_status VARCHAR(255), attendance_checkins INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (training_id) REFERENCES training(id))");
+                    "CREATE TABLE attendance (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), training_id INT(11), attendance_status VARCHAR(255), attendance_checkins INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id) ON DELETE CASCADE,FOREIGN KEY (training_id) REFERENCES training(id) ON DELETE CASCADE)");
             System.out.println("Table 'attendance' created.");
         }
         if (tables.contains("membership")) {
             System.out.println("Table 'membership' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE membership (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), start_date DATE, end_date DATE, membership_category VARCHAR(255), payment_id INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id), FOREIGN KEY (payment_id) REFERENCES payment(id))");
+                    "CREATE TABLE membership (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), start_date DATE, end_date DATE, membership_category VARCHAR(255), payment_id INT(11),FOREIGN KEY (person_id) REFERENCES trainee(id) ON DELETE CASCADE, FOREIGN KEY (payment_id) REFERENCES payment(id) ON DELETE CASCADE)");
             System.out.println("Table 'membership' created.");
         }
     }
@@ -111,6 +111,6 @@ public class InitialDataLoader {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         createTables();
-       //loadInitialData(); // First time run should uncomment this line
+        // loadInitialData(); // First time run should uncomment this line
     }
 }

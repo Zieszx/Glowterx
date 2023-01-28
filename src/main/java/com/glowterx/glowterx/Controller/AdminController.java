@@ -23,10 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 
 import com.glowterx.glowterx.DOA.AdminDAO;
+import com.glowterx.glowterx.DOA.AttendanceDAO;
 import com.glowterx.glowterx.DOA.InstructorDAO;
 import com.glowterx.glowterx.DOA.TraineeDAO;
 import com.glowterx.glowterx.DOA.TrainingDAO;
 import com.glowterx.glowterx.Model.Admin;
+import com.glowterx.glowterx.Model.Attendance;
 import com.glowterx.glowterx.Model.Instructor;
 import com.glowterx.glowterx.Model.Trainee;
 import com.glowterx.glowterx.Model.Training;
@@ -44,6 +46,8 @@ public class AdminController {
     private InstructorDAO instructorDAO;
     @Autowired
     private TraineeDAO traineeDAO;
+    @Autowired
+    private AttendanceDAO attendanceDAO;
 
     @GetMapping("/adminProfilePicture")
     public ResponseEntity<byte[]> getProfilePicture() {
@@ -155,7 +159,14 @@ public class AdminController {
 
     @GetMapping("/deletetraining")
     public String deleteTraining(@RequestParam("id") int id, Model model) {
-        adminDAO.deleteTraining(id);
+        List<Attendance> attendance = attendanceDAO.getAttendancebyTraining(id);
+        if (attendance.isEmpty()) {
+            adminDAO.deleteTraining(id);
+        } else {
+            for (Attendance a : attendance) {
+                adminDAO.deleteTrainingNAtendance(id, a.getId());
+            }
+        }
         List<Training> training = adminDAO.getAllTraining();
         model.addAttribute("training", training);
         return "Admin/ManageTrainingClass";

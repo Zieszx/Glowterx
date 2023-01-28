@@ -39,10 +39,29 @@ public class AttendanceDAO {
     }
 
     public boolean enrollCheck(Trainee trainee, Training training) {
-        String sql = "SELECT * FROM attendance WHERE person_id = ? AND training_id = ?";
-        List<Attendance> attendance = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Attendance>(Attendance.class),
-                trainee.getId(), training.getId());
-        if (attendance.size() > 0) {
+        Attendance attendance = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM attendance WHERE person_id = ? AND training_id = ?")) {
+
+            statement.setInt(1, trainee.getId());
+            statement.setInt(2, training.getId());
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                attendance = new Attendance();
+                attendance.setId(rs.getInt("id"));
+                attendance.setPerson_id(rs.getInt("person_id"));
+                attendance.setTraining_id(rs.getInt("training_id"));
+                attendance.setAttendance_status(rs.getString("attendance_status"));
+                attendance.setAttendance_checkins(rs.getInt("attendance_checkins"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (attendance != null) {
             return true;
         } else {
             return false;
@@ -60,6 +79,13 @@ public class AttendanceDAO {
         String sql = "SELECT * FROM attendance WHERE id = ?";
         Attendance attendance = jdbcTemplate.queryForObject(sql,
                 new BeanPropertyRowMapper<Attendance>(Attendance.class), attendance_id);
+        return attendance;
+    }
+
+    public List<Attendance> getAttendancebyTraining(int training_id) {
+        String sql = "SELECT * FROM attendance WHERE training_id = ?";
+        List<Attendance> attendance = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Attendance>(Attendance.class),
+                training_id);
         return attendance;
     }
 
