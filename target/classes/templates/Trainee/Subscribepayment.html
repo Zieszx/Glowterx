@@ -196,11 +196,11 @@
             // store the bmival model under the root scope so the 
             // 2nd controller "bmiCtrl2" can watch and evaluate it
             // $rootScope.price = $scope.weight / ($scope.height * $scope.height);
-            if ($scope.Pcategory == "Free") {
+            if ($scope.Pcategory == "Free Trial") {
                 $rootScope.price = 0.00;
-            } else if ($scope.Pcategory == "Customize") {
+            } else if ($scope.Pcategory == "Customize Plan") {
                 $rootScope.price = 155.00;
-            } else if ($scope.Pcategory == "Unlimited") {
+            } else if ($scope.Pcategory == "Unlimited Access") {
                 $rootScope.price = 250.00;
             } else {
                 $rootScope.price = 0.00;
@@ -211,11 +211,11 @@
             // store the bmival model under the root scope so the 
             // 2nd controller "bmiCtrl2" can watch and evaluate it
             // $rootScope.price = $scope.weight / ($scope.height * $scope.height);
-            if ($scope.Pcategory == "Free") {
+            if ($scope.Pcategory == "Free Trial") {
                 $rootScope.category = "Free Trial";
-            } else if ($scope.Pcategory == "Customize") {
-                $rootScope.category = "Customize Your Own Plan";
-            } else if ($scope.Pcategory == "Unlimited") {
+            } else if ($scope.Pcategory == "Customize Plan") {
+                $rootScope.category = "Customize Plan";
+            } else if ($scope.Pcategory == "Unlimited Access") {
                 $rootScope.category = "Unlimited Access";
             } else {
                 $rootScope.category = "Choose Your Plan";
