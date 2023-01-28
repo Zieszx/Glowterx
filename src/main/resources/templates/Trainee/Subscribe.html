@@ -44,7 +44,7 @@
     </div>
 
     <div class="pricing">
-        <div class="pricing-plan" th:if="${trainee.getMembershipStatus()!='PAID'}">
+        <div class="pricing-plan" th:if="${trainee.getMembershipStatus() == null}">
             <h2>Try Us For Free</h2>
             <p><span><b>RM0</b></span> / week</p>
             <ul>
