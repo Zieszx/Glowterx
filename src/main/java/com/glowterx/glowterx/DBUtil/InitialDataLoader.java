@@ -71,7 +71,7 @@ public class InitialDataLoader {
             System.out.println("Table 'orderuser' already exists.");
         } else {
             jdbcTemplate.execute(
-                    "CREATE TABLE orderuser (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id),FOREIGN KEY (payment_id) REFERENCES payment(id))");
+                    "CREATE TABLE orderuser (id INT(11) AUTO_INCREMENT PRIMARY KEY, person_id INT(11), payment_id INT(11), product_id INT(11), order_quantity INT(11), order_date DATE, order_status VARCHAR(255),FOREIGN KEY (person_id) REFERENCES trainee(id), FOREIGN KEY (product_id) REFERENCES product(id),FOREIGN KEY (payment_id) REFERENCES payment(id))");
             System.out.println("Table 'orderUser' created.");
         }
 

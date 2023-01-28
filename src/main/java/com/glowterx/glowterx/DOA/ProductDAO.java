@@ -60,6 +60,11 @@ public class ProductDAO {
         return jdbcTemplate.query("SELECT * FROM product", new BeanPropertyRowMapper<>(Product.class));
     }
 
+    public List<Product> getAllProductbyID(int prod_id) {
+        return jdbcTemplate.query("SELECT * FROM product WHERE id = ?", new BeanPropertyRowMapper<>(Product.class),
+                prod_id);
+    }
+
     public void uploadProductImage(String prod_name, byte[] image) {
         String sql = "UPDATE product SET prod_images = ? WHERE prod_name = ?";
         jdbcTemplate.update(sql, new Object[] { image, prod_name });

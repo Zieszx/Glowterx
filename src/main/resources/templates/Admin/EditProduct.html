@@ -25,12 +25,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
-                <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li class="Checked"><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
+                <li><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -44,27 +43,28 @@
 
     <div class="box">
         <table class="info">
-        <form th:action="@{/uploadProductImage}" method="post" enctype="multipart/form-data">
-        <tr>
-            <td class="table-col-1">Image File</td>
+            <form th:action="@{/uploadProductImage}" method="post" enctype="multipart/form-data">
+                <tr>
+                    <td class="table-col-1">Image File</td>
 
-            <td><div class="text-center">
-                <img th:src="@{/ProductImage(productId=${product.id})}" style="position: center;" /><br>
-                <input type="hidden" name="id" th:field="${product.id}"/>
-                <input type="file" name="imageFile" value="Change Profile Pictures" class="form-control">
-                    <button type="submit" value="Upload Image"  id="submitUpload">Upload Image</button><br>
-                </div>
-                <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
-            </td>
-        </tr>
-        </form>
-        <form th:action="@{/updateProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
-            
+                    <td>
+                        <div class="text-center">
+                            <img th:src="@{/ProductImage(productId=${product.id})}" style="position: center;" /><br>
+                            <input type="hidden" name="id" th:field="${product.id}" />
+                            <input type="file" name="imageFile" value="Change Profile Pictures" class="form-control">
+                            <button type="submit" value="Upload Image" id="submitUpload">Upload Image</button><br>
+                        </div>
+                        <div th:if="${message}" th:text="${message}" class="alert alert-success"></div>
+                    </td>
+                </tr>
+            </form>
+            <form th:action="@{/updateProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+
                 <tr>
                     <td class="table-col-1">Product Id</td>
                     <td><input type="text" class="form-control" name="id" id="id" placeholder="Product Id" th:field="*{id}" readonly></td>
                 </tr>
-                
+
                 <tr>
                     <td class="table-col-1">Product Name</td>
                     <td><input type="text" class="form-control" name="prod_name" id="prod_name" placeholder="Enter Product Name" th:field="*{prod_name}"></td>
@@ -99,11 +99,11 @@
                     </td>
                 </tr>
 
-            </table>
-            <div class="mt-5 text-center">
-                <button class="submitEdit" type="submit" id="submitEdit">Edit Product</button>
-            </div>
-            
+        </table>
+        <div class="mt-5 text-center">
+            <button class="submitEdit" type="submit" id="submitEdit">Edit Product</button>
+        </div>
+
         </form>
     </div>
 </body>

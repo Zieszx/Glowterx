@@ -191,7 +191,7 @@ public class AdminDAO {
     public void addManageUser(String username, String password, String role, String firstname,
             String lastname, String gender, String email, String phone) {
         String sql = "";
-        String membership = "Free";
+        String membership = "Free Trial";
         if (role.equals("admin")) {
             sql = "INSERT INTO admin (adminUsername, adminPass, firstname, lastname, gender, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql, username, password, firstname, lastname, gender, email, phone);

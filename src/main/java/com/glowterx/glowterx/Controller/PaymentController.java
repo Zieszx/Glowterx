@@ -81,19 +81,17 @@ public class PaymentController {
         Product tempProduct = new Product();
         int order_quantity = 0;
         int product_quantity = 0;
-        for (Cart c : cartAll) {
-            tempProduct = productDAO.getProduct(c.getProduct_id());
-            product_quantity = tempProduct.getProd_quantity() - c.getQuantity();
-            productDAO.updateProductQuantity(tempProduct.getId(), product_quantity);
-            cartDAO.deleteCart(c.getId(), trainee.getId());
-            order_quantity++;
-        }
         double total = Double.parseDouble(temptotal);
         LocalDate localDate = LocalDate.now();
         java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
         Payment payment = paymentDAO.createPaymentOrder(trainee.getId(), total, sqlDate, paymentMethod);
-        orderDAO.createOrder(trainee.getId(), payment, order_quantity);
-
+        for (Cart c : cartAll) {
+            tempProduct = productDAO.getProduct(c.getProduct_id());
+            product_quantity = tempProduct.getProd_quantity() - c.getQuantity();
+            productDAO.updateProductQuantity(tempProduct.getId(), product_quantity);
+            orderDAO.createOrder(trainee.getId(), payment, c.getQuantity(), c.getProduct_id());
+            cartDAO.deleteCart(c.getId(), trainee.getId());
+        }
         model.addAttribute("product", productAll);
         return "Trainee/AddToCart";
     }

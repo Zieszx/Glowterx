@@ -28,12 +28,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li class="Checked"><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
                 <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -90,7 +89,7 @@
                                     <td th:text="${instructor.firstName} + ' ' + ${instructor.lastName}"></td>
                                     <td th:text="${instructor.email}"></td>
                                     <td th:text="${instructor.phone}"></td>
-                                    <td><a class="btn btn-light" th:href="@{/gReportInstructor(username=${instructor.InstructorUsername})}" role="button" target="_blank">Generate Report</a></td>
+                                    <td><a class="btn btn-light" th:href="@{/gReportInstructor(username=${instructor.InstructorUsername})}" role="button">Generate Report</a></td>
                                 </tr>
 
                             </tbody>

@@ -49,7 +49,8 @@ public class ProductController {
 
         List<Product> productAll = productDAO.getAllProduct();
         model.addAttribute("product", productAll);
-
+        boolean check = true;
+        model.addAttribute("check", check);
         model.addAttribute("message", "Product added successfully!");
         return "/Admin/ManageShop";
     }
@@ -102,7 +103,8 @@ public class ProductController {
 
     @PostMapping("/updateProduct")
     public String updateProduct(
-    @ModelAttribute("product") Product product, @RequestParam("category")String catergory, BindingResult bindingResult, Model model) {
+            @ModelAttribute("product") Product product, @RequestParam("category") String catergory,
+            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "error";
         }

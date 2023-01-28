@@ -26,12 +26,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
                 <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li class="Checked"><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -41,65 +40,70 @@
     </div>
     <!-- Navigation Bar -->
 
-    <p class="title">Order</p>
+    <div class="row">
+        <div class="p-3 py-2">
 
-    <div class="nav-order">
-        <ul>
-            <li><a class="active" href="#all">All</a></li>
-            <li><a href="#toShip">To Ship</a></li>
-            <li><a href="#shipping">Shipping</a></li>
-            <li><a href="#completed">Completed</a></li>
-        </ul>
+            <div class="text-center title">
+                <p class="">Manage All Order</p>
+            </div>
+            <br><br>
+            <div class="container table-cont">
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Product Images</th>
+                                    <th scope="col">Payment Type</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">ORDER DATE</th>
+                                    <th scope="col">Order Quantity</th>
+                                    <th scope="col">Trainee Name</th>
+                                    <th scope="col">Order Status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="ord, iterTr : ${order}">
+                                    <form action="/ManageOrder" method="post">
+                                        <th scope="row" th:text="${ord.id}">1</th>
+                                        <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                            <img class="border border-2 rounded" width="110" height="110" th:src="@{/ProductImage(productId = ${prod.id})}" alt="product image">
+                                        </td>
+                                        <td th:each="pay, iterIn : ${payment}" th:if="${iterTr.index} == ${iterIn.index}">
+                                            <span th:text="${pay.payment_category}">Cash</span>
+                                        </td>
+                                        <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                            <span th:text="${prod.prod_name}">Product Name</span>
+                                        </td>
+                                        <td th:text="${#dates.format(ord.order_date, 'MM/dd/yyyy')}"></td>
+                                        <td th:text="${ord.order_quantity}"></td>
+                                        <td th:each="train, iterIn : ${trainee}" th:if="${iterTr.index} == ${iterIn.index}">
+                                            <span th:text="${train.firstName}+ ' '+ ${train.lastName}"></span>
+                                        </td>
+                                        <td>
+                                            <select id="ship" name="status" class="form-control">
+                                                <option th:value="${ord.order_status}"><span th:text="${ord.order_status}"></option>
+                                                <option value="PREPARING TO SHIP">PREPARING TO SHIP</option>
+                                                <option value="TO SHIP">TO SHIP</option>
+                                                <option value="SHIPPING">SHIPPING</option>
+                                                <option value="COMPLETED">COMPLETED</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" th:value="${ord.id}" name="id" />
+                                            <input type="submit" value="UPDATE" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" />
+                                        </td>
+                                    </form>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</body>
 
-    <div class="nav-order">
-        <ul>
-            <li><a href="ListOrder.html" style=" margin-left: 1170px; background-color: D8BBC0; border-radius: 10%;">Done</a></li>
-        </ul>
-    </div>
-
-    <table class="info">
-        <tr>
-            <th style="padding-left: 15px;"><b>Product(s)</b></th>
-            <td><b>Quantity</b></td>
-            <td><b>Order Total</b></td>
-            <td><b>Status</b></td>
-
-        </tr>
-        <tr>
-            <td> <img src="Images/IMG4.png" />MENS SHOES DN 23XX</td>
-            <td>1</td>
-            <td>133.00</td>
-            <td><select id="ship" name="ship" class="form-control">
-                <option value="toShip">To Ship</option>
-                <option value="shipping">Shipping</option>
-                <option value="comlpeted">Completed</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td> <img src="Images/IMG3.png" />SANDAL DN 23XX</td>
-            <td>1</td>
-            <td>133.00</td>
-            <td><select id="ship" name="ship" class="form-control">
-                <option value="toShip">To Ship</option>
-                <option value="shipping">Shipping</option>
-                <option value="comlpeted">Completed</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td> <img src="Images/IMG1.png" />WINDBREAKER DN 23XX</td>
-            <td>1</td>
-            <td>133.00</td>
-            <td>
-                <select id="ship" name="ship" class="form-control">
-                <option value="toShip">To Ship</option>
-                <option value="shipping">Shipping</option>
-                <option value="comlpeted">Completed</option>
-                </select>
-            </td>
-
-        </tr>
-
-    </table>
+</html>

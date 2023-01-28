@@ -166,7 +166,15 @@ public class IndexController {
 
     @GetMapping("/manageShop")
     public String manageShop(Model model, HttpSession session) {
+        boolean check = true;
         List<Product> product = productDAO.getAllProduct();
+        if (product.size() > 0) {
+            model.addAttribute("check", check);
+        } else {
+            check = false;
+            model.addAttribute("check", check);
+        }
+        model.addAttribute("product", product);
         model.addAttribute("product", product);
         return "Admin/ManageShop";
     }

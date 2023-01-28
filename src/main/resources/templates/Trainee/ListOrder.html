@@ -3,7 +3,7 @@
 <head>
     <title>List Order</title>
     <link rel="stylesheet" href="css/HeaderNav.css" />
-    <link rel="stylesheet" href="css/Report.css" />
+    <link rel="stylesheet" href="css/ProfileDetails.css" />
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,6 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li><a href="/Subscribe" class="nav-link px-2 link-light">MEMBERSHIP</a></li>
                 <li><a href="/listTraineeTC" class="nav-link px-2 link-light">HIT THE GYM</a></li>
                 <li><a href="/AttendanceTC" class="nav-link px-2 link-light">ATTENDANCE</a></li>
@@ -37,93 +36,97 @@
             <div class="col-md-3 text-end">
                 <a class="Nav-Item" href="/TraineeListCart"><img src="Images/shopping-bag.png" /></a>
                 <a class="Nav-Item" href="/traineeProfile"><img src="Images/account.png" /></a>
-                <a class="Nav-Item" href="#"><img src="Images/search.png" /></a>
             </div>
         </header>
     </div>
     <!-- Navigation Bar -->
-
-    <div class="row">
-        <div class="p-3 py-5">
-
-            <div class="d-flex justify-content-between align-items-center mb-0">
-                <div class="title">
-                    <div>List Order</div>
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-2 border-right">
+                <div class="p-2 px-md-1">
+                    <div class="d-block justify-content-between align-items-center mb-3">
+                        <div class="mt-5">
+                            <h4 class="text-right">My Account</h4>
+                        </div>
+                        <div class="row mt-3 Unchecked">
+                            <a href="/traineeProfile" class="nav-link px-2">My Details</a>
+                        </div>
+                        <div class="row mt-3 Checked">
+                            <a href="/myOrder" class="nav-link px-2">My Orders</a>
+                        </div>
+                        <div class="row mt-3 Unchecked">
+                            <a href="/logout" class="nav-link px-2">Log Out</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br><br>
-            <div class="container">
+            <div class="content col-md-10 my-5">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Order ID" aria-label="Search Order ID" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                    <div class="p-3 py-5">
+                        <div class="text-center title">
+                            <p class="">My Orders</p>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Person Id" aria-label="Search Person Id" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        <br><br>
+                        <div class="container table-cont">
+                            <div class="row">
+                                <div class="col-8">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order Id</th>
+                                                <th scope="col">Product Images</th>
+                                                <th scope="col">Payment Type</th>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Order Quantity</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Order Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="ord, iterTr : ${order}">
+                                                <th scope="row" th:text="${ord.id}">1</th>
+                                                <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <img class="border border-2 rounded" width="110" height="110" th:src="@{/ProductImage(productId = ${prod.id})}" alt="product image">
+                                                </td>
+                                                <td th:each="pay, iterIn : ${payment}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <span th:text="${pay.payment_category}">Cash</span>
+                                                </td>
+                                                <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <span th:text="${prod.prod_name}">Product Name</span>
+                                                </td>
+                                                <td th:text="${ord.order_quantity}"></td>
+                                                <td th:each="prod, iterIn : ${product}" th:if="${iterTr.index} == ${iterIn.index}">
+                                                    <span>RM </span><span th:text="${prod.prod_price}"></span>
+                                                </td>
+                                                <td th:text="${ord.order_status}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <div>
+                                        <p class="pb-2 fw-bold">
+                                            <h4 class="mb-3">Order Summary</h4>
+                                        </p>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="d-flex justify-content-between py-3"> <small class="text-muted">Order Summary</small>
+                                        <p>RM <span th:text="${subtotal}"></span></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-3"> <small class="text-muted">Shipping Fee</small>
+                                        <p>RM 10</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between"> <small class="text-muted">Total Amount</small>
+                                        <p>RM <span th:text="${total}"></span></p>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container table-cont">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Order Id</th>
-                            <th scope="col">Person Id</th>
-                            <th scope="col">Payment Id</th>
-                            <th scope="col">Product Id</th>
-                            <th scope="col">Order Quantity</th>
-                            <th scope="col">Order Total</th>
-                            <th scope="col">Order Status</th>
-                            <th scope="col"> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>30.00</td>
-                            <td>To Ship</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp;
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>30.00</td>
-                            <td>To Ship</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp;
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>30.00</td>
-                            <td>To Ship</td>
-                            <td><a class="btn btn-outline-info" href="EditProduct.html" role="button">Edit</a> &nbsp;
-                                <a class="btn btn-outline-danger" href="#" role="button">Delete</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-
             </div>
         </div>
-    </div>
-
-
 </body>
 
 </html>

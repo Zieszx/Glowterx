@@ -28,12 +28,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
                 <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -68,8 +67,8 @@
 
             <div class="col-md-3 border-right">
                 <div class="d-flex list-group-item flex-column align-items-center text-center mb-4"><img class="rounded-circle mt-5" width="350" height="350" src="/InstructorProfilePicture" alt="Profile Picture">
-                <span class="text" th:text="*{email}"></span>
-                <span><p class="text-left"><small class="text-muted">Instructor</small></p></span></div>
+                    <span class="text" th:text="*{email}"></span>
+                    <span><p class="text-left"><small class="text-muted">Instructor</small></p></span></div>
 
             </div>
             <div class="col-md-7 border-right">
@@ -103,7 +102,7 @@
                         </table>
                         <hr class="style2">
                     </div>
-                   
+
                     <div class="container table-cont">
                         <h4 class="text-right">Training Classes Information</h4>
                         <table class="table table-striped table-hover table-bordered my-5">
@@ -123,8 +122,8 @@
                                     <td th:text="${train.start_date} + ' to ' + ${train.end_date}"></td>
                                     <td th:text="${train.training_session}"></td>
                                     <td th:text="${train.training_duration} + ' minutes'"></td>
-                                    
-                                    
+
+
                                 </tr>
                             </tbody>
                         </table>

@@ -9,6 +9,13 @@
     font-size: 11px
 }
 
+div.title {
+    font-family: 'Inria Serif';
+    font-weight: 550;
+    font-size: 30px;
+    color: black;
+}
+
 .add-experience:hover {
     background: #783A4D;
     color: #fff;

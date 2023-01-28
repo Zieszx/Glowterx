@@ -128,6 +128,39 @@ public class TraineeDAO {
         return trainee;
     }
 
+    public Trainee getInfoTraineebyId(int id) {
+        Trainee trainee = null;
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM trainee WHERE id = ?")) {
+
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                trainee = new Trainee();
+                trainee.setId(rs.getInt("id"));
+                trainee.setTraineeUsername(rs.getString("TraineeUsername"));
+                trainee.setTraineePass(rs.getString("TraineePass"));
+                trainee.setFirstName(rs.getString("firstname"));
+                trainee.setLastName(rs.getString("lastname"));
+                trainee.setAddress(rs.getString("address"));
+                trainee.setCity(rs.getString("city"));
+                trainee.setState(rs.getString("state"));
+                trainee.setZip(rs.getString("zip"));
+                trainee.setPhone(rs.getString("phone"));
+                trainee.setEmail(rs.getString("email"));
+                trainee.setGender(rs.getString("gender"));
+                trainee.setMembershipStatus(rs.getString("MembershipStatus"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return trainee;
+    }
+
     public void uploadProfilePicture(String username, byte[] image) {
         String sql = "UPDATE trainee SET profle_images = ? WHERE TraineeUsername = ?";
         jdbcTemplate.update(sql, new Object[] { image, username });

@@ -31,11 +31,28 @@ public class OrderDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void createOrder(int person_id, Payment payment, int order_quantity) {
-        String status = "PENDING";
-        String sql = "INSERT INTO orderUser(person_id, payment_id, order_quantity, order_date, order_status) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, person_id, payment.getId(), order_quantity,
+    public void createOrder(int person_id, Payment payment, int order_quantity, int product_id) {
+        String status = "PREPARING TO SHIP";
+        String sql = "INSERT INTO orderUser(person_id, payment_id, product_id, order_quantity, order_date, order_status) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, person_id, payment.getId(), product_id, order_quantity,
                 new java.sql.Date(payment.getPayment_date().getTime()), status);
     }
 
+    public List<OrderUser> getAllOrdersByID(int person_id) {
+        String sql = "SELECT * FROM orderUser WHERE person_id = ?";
+        List<OrderUser> orders = jdbcTemplate.query(sql, new BeanPropertyRowMapper<OrderUser>(OrderUser.class),
+                person_id);
+        return orders;
+    }
+
+    public List<OrderUser> getAllOrders() {
+        String sql = "SELECT * FROM orderUser";
+        List<OrderUser> orders = jdbcTemplate.query(sql, new BeanPropertyRowMapper<OrderUser>(OrderUser.class));
+        return orders;
+    }
+
+    public void updateOrderStatus(int order_id, String status) {
+        String sql = "UPDATE orderUser SET order_status = ? WHERE id = ?";
+        jdbcTemplate.update(sql, status, order_id);
+    }
 }

@@ -28,12 +28,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
-                <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
+                <li class="Checked"><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
                 <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -68,8 +67,8 @@
 
             <div class="col-md-3 border-right">
                 <div class="d-flex list-group-item flex-column align-items-center text-center mb-4"><img class="rounded-circle mt-5" width="350" height="350" src="/TraineeProfilePicture" alt="Profile Picture">
-                <span class="text" th:text="*{email}"></span>
-                <span><p class="text-left"><small class="text-muted">Trainee</small></p></span></div>
+                    <span class="text" th:text="*{email}"></span>
+                    <span><p class="text-left"><small class="text-muted">Trainee</small></p></span></div>
 
             </div>
             <div class="col-md-7 border-right">
@@ -102,7 +101,7 @@
                                 <tr>
                                     <th scope="row">Membership Plans</th>
                                     <td>
-                                        <li  th:text="*{MembershipStatus}"></li>
+                                        <li th:text="*{MembershipStatus}"></li>
                                     </td>
                                 </tr>
                             </tr>
@@ -123,7 +122,7 @@
                                     <th scope="col" class="th-lg">Status</th>
                                 </tr>
                             </thead>
-                            <tbody >
+                            <tbody>
                                 <tr th:each="attend, iterTr : ${attendance}">
                                     <th scope="row" th:text="${iterTr.count}"></th>
                                     <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
@@ -139,12 +138,11 @@
                                         <small class="text-muted"> Minutes</small>
                                     </td>
                                     <td th:each="train, iterIn : ${training}" th:if="${iterTr.index} == ${iterIn.index}">
-                                        <span th:text="${attend.attendance_checkins} + ' '"></span><small class="text-muted">Check-Ins</small>
-                                         / <br>
+                                        <span th:text="${attend.attendance_checkins} + ' '"></span><small class="text-muted">Check-Ins</small> / <br>
                                         <span th:text="${train.training_session} + ' '"></span> <small class="text-muted">Sessions</small>
                                     </td>
                                     <td><span th:text="${attend.attendance_status}"></span><br><small class="text-muted">Status</small></td>
-                                    
+
                                 </tr>
                             </tbody>
                         </table>

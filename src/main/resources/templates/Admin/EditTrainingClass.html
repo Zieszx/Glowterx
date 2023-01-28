@@ -25,12 +25,11 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-light">HOME</a></li>
                 <li><a href="/reportTrainee" class="nav-link px-2 link-light">REPORT</a></li>
                 <li><a href="/manageUser" class="nav-link px-2 link-light">MANAGE USER</a></li>
                 <li class="Checked"><a href="/manageTraining" class="nav-link px-2 link-light">MANAGE TRAINING CLASS</a></li>
                 <li><a href="/manageShop" class="nav-link px-2 link-light">MANAGE SHOP</a></li>
-                <li><a href="/shop" class="nav-link px-2 link-light">SHOP</a></li>
+                <li><a href="/ManageOrder" class="nav-link px-2 link-light">MANAGE ORDER</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
@@ -47,7 +46,7 @@
             <table class="info">
                 <tr>
                     <td>Class Name</td>
-                    <td><input type="hidden" name="id" th:field="*{id}" ><input type="text" class="form-control" name="className" id="className" placeholder="XXXXXXXXXX" th:field="*{training_name}"></td>
+                    <td><input type="hidden" name="id" th:field="*{id}"><input type="text" class="form-control" name="className" id="className" placeholder="XXXXXXXXXX" th:field="*{training_name}"></td>
                 </tr>
                 <tr>
                     <td>Start Date</td>
@@ -63,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>Session (number)</td>
-                    <td><input type="number" class="form-control" name="session" id="session" placeholder="XX" min="5" max="500"th:field="*{training_session}" ></td>
+                    <td><input type="number" class="form-control" name="session" id="session" placeholder="XX" min="5" max="500" th:field="*{training_session}"></td>
                 </tr>
                 <tr>
                     <td>Instructor</td>
@@ -78,10 +77,10 @@
             </table>
             <div class="text-center pt-3 pb-3">
                 <input type="submit" class="btn btn-secondary btn-lg mx-auto" value="SAVE"></input>
-               
+
             </div>
         </form>
-         </div>
+    </div>
     </div>
 </body>
 

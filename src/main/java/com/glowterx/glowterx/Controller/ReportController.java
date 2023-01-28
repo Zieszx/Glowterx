@@ -37,28 +37,22 @@ public class ReportController {
 
     @Autowired
     private InstructorDAO instructorDAO;
-    
 
     @GetMapping("/gReportInstructor")
     public String adminGeneratedReportInstructor(@RequestParam("username") String username, Model model) {
         Instructor instructor = instructorDAO.getInfoinstructorbyUsername(username);
         model.addAttribute("instructor", instructor);
-    
-        Instructor instructor2 = instructorDAO.getInfoinstructor();
-        model.addAttribute("instructor", instructor2);
-        List<Training> training = trainingDAO.getInstructorTraining(instructor2);
+        List<Training> training = trainingDAO.getInstructorTraining(instructor);
         model.addAttribute("training", training);
 
         return "Admin/ReportInID";
     }
 
     @GetMapping("/gReportTrainee")
-    public String adminGeneratedReportTrainee(@RequestParam("username") String username,  Model model) {
+    public String adminGeneratedReportTrainee(@RequestParam("username") String username, Model model) {
         Trainee trainee = traineeDAO.getInfoTraineebyUsername(username);
         model.addAttribute("trainee", trainee);
-        Trainee trainees = traineeDAO.getInfoTrainee();
-        model.addAttribute("trainee", trainees);
-        List<Attendance> attendance = attendanceDAO.getTraineeAttendance(trainees);
+        List<Attendance> attendance = attendanceDAO.getTraineeAttendance(trainee);
         List<Training> training = new ArrayList<Training>();
         List<Instructor> instructor = new ArrayList<Instructor>();
         for (Attendance a : attendance) {

@@ -6,6 +6,7 @@ public class OrderUser {
     private int id;
     private int person_id;
     private int payment_id;
+    private int product_id;
     private int order_quantity;
     private Date order_date;
     private String order_status;
@@ -13,10 +14,11 @@ public class OrderUser {
     public OrderUser() {
     }
 
-    public OrderUser(int id, int person_id, int payment_id, int order_quantity, Date order_date, String order_status) {
-        this.id = id;
+    public OrderUser(int person_id, int payment_id, int product_id, int order_quantity, Date order_date,
+            String order_status) {
         this.person_id = person_id;
         this.payment_id = payment_id;
+        this.product_id = product_id;
         this.order_quantity = order_quantity;
         this.order_date = order_date;
         this.order_status = order_status;
@@ -44,6 +46,14 @@ public class OrderUser {
 
     public void setPayment_id(int payment_id) {
         this.payment_id = payment_id;
+    }
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
     public int getOrder_quantity() {
