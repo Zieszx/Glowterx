@@ -57,7 +57,17 @@ public class AttendanceController {
         Trainee trainee = traineeDAO.getInfoTrainee();
         Training training = trainingDAO.getInfoTrainingByID(training_id);
         List<Attendance> tempAttendance = attendanceDAO.getTraineeAttendance(trainee);
-        if (trainee.getMembershipStatus().equals("Free Trial")) {
+        if (trainee.getMembershipStatus().equals("NONE")) {
+            model.addAttribute("message", "You need to Subscribe to Enroll!");
+            List<Training> trainings = adminDAO.getAllTraining();
+            List<Instructor> instructor = new ArrayList<Instructor>();
+            for (Training t : trainings) {
+                instructor.add(instructorDAO.getInstructorID(t.getInstructor_id()));
+            }
+            model.addAttribute("instructor", instructor);
+            model.addAttribute("training", trainings);
+            return "/Trainee/TraineeListTC";
+        } else if (trainee.getMembershipStatus().equals("Free Trial")) {
             if (tempAttendance.size() == 1) {
                 model.addAttribute("message", "You need to Subscribe to Enroll More!");
                 List<Training> trainings = adminDAO.getAllTraining();

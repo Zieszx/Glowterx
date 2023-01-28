@@ -172,11 +172,12 @@ public class TraineeDAO {
     }
 
     public void insertTrainee(Trainee trainee) {
-        String sql = "INSERT INTO trainee (firstname, lastname, TraineeUsername, TraineePass, phone, email, gender, address, city, zip, state) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String MembershipStatus = "NONE";
+        String sql = "INSERT INTO trainee (firstname, lastname, TraineeUsername, TraineePass, phone, email, gender, address, city, zip, state, MembershipStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, trainee.getFirstName(), trainee.getLastName(), trainee.getTraineeUsername(),
                 trainee.getTraineePass(), trainee.getPhone(), trainee.getEmail(),
                 trainee.getGender(),
-                trainee.getAddress(), trainee.getCity(), trainee.getZip(), trainee.getState());
+                trainee.getAddress(), trainee.getCity(), trainee.getZip(), trainee.getState(), MembershipStatus);
     }
 
     public void updateProfile(Trainee trainee) {
